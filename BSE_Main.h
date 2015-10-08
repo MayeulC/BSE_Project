@@ -1,9 +1,7 @@
-/*
-   This program is designed to be compiled with Keil µVision4's ANSI C
+/* This program is designed to be compiled with Keil µVision4's ANSI C
    compiler, and ran on a 8051F020 microcontroller.
 
-   This file contains the files to configure the UART0, its clock and
-   the read/write functions.
+   This file contains declarations and function prototypes used in the main
 
    Copyright (C) 2015  Aydin Alperen <alperen.aydin@cpe.fr>
    Copyright (C) 2015  Cantan Mayeul <mayeul.cantan@cpe.fr>
@@ -23,31 +21,11 @@
    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 */
 
+#ifndef BSE_MAIN_H
+#define BSE_MAIN_H
+#include "defines.h"
+extern void Init_Device(void);
 
-#ifndef LIB_BSE_UART_H
-#define LIB_BSE_UART_H
+void main(void);
 
-#include "LIB_BSE_Config_Globale.h"
-
-#define BAUDRATE 115200
-/*
- * void CFG_Clock_UART0(void)
- *
- * We will use Timer1 as our timer for UART0. (TCLK0 = RCLK = 0)
- * To have the correct Baudrate, we have to an appropiate TH1
- *
- * The equation is TH1 = 256 - (1/16)*(SYSCLK/BAUDRATE)
- * with SMOD0 =1, T1M = 1
- *
- */
-void CFG_Clock_UART0(void);
-
-
-/*
- * void CFG_UART0(void)
- *
- * We want UART0 to have 8 bits of data, 1 Stop bit; and no parity.
- * The baudrate is given by a Timer.
- * Its configuration is done in CFG_UART0
- */
-#endif LIB_BSE_UART_H
+#endif //BSE_MAIN_H

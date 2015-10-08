@@ -1,10 +1,10 @@
-/* 
+/*
    This program is designed to be compiled with Keil µVision4's ANSI C
-	 compiler, and ran on a 8051F020 microcontroller.
-	 
-	 This file contains the config_Timer2(), ISR2_Timer2() and void Clear_RTC functions
-	 and the global variables used.
-	 
+   compiler, and ran on a 8051F020 microcontroller.
+
+   This file contains the config_Timer2(), ISR2_Timer2() and void Clear_RTC functions
+   and the global variables used.
+
    Copyright (C) 2015  Aydin Alperen <alperen.aydin@cpe.fr>
    Copyright (C) 2015  Cantan Mayeul <mayeul.cantan@cpe.fr>
 
@@ -37,7 +37,7 @@
 unsigned char RTC_5ms      =0;
 unsigned char RTC_Secondes =0;
 unsigned char RTC_Minutes  =0;
-unsigned char RTC_Heures   =0; 
+unsigned char RTC_Heures   =0;
 
 
 /*
@@ -47,7 +47,6 @@ unsigned char RTC_Heures   =0;
  * The period is 5ms => frequency of 200Hz
  * It is a 16 bit timer with Auto-recharge.
  * The overflow will call the function ISR2_Timer2
- * 
  */
 void Config_Timer2(void);
 
@@ -57,7 +56,7 @@ void Config_Timer2(void);
  * This is an interruptuion function. It is called when Timer2 overflows.
  * It increments the RTC.
  *
- * Note: This is a skeleton. For now, it only tuns on anf off a LED. More stuff will be eventually added.  
+ * Note: This is a skeleton. For now, it only tuns on anf off a LED. More stuff will be eventually added.
  */
 void ISR_Timer2(void);
 
@@ -70,4 +69,4 @@ void ISR_Timer2(void);
 void Clear_RTC(void);
 
 
-#endif 
+#endif

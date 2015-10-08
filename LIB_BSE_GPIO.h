@@ -1,9 +1,7 @@
-/*
-   This program is designed to be compiled with Keil µVision4's ANSI C
+/* This program is designed to be compiled with Keil µVision4's ANSI C
    compiler, and ran on a 8051F020 microcontroller.
 
-   This file contains prototypes for Init_Device() and other functions
-   it calls to initialize the device.
+   This file contains the prototypes of the LIB_BSE_GPIO.C functions.
 
    Copyright (C) 2015  Aydin Alperen <alperen.aydin@cpe.fr>
    Copyright (C) 2015  Cantan Mayeul <mayeul.cantan@cpe.fr>
@@ -23,51 +21,40 @@
    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 */
 
-#ifndef LIB_BSE_CONFIG_GLOBALE_H
-#define LIB_BSE_CONFIG_GLOBALE_H
+#ifndef LIB_BSE_GPIO_H
+#define LIB_BSE_GPIO_H
 
 #include "defines.h"
-
-/* externs to be found in LIB_BSE_Timers.h and LIB_BSE_GPIO.h */
-extern void Config_Timer2(void);
-extern void Config_GPIO(void);
+#include <intrins.h>
 
 /*
- * void Init_device(void)
+ * void Config_GPIO(void)
  *
- * Global Initialization of the device
- *
- * The only function from this file that should be called by main.
- * It calls upon the others functions in the file.
- *
+ * This function configures the GPIO, setting PORT pins in output/input
+ * mode depending on the realized function
  */
-void Init_Device(void);
+void Config_GPIO(void);
 
 /*
- * void Init_RST(void)
+ * void Pulse_P20(void)
  *
- * Configures RST sources.
- * Deactivates the Watchdog.
+ * This function generates a 500�s pulse on pin P2.0. It is blocking
  */
-void  Init_RST(void);
+void Pulse_P20(void);
 
 /*
- * void Init_CLK(void)
+ * void Pulse_P21(void)
  *
- * Sets the system clock to use an external crystal. SYSCLK = 22,1184HZ
- *
+ * This function generates a 500µs pulse on pin P2.1. It is blocking
  */
-void Init_CLK(void);
+void Pulse_P21(void);
 
 /*
- * void Init_XBAR(void)
+ * void Demo_GPIO(void)
  *
- * Initializes the crossbar, with INT1 and UART0 enabled
- *
+ * This function demonstrates the functionality of the various GPIO
+ * elements
  */
-void Init_XBAR(void);
+void Demo_GPIO(void);
 
-
-
-
-#endif //LIB_BSE_CONFIG_GLOBALE_H
+#endif //LIB_BSE_GPIO

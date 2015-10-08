@@ -33,10 +33,12 @@
 #define T2PERIOD 5 /*ms*/
 #define T2RLDVAL /*65635*/ -(SYSCLK/12/1000)*T2PERIOD
 
-unsigned char RTC_5ms;
-unsigned char RTC_Secondes;
-unsigned char RTC_Minutes;
-unsigned char RTC_Heures; 
+
+// RTC = Real Time Clock
+unsigned char RTC_5ms      =0;
+unsigned char RTC_Secondes =0;
+unsigned char RTC_Minutes  =0;
+unsigned char RTC_Heures   =0; 
 
 
 /*
@@ -54,7 +56,7 @@ void Config_Timer2(void);
  * void ISR_Timer2(void)
  *
  * This is an interruptuion function. It is called when Timer2 overflows.
- * The 
+ * It increments the RTC.
  *
  * Note: This is a skeleton. For now, it only tuns on anf off a LED. More stuff will be eventually added.  
  */
@@ -63,7 +65,7 @@ void ISR_Timer2(void);
 /*
  * void Clear_RTC(void)
  *
- * Resets the clock
+ * Resets the RTC back to 0
  *
  */
 void Clear_RTC(void);

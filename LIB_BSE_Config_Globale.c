@@ -23,40 +23,42 @@
    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 */
 
+#include "LIB_BSE_Config_Globale.h"
 
 void Init_Device(void)
 {
-  
+  EA = 0;
   Init_RST();
   Init_CLK();
-
+	Init_XBAR();
+	Config_GPIO();
+	Config_Timer2();
+  EA = 1;
 }
 
 
 void Init_RST(void)
 {
   // Normally we don't need EA, but it doesn't hurt anyone to be safe
-  EA    = 0;
   WDTCN = 0xDE;
-  WDTCH = 0xAD;
-  EA    = 1;
-  
+  WDTCN = 0xAD;  
 }
 
 void Init_CLK(void)
 {
-
+	int i;
   // We are supposed to have  OSCXCN = 0110 0111
   OSCXCN = 0x67; 
 
-  int i;
   for(i=0; i<3000; i++);
   while( (OSCXCN & 0x80) == 0);
  
   OSCICN = 0x08;
 }
 
-void Init_IO(void)
+void Init_XBAR(void)
 {
-
+	XBR0      = 0x04; // Enable UART0
+  XBR1      = 0x10; // Enable INT1
+  XBR2      = 0x40; // Enable crossbar
 }

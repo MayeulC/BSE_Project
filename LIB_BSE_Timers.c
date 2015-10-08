@@ -56,7 +56,7 @@ void ISR_Timer2(void) interrupt 5
 
   // LED
 
-  P1^6 = ~(P1^6);
+  LED = ~(LED);
  
   // Deactivating the flag
   TF2 = 0;

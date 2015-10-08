@@ -1,6 +1,16 @@
 # Temp files
 *~
 
+#uVision files
+*.LST
+*.OBJ
+*.__i
+*.iex*.M51
+*.lnp
+*.plg
+*.vgui.*
+*.uvopt
+
 # Object files
 *.o
 *.ko

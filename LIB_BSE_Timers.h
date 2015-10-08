@@ -26,13 +26,12 @@
 #define LIB_BSE_TIMERS_H
 
 
-#include <c8051f020.h>                    // SFR declarations
+#include "defines.h"
 
 //Definitions
 
 #define T2PERIOD 5 /*ms*/
 #define T2RLDVAL /*65635*/ -(SYSCLK/12/1000)*T2PERIOD
-
 
 // RTC = Real Time Clock
 unsigned char RTC_5ms      =0;

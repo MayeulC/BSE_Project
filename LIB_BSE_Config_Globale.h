@@ -26,10 +26,11 @@
 #ifndef LIB_BSE_CONFIG_GLOBALE_H
 #define LIB_BSE_CONFIG_GLOBALE_H
 
+#include "defines.h"
 
-#include <c8051f020.h>
-#include "Declarations_GPIO_BSE.h"
 
+extern void Config_Timer2(void);
+extern void Config_GPIO(void);
 /*
  * void Init_device(void)
  *
@@ -39,7 +40,7 @@
  * It calls upon the others functions in the file.
  *
  */
-void Init_device(void);
+void Init_Device(void);
 
 /*
  * void Init_RST(void)
@@ -58,10 +59,14 @@ void  Init_RST(void);
 void Init_CLK(void);
 
 /*
- * void Init_IO(void)
+ * void Init_XBAR(void)
  *
- * Configuration of I/O pins
+ * Initializes the crossbar, with INT1 and UART0 enabled
+ *
  */
-void Init_IO(void);
+void Init_XBAR(void);
 
-#endif
+
+
+
+#endif //LIB_BSE_CONFIG_GLOBALE_H

@@ -2,8 +2,7 @@
    This program is designed to be compiled with Keil µVision4's ANSI C
 	 compiler, and ran on a 8051F020 microcontroller.
 	 
-	 This file contains the Init_Device() and other functions it calls,
-	 to initialise the device.
+        This file contains the files to configure the UART0, its clock and the functions used to read and write. 
 	 
    Copyright (C) 2015  Aydin Alperen <alperen.aydin@cpe.fr>
    Copyright (C) 2015  Cantan Mayeul <mayeul.cantan@cpe.fr>
@@ -23,45 +22,31 @@
    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 */
 
-#ifndef LIB_BSE_CONFIG_GLOBALE_H
-#define LIB_BSE_CONFIG_GLOBALE_H
 
+#ifndef LIB_BSE_UART_H
+#define LIB_BSE_UART_H
 
-#include <c8051f020.h>
-#include "Declarations_GPIO_BSE.h"
+#include "LIB_BSE_Config_Globale.h"
 
+#define BAUDRATE 115200
 /*
- * void Init_device(void)
+ * void CFG_Clock_UART0(void)
  *
- * Globale Initialisation of the device
- *
- * The only function from this file that should be called by main.
- * It calls upon the others functions in the file.
- *
- */
-void Init_device(void);
-
-/*
- * void Init_RST(void)
+ * We will use Timer1 as our timer for UART0. (TCLK0 = RCLK = 0)
+ * To have the correct Baudrate, we have to an appropiate TH1
  * 
- * Configures RST sources.
- * Watchdogs are deactive. 
+ * The equation is TH1 = 256 - (1/16)*(SYSCLK/BAUDRATE)
+ * with SMOD0 =1, T1M = 1
+ *
  */
-void  Init_RST(void);
+void CFG_Clock_UART0(void);
+
 
 /*
- * void Init_CLK(void)
+ * void CFG_UART0(void)
  *
- * The System Clock is an external crystal. SYSCLK = 22,1184HZ 
- *
+ * We want UART0 to have 8 bits of data, 1 Stop bit; and no parity.
+ * The baudrate is given by a Timer. 
+ * Its configuration is done in CFG_UART0
  */
-void Init_CLK(void);
-
-/*
- * void Init_IO(void)
- *
- * Configuration of I/O pins
- */
-void Init_IO(void);
-
 #endif

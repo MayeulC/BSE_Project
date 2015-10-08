@@ -45,10 +45,18 @@ void Init_RST(void)
 
 void Init_CLK(void)
 {
-  OSCICN &= ~(1<<2); // Disable internal oscillator
-  OSCICN |= (1<<3); // Use external oscillator as System Clock 
 
-  // We are supposed to have  OSCXCN = -110 -111
-  OSCXCN &= ~(1<<4);
-  OSCXCN |= 0x67; 
+  // We are supposed to have  OSCXCN = 0110 0111
+  OSCXCN = 0x67; 
+
+  int i;
+  for(i=0; i<3000; i++);
+  while( (OSCXCN & 0x80) == 0);
+ 
+  OSCICN = 0x08;
+}
+
+void Init_IO(void)
+{
+
 }

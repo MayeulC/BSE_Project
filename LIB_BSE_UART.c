@@ -2,8 +2,7 @@
    This program is designed to be compiled with Keil µVision4's ANSI C
 	 compiler, and ran on a 8051F020 microcontroller.
 	 
-	 This file contains the Init_Device() and other functions it calls,
-	 to initialise the device.
+        This file contains the files to configure the UART0, its clock and the functions used to read and write. 
 	 
    Copyright (C) 2015  Aydin Alperen <alperen.aydin@cpe.fr>
    Copyright (C) 2015  Cantan Mayeul <mayeul.cantan@cpe.fr>
@@ -23,45 +22,23 @@
    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 */
 
-#ifndef LIB_BSE_CONFIG_GLOBALE_H
-#define LIB_BSE_CONFIG_GLOBALE_H
+
+#include "LIB_BSE_UART.h"
 
 
-#include <c8051f020.h>
-#include "Declarations_GPIO_BSE.h"
+void CFG_Clock_UART0(void)
+{
 
-/*
- * void Init_device(void)
- *
- * Globale Initialisation of the device
- *
- * The only function from this file that should be called by main.
- * It calls upon the others functions in the file.
- *
- */
-void Init_device(void);
+  // The Baud source clock is Timer1
+  TCLK =0;
+  RCLK =0;
 
-/*
- * void Init_RST(void)
- * 
- * Configures RST sources.
- * Watchdogs are deactive. 
- */
-void  Init_RST(void);
+  //T1M = 0, Timer1 uses system clock
 
-/*
- * void Init_CLK(void)
- *
- * The System Clock is an external crystal. SYSCLK = 22,1184HZ 
- *
- */
-void Init_CLK(void);
+  CKCON |= (1<<4);
 
-/*
- * void Init_IO(void)
- *
- * Configuration of I/O pins
- */
-void Init_IO(void);
+  // CFG of TH1
 
-#endif
+  TH1 = 256 - (1/16)*(SYSCLK/BAUDRATE); // Should be 244 = F4 
+
+}

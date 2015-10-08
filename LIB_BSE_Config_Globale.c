@@ -48,7 +48,7 @@ void Init_CLK(void)
   OSCICN &= ~(1<<2); // Disable internal oscillator
   OSCICN |= (1<<3); // Use external oscillator as System Clock 
 
-  // OSCXCN = -110 -111
+  // We are supposed to have  OSCXCN = -110 -111
   OSCXCN &= ~(1<<4);
   OSCXCN |= 0x67; 
 }

@@ -106,6 +106,7 @@ int Send_String(char* char_ptr)
       c_return = Putchar(*c_send, csg_tempo);
       if(c_return == 0) return 0;
       i++;
+      c_send++;
     }
   return i;
 }

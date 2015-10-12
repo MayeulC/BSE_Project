@@ -32,6 +32,7 @@ void Init_Device(void)
   Init_CLK();
 	Init_XBAR();
 	Config_GPIO();
+	Config_INT1();
 	Config_Timer2();
   EA = 1;
 }

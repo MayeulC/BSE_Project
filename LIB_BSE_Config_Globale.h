@@ -31,6 +31,7 @@
 /* externs to be found in LIB_BSE_Timers.h and LIB_BSE_GPIO.h */
 extern void Config_Timer2(void);
 extern void Config_GPIO(void);
+extern void Config_INT1(void);
 
 /*
  * void Init_device(void)

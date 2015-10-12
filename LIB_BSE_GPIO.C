@@ -33,32 +33,42 @@ void Config_GPIO(void)
 		
 	P3MDOUT = 0x7c; //P3.0, P3.1 and P3.7 as open drain; push-pull for the others 
 	
-	P3=~0xfc + 1<<2;//configure the open drains as input; output low on the 
+	P3=0x87;        //configure the open drains as input; output low on the 
 									// others, excepted P3.2, which must be output high by default
 	P1MDOUT |= 0x40;//Configures P1.6 (LED) as push-pull
 }
 
 void Pulse_P20(void)
 {
-	int i=10;
 	P2__0=1;
-	while(i>0)
-	{
-		i--;
-		_nop_ ();
-	}
+	_nop_ ();
+	_nop_ ();
+	_nop_ ();
+	_nop_ ();
+	_nop_ ();
+	_nop_ ();
+	_nop_ ();
+	_nop_ ();
+	_nop_ ();
+	_nop_ ();
+	_nop_ ();
 	P2__0=0;
 }
 
 void Pulse_P21(void)
 {
-	int i=10;
 	P2__1=1;
-	while(i>0)
-	{
-		i--;
-		_nop_ ();
-	}
+	_nop_ ();
+	_nop_ ();
+	_nop_ ();
+	_nop_ ();
+	_nop_ ();
+	_nop_ ();
+	_nop_ ();
+	_nop_ ();
+	_nop_ ();
+	_nop_ ();
+	_nop_ ();
 	P2__1=0;
 }
 

@@ -29,22 +29,24 @@
 
 void CFG_Clock_UART0(void)
 {
-
+  PCON=0x80; //stub; this is bad
   // The Baud source clock is Timer1
   TCLK0 =0;
   RCLK0 =0;
 
-  //T1M = 1, Timer1 uses system clock
+  CKCON |= (1<<4); //T1M = 1, Timer1 uses system clock
+	TR1=1; //Enable Timer 1
 
-  CKCON |= (1<<4);
-
-  // SMOD0 = PCON^7 =1
-
-  PCON |= (1<<7); 
+  
+  TMOD |= (1<<5);
+	TMOD &= ~(1<<4 + 1<<7 + 1<<6);
+	
+  PCON |= (1<<7); // SMOD0 = PCON^7 =1
 
   // CFG of TH1
 
-  TH1 = 256 - (1/16)*(SYSCLK/BAUDRATE); 
+  //TH1 = 256 - (1/16)*(SYSCLK/BAUDRATE); 
+	TH1= 0xF4; //fa
   // According to the docementation,
   // TH1 should be 0xF4 for a baudrate of 115200
 
@@ -53,6 +55,7 @@ void CFG_Clock_UART0(void)
 
 void CFG_UART0(void)
 {
+	CFG_Clock_UART0();
   // The mode1 is chosen:
   // Asynchronous, Timer1 or Timer2 overflow
   // 8 data bits, 1 Start+1 Stop bit 
@@ -65,7 +68,7 @@ void CFG_UART0(void)
   // Transmit Interrupt Flag
   // This flag should be set to 1, so that Putchar can put char
   TI0 = 1;
-	CFG_Clock_UART0();
+	
 }
 
 

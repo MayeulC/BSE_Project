@@ -30,7 +30,7 @@ void Config_Timer2(void)
 {
   T2CON = 0x00; // Resetting different parametres
 
-  CKCON&= (1<<5); // CKCON.5 = T2M when set to one uses SYSCLK/12
+  CKCON&= ~(1<<5); // CKCON.5 = T2M when set to one uses SYSCLK/12
 
   RCAP2 = T2RLDVAL;
   T2    = 0xffff;

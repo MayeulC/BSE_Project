@@ -168,7 +168,7 @@
           </Flash1>
           <bUseTDR>0</bUseTDR>
           <Flash2></Flash2>
-          <Flash3></Flash3>
+          <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
         </Utilities>
         <Target51>
@@ -380,6 +380,11 @@
               <FileName>LIB_BSE_Config_Globale.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\LIB_BSE_Config_Globale.c</FilePath>
+            </File>
+            <File>
+              <FileName>LIB_BSE_UART.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LIB_BSE_UART.c</FilePath>
             </File>
           </Files>
         </Group>

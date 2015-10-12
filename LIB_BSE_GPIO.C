@@ -26,6 +26,8 @@
 
 void Config_GPIO(void)
 {
+	P0MDOUT |= 1; //P0.0 in push-pull mode
+	P0MDOUT &= ~(1<<1); //P0.1 in open drain mode
 	P2MDOUT = 0x7b; //P2.7 and P2.2 configured as open drain, the others as
 							    // push-pull.
 	P2=~0x7b;       //configure the open drains as input; output low on the 

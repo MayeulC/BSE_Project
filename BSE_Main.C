@@ -28,9 +28,10 @@ void main(void)
 {
 	char a;
 	Init_Device();
-	Send_String("Hello, World !");
+
+	//Send_String("Hello, World !");
 	while(1){
-		a=Getchar();
-		Putchar(a,10);
+//		a=Getchar();
+		Putchar('e',1);
 	}
 }

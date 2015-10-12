@@ -65,3 +65,64 @@ void CFG_UART0(void)
   // This flag should be set to 1, so that Putchar can put char
   TI0 = 1;
 }
+
+
+char Putchar(char c, int csg_tempo)
+{
+  if(csg_tempo ==0)
+    return 0;
+
+  else{
+    if(TI0 ==1)
+      {
+	SBUF = c;
+	TI0  = 0;
+	return c;
+      }
+    else
+      {
+	// wait 100us
+	int i=100;
+	while(i>0)
+	{
+		i--;
+		_nop_ ();
+	}
+
+	return Putchar(c,csg_tempo-1);
+      }
+  }
+}
+
+int Send_String(char* char_ptr)
+{
+  int csg_tempo = 5;
+  int i = 0;
+  char c_return;
+  char* c_send = char_ptr;
+  
+  while(*c_send != '\0' )
+    {
+      c_return = Putchar(*c_send, csg_tempo);
+      if(c_return == 0) return 0;
+      i++;
+    }
+  return i;
+}
+
+
+char Getchar(void)
+{
+  char c;
+  if(RI0 == 1)
+    {
+      c =SBUF;
+      RI0 = 0;
+      return c;
+    }
+  else
+    {
+      return 0;
+    }
+
+}

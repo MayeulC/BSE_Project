@@ -52,4 +52,51 @@ void CFG_Clock_UART0(void);
  */
 void CFG_UART0(void);
 
+
+/*
+ * char Putchar(char c, int csg_tempo)
+ *
+ * The write function. Writes thj character c in SBUF0
+ *
+ * The Algorithm:
+ * If csg_tempo = 0, return 0
+ *
+ * Check if the flag TI0 is 1 so we can transmit
+ * if true,
+ *        Put the c in SBUF0
+ *        Set TI0 = 0
+ *        return c
+ * If not, wait 100 us then call Putchar(c, csg_tempo-1) 
+ *
+ * 
+ */
+char Putchar(char c, int csg_tempo);
+
+/*
+ * int Send_String(char *char_ptr)
+ * 
+ * Sends a string using Putchar several times.
+ * If a single Putchar fails, it return 0.
+ * Othewise, it returns the number of strings sent.
+ */
+int Send_String(char *char_ptr);
+
+/*
+ * char Getchar(void)
+ * 
+ * The read function. Reads the the character in SBUF0
+ *
+ * The Algorithm:
+ * Checks if RI0 is 1
+ * if true, 
+ *    c = SBUF0
+ *    RI0 = 0
+ *    return c
+ * if not,
+ *    return 0
+ *
+ */
+char Getchar(void);
+
+
 #endif LIB_BSE_UART_H

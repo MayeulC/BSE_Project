@@ -55,7 +55,13 @@ void CFG_UART0(void)
   // The mode1 is chosen:
   // Asynchronous, Timer1 or Timer2 overflow
   // 8 data bits, 1 Start+1 Stop bit 
-  SCON0 |= 0x50;
-  SCON0 &= ~(1<<7); 
+  SM00 = 0;
+  SM10 = 1;
 
+  // UART0 receive enabled
+  REN0 = 1;
+
+  // Transmit Interrupt Flag
+  // This flag should be set to 1, so that Putchar can put char
+  TI0 = 1;
 }

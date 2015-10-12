@@ -33,12 +33,29 @@ void CFG_Clock_UART0(void)
   TCLK =0;
   RCLK =0;
 
-  //T1M = 0, Timer1 uses system clock
+  //T1M = 1, Timer1 uses system clock
 
   CKCON |= (1<<4);
 
+  // SMOD0 = PCON^7 =1
+
+  PCON |= (1<<7); 
+
   // CFG of TH1
 
-  TH1 = 256 - (1/16)*(SYSCLK/BAUDRATE); // Should be 244 = F4 
+  TH1 = 256 - (1/16)*(SYSCLK/BAUDRATE); 
+  // According to the docementation,
+  // TH1 should be 0xF4 for a baudrate of 115200
+
+}
+
+
+void CFG_UART0(void)
+{
+  // The mode1 is chosen:
+  // Asynchronous, Timer1 or Timer2 overflow
+  // 8 data bits, 1 Start+1 Stop bit 
+  SCON0 |= 0x50;
+  SCON0 &= ~(1<<7); 
 
 }

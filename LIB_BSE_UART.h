@@ -48,6 +48,8 @@ void CFG_Clock_UART0(void);
  *
  * We want UART0 to have 8 bits of data, 1 Stop bit; and no parity.
  * The baudrate is given by a Timer.
- * Its configuration is done in CFG_UART0
+ * Its configuration is done in CFG_Clock_UART0
  */
+void CFG_UART0(void);
+
 #endif LIB_BSE_UART_H

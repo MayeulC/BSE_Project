@@ -26,6 +26,11 @@
 
 void main(void)
 {
+	char a;
 	Init_Device();
-	while(1);
+	Send_String("Hello, World !");
+	while(1){
+		a=Getchar();
+		Putchar(a,10);
+	}
 }

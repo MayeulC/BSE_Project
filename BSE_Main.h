@@ -25,6 +25,9 @@
 #define BSE_MAIN_H
 #include "defines.h"
 extern void Init_Device(void);
+extern void Send_String(char *);
+extern char Getchar(void);
+extern void Putchar(char,int);
 
 void main(void);
 

@@ -32,6 +32,7 @@
 extern void Config_Timer2(void);
 extern void Config_GPIO(void);
 extern void Config_INT1(void);
+extern void CFG_UART0(void);
 
 /*
  * void Init_device(void)

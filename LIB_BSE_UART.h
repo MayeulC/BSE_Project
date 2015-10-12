@@ -27,9 +27,9 @@
 #ifndef LIB_BSE_UART_H
 #define LIB_BSE_UART_H
 
-#include "LIB_BSE_Config_Globale.h"
+#include "defines.h"
+#include <intrins.h>
 
-#define BAUDRATE 115200
 /*
  * void CFG_Clock_UART0(void)
  *
@@ -98,5 +98,5 @@ int Send_String(char *char_ptr);
  */
 char Getchar(void);
 
+#endif //LIB_BSE_UART_H
 
-#endif LIB_BSE_UART_H

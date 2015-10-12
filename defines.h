@@ -31,4 +31,7 @@
 /* system clock */
 #define SYSCLK 22118400
 
+/* UART0 */
+#define BAUDRATE 115200
+
 #endif //DEFINES_H

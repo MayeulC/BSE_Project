@@ -2,7 +2,8 @@
    This program is designed to be compiled with Keil µVision4's ANSI C
 	 compiler, and ran on a 8051F020 microcontroller.
 	 
-        This file contains the files to configure the UART0, its clock and the functions used to read and write. 
+  This file contains the files to configure the UART0, its clock and the
+	functions used to read and write. 
 	 
    Copyright (C) 2015  Aydin Alperen <alperen.aydin@cpe.fr>
    Copyright (C) 2015  Cantan Mayeul <mayeul.cantan@cpe.fr>
@@ -30,8 +31,8 @@ void CFG_Clock_UART0(void)
 {
 
   // The Baud source clock is Timer1
-  TCLK =0;
-  RCLK =0;
+  TCLK0 =0;
+  RCLK0 =0;
 
   //T1M = 1, Timer1 uses system clock
 
@@ -64,6 +65,7 @@ void CFG_UART0(void)
   // Transmit Interrupt Flag
   // This flag should be set to 1, so that Putchar can put char
   TI0 = 1;
+	CFG_Clock_UART0();
 }
 
 
@@ -75,7 +77,7 @@ char Putchar(char c, int csg_tempo)
   else{
     if(TI0 ==1)
       {
-	SBUF = c;
+	SBUF0 = c;
 	TI0  = 0;
 	return c;
       }
@@ -117,7 +119,7 @@ char Getchar(void)
   char c;
   if(RI0 == 1)
     {
-      c =SBUF;
+      c =SBUF0;
       RI0 = 0;
       return c;
     }

@@ -30,7 +30,6 @@
 
 //Definitions
 
-#define T2PERIOD 5 /*ms*/
 #define T2RLDVAL /*65635*/ -(SYSCLK/12/1000)*T2PERIOD
 
 // RTC = Real Time Clock
@@ -38,6 +37,12 @@ unsigned char RTC_5ms      =0;
 unsigned char RTC_Secondes =0;
 unsigned char RTC_Minutes  =0;
 unsigned char RTC_Heures   =0;
+
+// Package detection
+
+int Package_detected = 0;
+//if 0, there is no package
+//if not 0, the Package_detected*5ms*10m/s is the length of the package
 
 
 /*

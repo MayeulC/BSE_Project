@@ -98,5 +98,13 @@ int Send_String(char *char_ptr);
  */
 char Getchar(void);
 
+/*
+ * void CONV_Pes_Val(unsigned char value, char * string)
+ *
+ * This function converts a number into a null-terminated string.
+ *
+ */
+void CONV_Pes_Val(unsigned char value, char * string);
+
 #endif //LIB_BSE_UART_H
 

@@ -101,7 +101,7 @@ char Getchar(void);
 /*
  * void CONV_Pes_Val(unsigned char value, char * string)
  *
- * This function converts a number into a null-terminated string.
+ * This function converts a number into a 3 char string.
  *
  */
 void CONV_Pes_Val(unsigned char value, char * string);

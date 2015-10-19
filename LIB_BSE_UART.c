@@ -135,15 +135,7 @@ char Getchar(void)
 
 void CONV_Pes_Val(unsigned char value, char * string)
 {
-    unsigned char digit=0;
-    unsigned char temp;
-    for(temp=value;temp!=0;temp/=10,digit++);
-    temp=0;
-    while(temp<=digit)
-    {
-        string[digit-temp-1]=(value)%10+'0';
-        temp++;
-        value=value/10;
-    }
-    string[digit]='\0';
+    string[2]=value%10+'0';
+    string[1]=(value/10)%10+'0';
+    string[0]=(value/100)%10+'0';
 }

@@ -30,5 +30,6 @@ void main(void)
 	Send_String("Hello, World !");
 	while(1){
 		demo2();
+        Send_to_DAC0(ACQ_ADC());
 	}
 }

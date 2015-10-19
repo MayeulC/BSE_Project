@@ -16,7 +16,7 @@ void CFG_ADC0(void)
     //  of CLKsar0=2.5MHz, which means that SYSCLK/CLKsar0-1=7.8 ~ 8.
     //  This is the value we put in AD0SC
     ADC0CF = (8<<4) + 1;
-    ADC0CN = 0xC0; // Conversion initiated on AD0BUSY flag,  data is right-justified,
+    ADC0CN = 0x81; // Conversion initiated on AD0BUSY flag,  data is right-justified,
                    //  Also activates ADC0 in continuous tracking mode.
 
     AMX0SL=3; // Channel select register configured to read from AIN3, this shouldn't

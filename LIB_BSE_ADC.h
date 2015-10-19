@@ -26,19 +26,28 @@
 
 #include "defines.h"
 #include <intrins.h>
-
 /*
  * void CFG_VREF(void)
  *
- * Configuring the Reference voltage
+ * Configures the Reference voltage
  */
 void CFG_VREF(void);
 
 /*
  * void CFG_ADC0(void)
  *
- * Configuring ADC0 
+ * Configures the ADC0.
+ * Weight must be measured with a 1g precision, which means a
+ * 0.4mV resolution.
  */
 void CFG_ADC0(void);
+
+/*
+ * unsigned char ACQ_ADC(void)
+ *
+ * Launches an acquisition on ADC0
+ */
+unsigned char ACQ_ADC(void);
+
 
 #endif

@@ -43,6 +43,7 @@ void Config_Timer2(void)
 
 void ISR_Timer2(void) interrupt 5
 {
+	P3__5 =1;
   // Controlling the RTC
 
   // If it works correctly, Timer2 overflows every 5ms.
@@ -60,6 +61,8 @@ void ISR_Timer2(void) interrupt 5
  
   // Deactivating the flag
   TF2 = 0;
+	
+	P3__5 = 0;
 }
 
 

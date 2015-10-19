@@ -76,5 +76,14 @@ void Pulse_P21(void)
 
 void Demo_GPIO(void)
 {
+	int i =0;
+	int l =4;
 	
+	sbit LEBs[4] = [P2__0,P2__5, P3__2, P3__6];
+	
+	if(P2__2 == 1)
+		{
+			LEDs[i] = 0
+			i = (i+1)%l;
+		}
 }

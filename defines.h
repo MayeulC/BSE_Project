@@ -34,4 +34,8 @@
 /* UART0 */
 #define BAUDRATE 115200
 
+/* ADC0 */
+#define ADC_TIMEOUT 8*16*3 // ADC clock is eight times slower than sysclk, it
+                           //  needs 16 ticks. The imeout is three times this value.
+
 #endif //DEFINES_H

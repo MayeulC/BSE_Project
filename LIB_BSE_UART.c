@@ -158,3 +158,10 @@ void demo2(void)
 	}
 	Putchar(c,2);
 }
+
+void CONV_Pes_Val(unsigned char value, char * string)
+{
+    string[2]=value%10+'0';
+    string[1]=(value/10)%10+'0';
+    string[0]=(value/100)%10+'0';
+}

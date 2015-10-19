@@ -28,6 +28,8 @@ extern void Init_Device(void);
 extern void Send_String(char *);
 extern char Getchar(void);
 extern void Putchar(char,int);
+extern void demo1(void);
+extern void demo2(void);
 
 void main(void);
 

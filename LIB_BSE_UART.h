@@ -115,5 +115,13 @@ char Getchar(void);
  */ 
  void demo2(void);
 
+/*
+ * void CONV_Pes_Val(unsigned char value, char * string)
+ *
+ * This function converts a number into a 3 char string.
+ *
+ */
+void CONV_Pes_Val(unsigned char value, char * string);
+
 #endif //LIB_BSE_UART_H
 

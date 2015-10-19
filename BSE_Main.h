@@ -30,6 +30,8 @@ extern char Getchar(void);
 extern void Putchar(char,int);
 extern void demo1(void);
 extern void demo2(void);
+extern void Send_to_DAC0(unsigned char Output_DAC);
+extern unsigned char ACQ_ADC(void);
 
 void main(void);
 

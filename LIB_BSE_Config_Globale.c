@@ -34,6 +34,8 @@ void Init_Device(void)
 	Config_GPIO();
 	Config_INT1();
 	CFG_UART0();
+    CFG_ADC0();
+    CFG_DAC0();
 	Config_Timer2();
   EA = 1;
 }

@@ -98,5 +98,22 @@ int Send_String(char *char_ptr);
  */
 char Getchar(void);
 
+/*
+ * void demo1(void)
+ * 
+ * A small echo function. 
+ * Waits for a character.
+ * When it gets it, it sends it back 2 times. 
+ */ 
+ void demo1(void);
+
+/*
+ * void demo2(void)
+ * 
+ * Another small echo function. 
+ * As long as new character isn't received, it sends the same char.
+ */ 
+ void demo2(void);
+
 #endif //LIB_BSE_UART_H
 

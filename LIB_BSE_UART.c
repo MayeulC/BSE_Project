@@ -132,3 +132,29 @@ char Getchar(void)
     }
 
 }
+
+void demo1(void)
+{
+	char c = Getchar();
+	if (c != 0)
+		{
+			Putchar(c,2);
+			Putchar(c,2);
+			return;
+		}
+	else
+		{
+			return;
+		}
+}
+
+void demo2(void)
+{
+	static char c = 'e';
+	char n = Getchar();
+	if(n != 0)
+	{
+		c = n;
+	}
+	Putchar(c,2);
+}

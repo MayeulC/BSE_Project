@@ -29,7 +29,7 @@
 
 #include "defines.h"
 
-//Definitions
+/* Defines */
 
 #define T2RLDVAL /*65635*/ -(SYSCLK/12/1000)*T2PERIOD
 
@@ -46,6 +46,10 @@ int Package_detected = 0;
 //if 0, there is no package
 //if not 0, the Package_detected*5ms*10m/s is the length of the package
 
+/* EXTERNAL FUNCTIONS */
+extern void dispatch(void);
+
+/* Functions */
 
 /*
  * void Config_Timer2(void)

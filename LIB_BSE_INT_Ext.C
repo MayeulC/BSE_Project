@@ -34,9 +34,6 @@ extern void Pulse_P20(void);
 extern void Pulse_P21(void);
 void ISR_INT1(void) interrupt 2
 {
-    //TODO
-    Test_1=1;
-    Pulse_P20();
-    Pulse_P21();
-    Test_1=0;
+    addEvent({STOP_PES, timestamp, 0, 0});
+
 }

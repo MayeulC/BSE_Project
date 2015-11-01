@@ -28,47 +28,49 @@
 
 void Config_Timer2(void)
 {
-  T2CON = 0x00; // Resetting different parametres
+    T2CON = 0x00; // Resetting different parametres
 
-  CKCON&= ~(1<<5); // CKCON.5 = T2M when set to one uses SYSCLK/12
+    CKCON&= ~(1<<5); // CKCON.5 = T2M when set to one uses SYSCLK/12
 
-  RCAP2 = T2RLDVAL;
-  T2    = 0xffff;
-  ET2   = 1; //Activation of Timer2
-  PT2   = 0; // Priority of Timer2 (change this afterwards)
+    RCAP2 = T2RLDVAL;
+    T2    = 0xffff;
+    ET2   = 1; //Activation of Timer2
+    PT2   = 0; // Priority of Timer2 (change this afterwards)
 
-  T2CON |= 1<<2; // Activating Timer2
+    T2CON |= 1<<2; // Activating Timer2
 
 }
 
 void ISR_Timer2(void) interrupt 5
 {
-  P3__5 =1; // Observable on the scope
+    P3__5 =1; // Observable on the scope
 
-  // RTC control
-  // If it works correctly, Timer2 overflows every 5ms.
-  RTC_5ms += 1;
-  if (RTC_5ms == 200) // 200*5ms = 1s
-    RTC_Secondes += 1;
-  if (RTC_Secondes == 60) // 60s = 1m
-    RTC_Minutes +=1;
-  if (RTC_Minutes == 60) // 60m = 1h
-    RTC_Heures +=1;
+    // RTC control
+    // If it works correctly, Timer2 overflows every 5ms.
+    RTC_5ms += 1;
+    if (RTC_5ms == 200) // 200*5ms = 1s
+        RTC_Secondes += 1;
+    if (RTC_Secondes == 60) // 60s = 1m
+        RTC_Minutes +=1;
+    if (RTC_Minutes == 60) // 60m = 1h
+        RTC_Heures +=1;
 
-  timestamp++; // WARNING : loops every 65536*T2PERIOD, which is here 326s
-  mainProcess();
-  
-  // Deactivating the flag
-  TF2 = 0;
+    timestamp++; // WARNING : loops every 65536*T2PERIOD, which is here 326s
+    dispatch();
 
-  P3__5 = 0;
+    // Deactivating the flag
+    TF2 = 0;
+
+    P3__5 = 0;
 }
 
 
 void Clear_RTC(void)
 {
-  RTC_5ms      =0;
-  RTC_Secondes =0;
-  RTC_Minutes  =0;
-  RTC_Heures   =0;
+    RTC_5ms      =0;
+    RTC_Secondes =0;
+    RTC_Minutes  =0;
+    RTC_Heures   =0;
+    // note that we don't clear the timestamp in order to be able to process
+    // incoming events at the right time.
 }

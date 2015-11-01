@@ -41,35 +41,8 @@
 /* EXTERNS */
 extern void Pulse_P20(void);
 extern void Pulse_P21(void);
-
-/* TYPES */
-enum event_type{
-    error,
-    reset,
-    PPA_push,
-    PPB_push,
-    LED1_ON,
-    LED2_ON,
-    LED3_ON,
-    LEDR_ON,
-    LED1_OFF,
-    LED2_OFF,
-    LED3_OFF,
-    LEDR_OFF,
-    START_PES,
-    STOP_PES,
-    PRINT,
-    QUERY_STATUS
-};
-
-struct event{
-    enum event_type type;
-    unsigned int deadline;
-    void *meta;// Used to pass misc info. Such as package type
-    unsigned char discarded; // Boolean, marks the event as eraseable by
-                             // the garbage collector
-};
-
+extern void packageDetection(void);
+extern void Clear_RTC(void);
 
 /* GLOBALS */
 
@@ -101,6 +74,14 @@ static unsigned char event_num=0;
 void dispatch(void);
 
 /*
+ * void addEvent(void)
+ *
+ * This function adds an event to the queue
+ *
+ */
+void addEvent(struct event e);
+
+/*
  *  struct event * nextEvent(void)
  *
  * This function finds and returns the index of the next event to be
@@ -125,6 +106,8 @@ void cleanEvents(void);
  * This function goes trough every input, and adjusts the current state
  * accordingly. Note that it cannot be faster than the pooling frequency :
  * if it is called every 5ms, events shorter than that might not be caught.
+ * This belongs to the event dispatcher as, well, input can be considered
+ * as an event.
  *
  */
 void processInput(void);

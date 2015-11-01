@@ -28,6 +28,13 @@
 #include <c8051f020.h>
 #include "Declarations_GPIO_BSE.h"
 
+/* MACROS */
+#define min(x,y) ( (x) < (y) ? (x):(y))
+#define max(x,y) ( (x) > (y) ? (x):(y))
+#define abs(x) ( (x) < 0 ? (-(x)):(x))
+
+/* DEFINES */
+
 /* system clock */
 #define SYSCLK 22118400
 
@@ -44,5 +51,35 @@
 #define EVENT_QUEUE_AUTO_CLEAN_THRESHOLD (EVENT_QUEUE_LENGTH*85)/100
 // Below, attempt to remove elements from the queue if it reaches 110% capacity [disabled for now]
 #define EVENT_QUEUE_AUTO_REMOVE_THRESHOLD (EVENT_QUEUE_LENGTH*85)/100
+
+
+/* TYPES */
+enum event_type{
+    error,
+    reset,
+    PPA_push,
+    PPB_push,
+    LED1_ON,
+    LED2_ON,
+    LED3_ON,
+    LEDR_ON,
+    LED1_OFF,
+    LED2_OFF,
+    LED3_OFF,
+    LEDR_OFF,
+    START_PES,
+    STOP_PES,
+    PRINT,
+    QUERY_STATUS
+};
+
+struct event{
+    enum event_type type;
+    unsigned int deadline;
+    void *meta;// Used to pass misc info. Such as package type
+    unsigned char discarded; // Boolean, marks the event as eraseable by
+                             // the garbage collector
+};
+
 
 #endif //DEFINES_H

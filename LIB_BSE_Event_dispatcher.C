@@ -95,6 +95,12 @@ void dispatch(void)
         cleanEvents();
 }
 
+void addEvent(struct event e) //Note : this must be called in an interrupt-safe way (TODO)
+{
+    event_num++;
+    event_queue[event_num]=e;
+}
+
 int nextEvent(void) // TODO : make this less dumb
 {
     unsigned char i=0;
@@ -138,6 +144,20 @@ void cleanEvents(void)
         i++;
     }
     event_num-=shift;
+}
+
+void processInput(void)
+{
+    packageDetection();
+    if(RAZ_RTC == 0)
+        Clear_RTC();
+    if(RAZ_CP)
+        clearPackageCounter();
+    if(RAZ_Sys)
+    {
+        event_num=0;
+        SIG_Erreur=0;
+    }
 }
 
 void removeUseless(void)

@@ -25,6 +25,11 @@
 #define LIB_BSE_INT_Ext_H
 #include "defines.h"
 
+/* Externs */
+extern void addEvent(struct event e);
+
+/* Functions */
+
 /*
  * void Config_InT1(void)
  *
@@ -38,7 +43,7 @@ void Config_INT1(void);
  *
  * This ISR is called when iNT1 is triggered.
  * For now, it is mostly a placeholder, emitting a signal on P3^4.
-*/
+ */
 void ISR_INT1(void);
 
 #endif //LIB_BSE_INT_Ext_H

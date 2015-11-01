@@ -25,17 +25,8 @@
 #define BSE_MAIN_H
 #include "defines.h"
 extern void Init_Device(void);
-extern void Send_String(char *);
-extern char Getchar(void);
-extern void Putchar(char,int);
-extern void demo1(void);
-extern void demo2(void);
-extern void Send_to_DAC0(unsigned char Output_DAC);
-extern unsigned char ACQ_ADC(void);
-extern int Package_flag;
 
 void main(void);
 
-void Package_detection(void);
 
 #endif //BSE_MAIN_H

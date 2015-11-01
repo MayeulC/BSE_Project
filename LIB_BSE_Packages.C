@@ -75,10 +75,16 @@ void packageDetection(void)
     }
 
     addEvent({PPA_push,deadline,type,0});
+    num_packages++;
 
 }
 
 void clearPackageCounter(void)
 {
     num_packages=0;
+}
+
+unsigned int getPackageCounter(void)
+{
+    return num_packages;
 }

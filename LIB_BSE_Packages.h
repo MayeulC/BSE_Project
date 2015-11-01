@@ -53,4 +53,12 @@ void packageDetection(void);
  */
 void clearPackageCounter(void);
 
+/*
+ * unsigned int getPackageCounter(void)
+ *
+ * Returns the current package count
+ *
+ */
+unsigned int getPackageCounter(void);
+
 #endif //LIB_BSE_PACKAGES_H

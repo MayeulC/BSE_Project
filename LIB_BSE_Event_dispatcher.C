@@ -26,94 +26,96 @@
 void dispatch(void)
 {
     enum package_types current_weighed=NONE;
-    static boolean scale_free=TRUE; //Yes, this is an assumption
-
+    static enum boolean scale_free=TRUE; //Yes, this is an assumption
+    unsigned char remaining_loops=5; // To avoid staying too long
+    unsigned char next;
     if(event_num == 0)
         return; // nothing to do
 
     processInput();
 
-    unsigned char next = nextEvent();
-    switch(event_queue[next].type) {
-        case PPA_push:
-            //TODO : check that it hasn't expired
-            if(!scale_free)
-                break; //just discard it, there is nothing we can do
-            Pulse_P20(); //push PPA
-            // Todo : check if plate is free before doing so
-            switch((enum package_types)(event_queue[next].meta)){
-                case TYPE1:
-                    addEvent({LED1_ON,timestamp});
-                    addEvent({LED1_OFF,timestamp+100/T2PERIOD});
-                    break;
-                case TYPE2:
-                    addEvent({LED2_ON,timestamp});
-                    addEvent({LED2_OFF,timestamp+100/T2PERIOD});
-                    break;
-                case TYPE3:
-                default:
-                    addEvent({LEDR_ON,timestamp});
-                    addEvent({LEDR_OFF,timestamp+100/T2PERIOD});
-            }
-            scale_free=FALSE;
-            current_weighed=(enum package_types)(event_queue[next].meta);
-            addEvent({START_PES,timestamp});
-            addEvent({STOP_PES,timestamp+1});
+    while( remaining_loops)
+    {
+        next = nextEvent();
+        if(next==EVENT_QUEUE_LENGTH) // no suitable event
             break;
-        case PPB_push:
-            Pulse_P21(); //push PPB
-            scale_free=TRUE;
-            current_weighed=NONE;
-            break;
-        case LED1_ON:
-            CT1_DCT=0;
-            break;
-        case LED2_ON:
-            CT2_DCT=0;
-            break;
-        case LED3_ON:
-            CT3_DCT=0;
-            break;
-        case LEDR_ON:
-            CHG_DCT=0;
-            break;
-        case LED1_OFF:
-            CT1_DCT=1;
-            break;
-        case LED2_OFF:
-            CT2_DCT=1;
-            break;
-        case LED3_OFF:
-            CT3_DCT=1;
-            break;
-        case LEDR_OFF:
-            CHG_DCT=1;
-            break;
-        case START_PES:
-            Decl_PES=1;
-            break;
-        case STOP_PES:
-            Decl_PES=0;
-            break;
-        case PRINT:
-            Waiting_PKG.type=current_weighed;
-            Waiting_PKG.weigth=(unsigned char)(event_queue[next].meta);
-            // The main will call the print function  (with "M ..... m")
-            // note : 5ms ~= 500char@115200 bauds
-            break;
-        case QUERY_STATUS:
-            // Print status
-            break;
-        case error:
-        default:
-            event_num=0;
-            SIG_Erreur=1;
-            send_error_info(event_queue[next].meta);
+        remaining_loops--;
+        switch(event_queue[next].type) {
+            case PPA_push:
+                //TODO : check that it hasn't expired
+                if(!scale_free)
+                    break; //just discard it, there is nothing we can do
+                Pulse_P20(); //push PPA
+                switch((enum package_types)(event_queue[next].meta)){
+                    case TYPE1:
+                        addEvent({LED1_ON,timestamp});
+                        addEvent({LED1_OFF,timestamp+100/T2PERIOD});
+                        break;
+                    case TYPE2:
+                        addEvent({LED2_ON,timestamp});
+                        addEvent({LED2_OFF,timestamp+100/T2PERIOD});
+                        break;
+                    case TYPE3:
+                    default:
+                        addEvent({LEDR_ON,timestamp});
+                        addEvent({LEDR_OFF,timestamp+100/T2PERIOD});
+                }
+                scale_free=FALSE;
+                current_weighed=(enum package_types)(event_queue[next].meta);
+                addEvent({START_PES,timestamp});
+                addEvent({STOP_PES,timestamp+1});
+                break;
+            case PPB_push:
+                Pulse_P21(); //push PPB
+                scale_free=TRUE;
+                current_weighed=NONE;
+                break;
+            case LED1_ON:
+                CT1_DCT=0;
+                break;
+            case LED2_ON:
+                CT2_DCT=0;
+                break;
+            case LED3_ON:
+                CT3_DCT=0;
+                break;
+            case LEDR_ON:
+                CHG_DCT=0;
+                break;
+            case LED1_OFF:
+                CT1_DCT=1;
+                break;
+            case LED2_OFF:
+                CT2_DCT=1;
+                break;
+            case LED3_OFF:
+                CT3_DCT=1;
+                break;
+            case LEDR_OFF:
+                CHG_DCT=1;
+                break;
+            case START_PES:
+                Decl_PES=1;
+                break;
+            case STOP_PES:
+                Decl_PES=0;
+                break;
+            case PRINT:
+                Waiting_PKG.type=current_weighed;
+                Waiting_PKG.weigth=(unsigned char)(event_queue[next].meta);
+                // The main will call the print function  (with "M ..... m")
+                // note : 5ms ~= 500char@115200 bauds
+                break;
+            case error:
+            default:
+                event_num=0;
+                SIG_Erreur=1;
+                send_error_info(event_queue[next].meta);
+        }
+        // Since we proceeded it, it is no longer useful. We however
+        // add a "backdoor" for packages that might get pushed later
+        event_queue[next].discarded=!event_queue[next].discarded;
     }
-    // Since we proceeded it, it is no longer useful. We however
-    // add a "backdoor" for packages that might get pushed later
-    event_queue[next].discarded=!event_queue[next].discarded;
-
     if(event_num > EVENT_QUEUE_AUTO_REMOVE_THRESHOLD)
         removeUseless();
     else if(event_num > EVENT_QUEUE_AUTO_CLEAN_THRESHOLD)
@@ -129,27 +131,32 @@ void addEvent(struct event e) //Note : this must be called in an interrupt-safe 
 int nextEvent(void) // TODO : make this less dumb
 {
     unsigned char i=0;
-    unsigned char candidate=0;
+    unsigned char candidate=EVENT_QUEUE_LENGTH;
     unsigned int bestDeadline=-1; // TODO : change to something meaningful
-
+    enum event_type returningtype=NONE;
+    unsigned char encounteredPPB_Push=EVENT_QUEUE_LENGTH; //not yet
     if(event_num == 0)
         return NULL; // Skip a few corner cases
 
-    while(i<event_num)
+    while(i<event_num) // All the events are candidate
     {
         if(!event_queue[i].discarded) // If still valid, we continue
         {
-            if(bestDeadline>event_queue[i].deadline)
+            if(bestDeadline> abs(timestamp - event_queue[i].deadline)) // nearest event
             {
+                bestDeadline=abs(timestamp - event_queue[i].deadline );
                 candidate=i;
-                bestDeadline=event_queue[i].deadline;
+                returningtype=event_queue[i].type;
             }
-            if(event_queue[i].type == error ||
-               event_queue[i].type == reset) // These are of the utmost importance
+            if(event_queue[i].type == error ) // This one is of the utmost importance
                 return i; // must be processed as soon as possible
+            if(event_queue[i].type == PPB_push)
+                encounteredPPB_Push=i;
         }
     }
-
+    if(returningtype==PPA_push && encounteredPPB_Push!= EVENT_QUEUE_LENGTH)
+        return encounteredPPB_Push; // Artificially prioritize these
+    return candidate;
 }
 
 void cleanEvents(void)

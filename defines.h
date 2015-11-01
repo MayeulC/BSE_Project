@@ -55,7 +55,9 @@
                            //  needs 16 ticks. The timeout is three times this value.
 
 /* Event dispatcher */
-#define EVENT_QUEUE_LENGTH 32 //curently, max is 255 (unsigned char are used to browse the queue)
+#define EVENT_QUEUE_LENGTH 32 //curently, max is 255 (unsigned char are used
+                              // to browse the queue). This value is also used
+                              // as an error code.
 // Below, attempt to clean the queue if it reaches 85% capacity
 #define EVENT_QUEUE_AUTO_CLEAN_THRESHOLD (EVENT_QUEUE_LENGTH*85)/100
 // Below, attempt to remove elements from the queue if it reaches 110% capacity [disabled for now]
@@ -65,7 +67,7 @@
 /* TYPES */
 enum event_type{
     error,
-    //reset,
+    //reset, // This one is completly handled by the processInput function
     PPA_push,
     PPB_push,
     LED1_ON,
@@ -79,7 +81,8 @@ enum event_type{
     START_PES,
     STOP_PES,
     PRINT,
-    QUERY_STATUS
+    NONE
+    //QUERY_STATUS //the main() takes care of this one
 };
 
 enum package_types{

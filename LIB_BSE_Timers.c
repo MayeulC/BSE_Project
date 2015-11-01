@@ -49,16 +49,28 @@ void ISR_Timer2(void) interrupt 5
     // If it works correctly, Timer2 overflows every 5ms.
     RTC_5ms += 1;
     if (RTC_5ms == 200) // 200*5ms = 1s
+    {
         RTC_Secondes += 1;
+        RTC_5ms=0;
+    }
     if (RTC_Secondes == 60) // 60s = 1m
+    {
+        RTC_Secondes=0;
         RTC_Minutes +=1;
+    }
     if (RTC_Minutes == 60) // 60m = 1h
+    {
+        RTC_Minutes=0;
         RTC_Heures +=1;
+    }
 
     timestamp++; // WARNING : loops every 65536*T2PERIOD, which is here 326s
     dispatch();
 
-    // Deactivating the flag
+    if(timestamp%5) //frequently tidy the queue
+        cleanEvents();
+
+    // Clear the timer overflow flag
     TF2 = 0;
 
     P3__5 = 0;

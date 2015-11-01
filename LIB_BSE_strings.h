@@ -32,4 +32,14 @@ const char * eror404 = "Not found";
 const char * string_e_package_too_big = "Error, measured size exceeds "
                                         "max gauge tolerance\r\n";
 
+const char * string_status_request="R \r\n"
+                                   "RTC: xx/yy/zz \r\n" //last is 20th
+                                   "T1 : xx/yy \r\n"
+                                   "T2 : xx/yy \r\n"
+                                   "T3 : xx/yy \r\n"
+                                   "HG : xx/yy \r\n";
+
+const char * string_label="Tx -- Pds :yyyyg \r\n"
+                          "H : xx/yy/zz \r\n";
+
 #endif //LIB_BSE_STRINGS_H

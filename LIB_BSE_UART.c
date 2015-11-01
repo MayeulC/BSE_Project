@@ -165,3 +165,35 @@ void CONV_Pes_Val(unsigned char value, char * string)
     string[1]=(value/10)%10+'0';
     string[0]=(value/100)%10+'0';
 }
+
+void CONV_HMSC(unsigned char value, char * string)
+{
+    string[2]=value%10+'0';
+    string[1]=(value/10)%10+'0';
+}
+
+void sendStatus(void)
+{
+
+    CONV_HMSC(RTC_Minutes,string_status_request+10);
+    CONV_HMSC(RTC_Secondes,string_status_request+13);
+    CONV_HMSC(RTC_5ms/2,string_status_request+16);
+
+    CONV_HMSC(RTC_5ms,string_status_request+16);
+    // TODO : complete this function
+}
+void print(enum package_types type)
+{
+    string_label[1]=type+'1';
+    // TODO : add weight
+    // x*2500/(255*Vref/2) ~ 6 (5.94)
+    CONV_Pes_Val(6,string_label+12);
+
+    CONV_HMSC(RTC_Minutes,string_label+24);
+    CONV_HMSC(RTC_Secondes,string_label+27);
+    CONV_HMSC(RTC_5ms/2,string_label+30);
+
+    Putchar('M'); //could have been in the string
+    Send_String(string_label);
+    Putchar('m');
+}

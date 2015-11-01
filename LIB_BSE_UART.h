@@ -28,6 +28,7 @@
 #define LIB_BSE_UART_H
 
 #include "defines.h"
+#include "LIB_BSE_strings.h"
 #include <intrins.h>
 
 /*
@@ -122,6 +123,23 @@ char Getchar(void);
  *
  */
 void CONV_Pes_Val(unsigned char value, char * string);
+
+/*
+ * void sendStatus(void)
+ *
+ * Ths functions replies to a status request, sending statistics about
+ * operations.
+ *
+ */
+void sendStatus(void);
+
+/*
+ * void print(enum package_types type)
+ *
+ * Prints the label on the package
+ *
+ */
+enum package_types type(enum package_types type);
 
 #endif //LIB_BSE_UART_H
 

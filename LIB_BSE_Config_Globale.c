@@ -43,26 +43,26 @@ void Init_Device(void)
 
 void Init_RST(void)
 {
-  // Normally we don't need EA, but it doesn't hurt anyone to be safe
-  WDTCN = 0xDE;
-  WDTCN = 0xAD;  
+    // Normally we don't need EA, but it doesn't hurt anyone to be safe
+    WDTCN = 0xDE;
+    WDTCN = 0xAD;
 }
 
 void Init_CLK(void)
 {
-	int i;
-  // We are supposed to have  OSCXCN = 0110 0111
-  OSCXCN = 0x67; 
+    int i;
+    // We are supposed to have  OSCXCN = 0110 0111
+    OSCXCN = 0x67;
 
-  for(i=0; i<3000; i++);
-  while( (OSCXCN & 0x80) == 0);
- 
-  OSCICN = 0x08;
+    for(i=0; i<3000; i++);
+    while( (OSCXCN & 0x80) == 0);
+
+    OSCICN = 0x08;
 }
 
 void Init_XBAR(void)
 {
-	XBR0      = 0x04; // Enable UART0
-  XBR1      = 0x10; // Enable INT1
-  XBR2      = 0x40; // Enable crossbar
+    XBR0      = 0x04; // Enable UART0
+    XBR1      = 0x10; // Enable INT1
+    XBR2      = 0x40; // Enable crossbar
 }

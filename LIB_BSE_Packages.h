@@ -33,7 +33,7 @@ extern void addEvent(struct event e);
 extern void makeError(const char * message);
 
 /* Globals */
-int num_packages=0;
+struct packageCounter num_packages=0;
 
 /*
  * packageDetection(void);
@@ -59,6 +59,6 @@ void clearPackageCounter(void);
  * Returns the current package count
  *
  */
-unsigned int getPackageCounter(void);
+struct packageCounter getPackageCounter(void);
 
 #endif //LIB_BSE_PACKAGES_H

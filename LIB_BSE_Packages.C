@@ -81,10 +81,10 @@ void packageDetection(void)
 
 void clearPackageCounter(void)
 {
-    num_packages=0;
+    num_packages={};
 }
 
-unsigned int getPackageCounter(void)
+packageCounter getPackageCounter(void)
 {
     return num_packages;
 }

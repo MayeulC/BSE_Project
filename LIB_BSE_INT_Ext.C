@@ -35,6 +35,6 @@ extern void Pulse_P21(void);
 void ISR_INT1(void) interrupt 2
 {
     unsigned char value=ACQ_ADC();
-    addEvent({STOP_PES, timestamp, value, 0});
+    addEvent({PRINT, timestamp, value, 0});
 
 }

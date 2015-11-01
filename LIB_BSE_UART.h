@@ -31,6 +31,9 @@
 #include "LIB_BSE_strings.h"
 #include <intrins.h>
 
+/* Externs */
+extern struct packageCounter getPackageCounter(void);
+
 /*
  * void CFG_Clock_UART0(void)
  *
@@ -139,7 +142,7 @@ void sendStatus(void);
  * Prints the label on the package
  *
  */
-enum package_types type(enum package_types type);
+void print(enum package_types type, unsigned char weigth);
 
 #endif //LIB_BSE_UART_H
 

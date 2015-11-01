@@ -39,7 +39,7 @@ const char * string_status_request="R \r\n"
                                    "T3 : xx/yy \r\n"
                                    "HG : xx/yy \r\n";
 
-const char * string_label="Tx -- Pds :yyyyg \r\n"
+const char * string_label="Tx -- Pds :yyy0g \r\n" //19 char
                           "H : xx/yy/zz \r\n";
 
 #endif //LIB_BSE_STRINGS_H

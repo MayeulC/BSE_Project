@@ -25,7 +25,7 @@
 
 void dispatch(void)
 {
-    enum package_types current_weighed=OTHER;
+    enum package_types current_weighed=NONE;
     static boolean scale_free=TRUE; //Yes, this is an assumption
 
     if(event_num == 0)
@@ -63,7 +63,7 @@ void dispatch(void)
         case PPB_push:
             Pulse_P21(); //push PPB
             scale_free=TRUE;
-            current_weighed=OTHER;
+            current_weighed=NONE;
             break;
         case LED1_ON:
             CT1_DCT=0;
@@ -96,6 +96,8 @@ void dispatch(void)
             Decl_PES=0;
             break;
         case PRINT:
+            (unsigned char)(event_queue[next].meta);
+            current_weighed;
             // Call print function  (with "M ..... m")
             // note : 5ms ~= 500char@115200 bauds
             break;

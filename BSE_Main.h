@@ -27,7 +27,7 @@
 extern void Init_Device(void);
 extern unsigned char Getchar(void);
 extern void sendStatus(void);
-
+struct package Waiting_PKG={0,NONE};
 void main(void);
 
 

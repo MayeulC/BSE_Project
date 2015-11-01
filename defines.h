@@ -87,12 +87,29 @@ enum package_types{
     TYPE2, //15cm
     TYPE3, //20cm
     OTHER, //25 to MAXPACKAGELENGTHcm
-    ERROR  // >MAXPACKAGELENGTHcm
+    ERROR,  // >MAXPACKAGELENGTHcm
+    NONE
 };
 
 enum boolean{
     FALSE,
     TRUE
+};
+
+struct package{
+    unsigned char weigth;
+    enum package_types type;
+};
+
+struct packageCounter{ // Limited to 255 each, but we can print 99 at best, so...
+    unsigned char num_packages;
+    unsigned char num_packages1;
+    unsigned char num_packages2;
+    unsigned char num_packages3;
+
+    unsigned char num_packages_processed1;
+    unsigned char num_packages_processed2;
+    unsigned char num_packages_processed3;
 };
 
 struct event{

@@ -107,10 +107,12 @@ void dispatch(void)
                 // note : 5ms ~= 500char@115200 bauds
                 break;
             case error:
-            default:
                 event_num=0;
                 SIG_Erreur=1;
-                send_error_info(event_queue[next].meta);
+                Send_String((char *)event_queue[next].meta);
+                break;
+            default:
+                makeError(string_e_defaultEvent);
         }
         // Since we proceeded it, it is no longer useful. We however
         // add a "backdoor" for packages that might get pushed later

@@ -37,6 +37,7 @@
 #define LIB_BSE_EVENT_DISPATCHER_H
 #include "LIB_BSE_Event_dispatcher.h"
 #include "defines.h"
+#include "LIB_BSE_strings.h"
 
 /* EXTERNS */
 extern void Pulse_P20(void);

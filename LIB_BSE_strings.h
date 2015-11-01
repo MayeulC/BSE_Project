@@ -24,22 +24,23 @@
 #ifndef LIB_BSE_STRINGS_H
 #define LIB_BSE_STRINGS_H
 
-const char * string_e_package_too_big="Error, measured size exceeds "
-                                      "max package size\r\n";
+static const char * string_e_package_too_big="Error, measured size exceeds "
+                                             "max package size\r\n";
 
-const char * eror404 = "Not found";
+static const char * string_e_defaultEvent = "Unknown event type\r\n";
 
-const char * string_e_package_too_big = "Error, measured size exceeds "
-                                        "max gauge tolerance\r\n";
+static const char * string_e_package_too_big = "Error, measured size exceeds "
+                                               "max gauge tolerance\r\n";
 
-const char * string_status_request="R \r\n"
-                                   "RTC: xx/yy/zz \r\n" //last is 20th
-                                   "T1 : xx/yy \r\n"
-                                   "T2 : xx/yy \r\n"
-                                   "T3 : xx/yy \r\n"
-                                   "HG : xx/yy \r\n";
+static const char * string_status_request="R \r\n"
+                                          "RTC: xx/yy/zz \r\n" //last is 20th
+                                          "T1 : xx/yy \r\n"
+                                          "T2 : xx/yy \r\n"
+                                          "T3 : xx/yy \r\n"
+                                          "HG : xx/yy \r\n";
 
-const char * string_label="Tx -- Pds :yyy0g \r\n" //19 char
-                          "H : xx/yy/zz \r\n";
+
+static const char * string_label="Tx -- Pds :yyy0g \r\n" //19 char
+                                 "H : xx/yy/zz \r\n";
 
 #endif //LIB_BSE_STRINGS_H

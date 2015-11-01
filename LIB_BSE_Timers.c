@@ -1,9 +1,9 @@
 /* 
    This program is designed to be compiled with Keil µVision4's ANSI C
-	 compiler, and ran on a 8051F020 microcontroller.
+   compiler, and ran on a 8051F020 microcontroller.
 	 
-	 This file contains the config_Timer2(), ISR2_Timer2() and void Clear_RTC functions
-	 and the global variables used.
+   This file contains the config_Timer2(), ISR2_Timer2(), Clear_RTC()
+   functions.
 	 
    Copyright (C) 2015  Aydin Alperen <alperen.aydin@cpe.fr>
    Copyright (C) 2015  Cantan Mayeul <mayeul.cantan@cpe.fr>
@@ -43,9 +43,9 @@ void Config_Timer2(void)
 
 void ISR_Timer2(void) interrupt 5
 {
-  P3__5 =1;
-  // Controlling the RTC
+  P3__5 =1; // Observable on the scope
 
+  // RTC control
   // If it works correctly, Timer2 overflows every 5ms.
   RTC_5ms += 1;
   if (RTC_5ms == 200) // 200*5ms = 1s
@@ -55,25 +55,13 @@ void ISR_Timer2(void) interrupt 5
   if (RTC_Minutes == 60) // 60m = 1h
     RTC_Heures +=1;
 
-  // LED
-
-  LED = ~(LED);
-
-  // Package detection
-  static int Package_counter =0;
-
-  if (P2__2 == 0)
-    Package_counter++;
-  else
-    {
-      Package_flag = Package_counter;
-      Package_counter = 0; 
-    }
+  timestamp++; // WARNING : loops every 65536*T2PERIOD, which is here 326s
+  mainProcess();
   
   // Deactivating the flag
   TF2 = 0;
-	
-	P3__5 = 0;
+
+  P3__5 = 0;
 }
 
 

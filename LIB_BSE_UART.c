@@ -1,9 +1,9 @@
 /* 
    This program is designed to be compiled with Keil µVision4's ANSI C
-	 compiler, and ran on a 8051F020 microcontroller.
+   compiler, and ran on a 8051F020 microcontroller.
 	 
-  This file contains the files to configure the UART0, its clock and the
-	functions used to read and write. 
+   This file contains the files to configure the UART0, its clock and the
+   functions used to read and write.
 	 
    Copyright (C) 2015  Aydin Alperen <alperen.aydin@cpe.fr>
    Copyright (C) 2015  Cantan Mayeul <mayeul.cantan@cpe.fr>

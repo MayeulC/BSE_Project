@@ -1,9 +1,9 @@
 /* 
    This program is designed to be compiled with Keil µVision4's ANSI C
-	 compiler, and ran on a 8051F020 microcontroller.
+   compiler, and ran on a 8051F020 microcontroller.
 	 
-	 This file contains the Init_Device() and other functions it calls,
-	 to initialise the device.
+   This file contains the Init_Device() and other functions it calls,
+   to initialise the device.
 	 
    Copyright (C) 2015  Aydin Alperen <alperen.aydin@cpe.fr>
    Copyright (C) 2015  Cantan Mayeul <mayeul.cantan@cpe.fr>
@@ -27,17 +27,17 @@
 
 void Init_Device(void)
 {
-  EA = 0;
-  Init_RST();
-  Init_CLK();
-	Init_XBAR();
-	Config_GPIO();
-	Config_INT1();
-	CFG_UART0();
+    EA = 0;
+    Init_RST();
+    Init_CLK();
+    Init_XBAR();
+    Config_GPIO();
+    Config_INT1();
+    CFG_UART0();
     CFG_ADC0();
     CFG_DAC0();
-	Config_Timer2();
-  EA = 1;
+    Config_Timer2();
+    EA = 1;
 }
 
 

@@ -42,7 +42,7 @@ void Config_GPIO(void)
 
 void Pulse_P20(void)
 {
-	P2__0=1;
+        Decl_PP1=1;
 	_nop_ ();
 	_nop_ ();
 	_nop_ ();
@@ -54,12 +54,12 @@ void Pulse_P20(void)
 	_nop_ ();
 	_nop_ ();
 	_nop_ ();
-	P2__0=0;
+        Decl_PP1=0;
 }
 
 void Pulse_P21(void)
 {
-	P2__1=1;
+        Decl_PP2=1;
 	_nop_ ();
 	_nop_ ();
 	_nop_ ();
@@ -71,7 +71,7 @@ void Pulse_P21(void)
 	_nop_ ();
 	_nop_ ();
 	_nop_ ();
-	P2__1=0;
+        Decl_PP2=0;
 }
 
 void Demo_GPIO(void)

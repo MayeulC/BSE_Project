@@ -2,8 +2,8 @@
    This program is designed to be compiled with Keil µVision4's ANSI C
    compiler, and ran on a 8051F020 microcontroller.
 
-   This file contains the config_Timer2(), ISR2_Timer2() and void Clear_RTC functions
-   and the global variables used.
+   This file contains the config_Timer2(), ISR2_Timer2(), Clear_RTC()
+   functions prototypes and the global variables used.
 
    Copyright (C) 2015  Aydin Alperen <alperen.aydin@cpe.fr>
    Copyright (C) 2015  Cantan Mayeul <mayeul.cantan@cpe.fr>
@@ -22,6 +22,7 @@
    along with this program; if not, write to the Free Software Foundation,
    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 */
+
 #ifndef LIB_BSE_TIMERS_H
 #define LIB_BSE_TIMERS_H
 
@@ -37,6 +38,7 @@ unsigned char RTC_5ms      =0;
 unsigned char RTC_Secondes =0;
 unsigned char RTC_Minutes  =0;
 unsigned char RTC_Heures   =0;
+unsigned int timestamp=0;
 
 // Package detection
 

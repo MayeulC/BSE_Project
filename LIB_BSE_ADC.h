@@ -1,8 +1,9 @@
 /* 
    This program is designed to be compiled with Keil µVision4's ANSI C
-	 compiler, and ran on a 8051F020 microcontroller.
+   compiler, and ran on a 8051F020 microcontroller.
 	 
-  This file contains the files to configure the ADC and other functions releated to ADC 
+   This file contains the files to configure the ADC and other functions
+   releated to ADC
 	 
    Copyright (C) 2015  Aydin Alperen <alperen.aydin@cpe.fr>
    Copyright (C) 2015  Cantan Mayeul <mayeul.cantan@cpe.fr>
@@ -21,6 +22,7 @@
    along with this program; if not, write to the Free Software Foundation,
    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 */
+
 #ifndef LIB_BSE_ADC_H
 #define LIB_BSE_ADC_H
 

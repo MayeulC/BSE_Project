@@ -33,10 +33,11 @@
 
 /* Externs */
 extern struct packageCounter getPackageCounter(void);
-extern unsigned char RTC_5ms      =0;
-extern unsigned char RTC_Secondes =0;
-extern unsigned char RTC_Minutes  =0;
-extern unsigned char RTC_Heures   =0;
+extern unsigned char RTC_5ms;
+extern unsigned char RTC_Secondes;
+extern unsigned char RTC_Minutes;
+extern unsigned char RTC_Heures;
+																 
 /*
  * void CFG_Clock_UART0(void)
  *

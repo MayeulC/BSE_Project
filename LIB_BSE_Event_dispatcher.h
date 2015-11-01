@@ -139,4 +139,25 @@ void makeError(const char * message);
  */
 void removeUseless(void);
 
+/*
+ * event EventX(enum event_type, unsigned int, void*);
+ *
+ * These functions create a new event with the parameters they get, and return it.
+ * Multiple constructors exists depending on the type of parameters to be set.
+ * Note : Since this is a new event, discarded is automatically put at 0
+ * 
+ */
+
+struct event Eventp(enum event_type type,
+																 unsigned int deadline,
+																 enum package_types p);
+struct event Eventuc(enum event_type type,
+																 unsigned int deadline,
+																 unsigned char uc);
+struct event Event(enum event_type type,
+																 unsigned int deadline);
+struct event EventS(enum event_type type,
+																 unsigned int deadline,
+										char * string);
+
 #endif // LIB_BSE_EVENT_DISPATCHER_H

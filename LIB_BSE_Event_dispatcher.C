@@ -205,3 +205,47 @@ void removeUseless(void)
 {
     // This function is a placeholder for now
 }
+
+// event constructors
+struct event Eventp(enum event_type type,
+																 unsigned int deadline,
+																 enum package_types p)
+{
+	  struct event e;
+	  e.type=type;
+	  e.deadline=deadline;
+	  e.p=p;
+	  e.discarded=0;
+	  return e;
+}
+struct event Eventuc(enum event_type type,
+																 unsigned int deadline,
+																 unsigned char uc)
+{
+	  struct event e;
+	  e.type=type;
+	  e.deadline=deadline;
+	  e.uc=uc;
+	  e.discarded=0;
+	  return e;
+}
+struct event Event(enum event_type type,
+																 unsigned int deadline)
+{
+	  struct event e;
+	  e.type=type;
+	  e.deadline=deadline;
+	  e.discarded=0;
+	  return e;
+}
+struct event EventS(enum event_type type,
+																 unsigned int deadline,
+										char * string)
+{
+	  struct event e;
+	  e.type=type;
+	  e.deadline=deadline;
+	  e.discarded=0;
+	  e.string = string;
+	  return e;
+}

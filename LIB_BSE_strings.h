@@ -24,15 +24,16 @@
 #ifndef LIB_BSE_STRINGS_H
 #define LIB_BSE_STRINGS_H
 
-static const char * string_e_package_too_big="Error, measured size exceeds "
+#ifdef LIB_BSE_UART_H
+const char * string_e_package_too_big="Error, measured size exceeds "
                                              "max package size\r\n";
 
-static const char * string_e_defaultEvent = "Unknown event type\r\n";
+const char * string_e_defaultEvent = "Unknown event type\r\n";
 
-static const char * string_e_package_not_normed = "Error, measured size exceeds "
+const char * string_e_package_not_normed = "Error, measured size exceeds "
                                                   "max gauge tolerance\r\n";
-
-static const char * string_status_request="R \r\n"
+																									
+char string_status_request[73]="R \r\n"
                                           "RTC: xx/yy/zz \r\n" //last is 20th
                                           "T1 : xx/yy \r\n"
                                           "T2 : xx/yy \r\n"
@@ -40,7 +41,14 @@ static const char * string_status_request="R \r\n"
                                           "HG : xx/yy \r\n";
 
 
-static const char * string_label="Tx -- Pds :yyy0g \r\n" //19 char
+char string_label[35]="Tx -- Pds :yyy0g \r\n" //19 char
                                  "H : xx/yy/zz \r\n";
-
+																 
+#else
+extern const char * string_e_package_too_big;
+extern const char * string_e_defaultEvent;
+extern const char * string_e_package_not_normed;			
+extern char string_status_request[73];
+extern char string_label[35];
+#endif
 #endif //LIB_BSE_STRINGS_H

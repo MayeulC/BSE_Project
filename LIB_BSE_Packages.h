@@ -32,6 +32,9 @@
 extern void addEvent(struct event e);
 extern void makeError(const char * message);
 extern unsigned int timestamp;
+extern struct event Eventp(enum event_type type,
+																 unsigned int deadline,
+																 enum package_types p);
 
 /* Globals */
 struct packageCounter num_packages={0};

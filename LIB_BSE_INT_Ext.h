@@ -29,6 +29,9 @@
 extern void addEvent(struct event e);
 extern unsigned char ACQ_ADC(void);
 extern unsigned int timestamp;
+extern struct event Eventuc(enum event_type type,
+																 unsigned int deadline,
+																 unsigned char uc);
 
 /* Functions */
 

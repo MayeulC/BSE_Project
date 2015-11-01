@@ -172,6 +172,16 @@ void CONV_HMSC(unsigned char value, char * string)
     string[1]=(value/10)%10+'0';
 }
 
+/*void copyString(const char * source, char * destination)
+{
+	  unsigned char c;
+	  do{
+			   c=*destination=*source;
+			   destination++;
+			   source++;
+		}while(c!='\0');
+}*/
+	
 void sendStatus(void)
 {
     struct packageCounter num_packages;
@@ -217,7 +227,7 @@ void print(enum package_types type, unsigned char weigth)
     CONV_HMSC(RTC_Secondes,string_label+27);
     CONV_HMSC(RTC_5ms/2,string_label+30);
 
-    Putchar('M'); //could have been in the string
+    Putchar('M',2); //could have been in the string
     Send_String(string_label);
-    Putchar('m');
+    Putchar('m',2);
 }

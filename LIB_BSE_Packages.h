@@ -31,9 +31,10 @@
 /* Externs */
 extern void addEvent(struct event e);
 extern void makeError(const char * message);
+extern unsigned int timestamp;
 
 /* Globals */
-struct packageCounter num_packages=0;
+struct packageCounter num_packages={0};
 
 /*
  * packageDetection(void);

@@ -34,10 +34,10 @@ void main(void)
         // thus eliminating a possible RTC drift source
         if(Getchar()=='R')
             sendStatus();
-        if(Waiting_PKG.type!=NONE)
+        if(Waiting_PKG.type!=NO_PACKAGE)
         {
             print(Waiting_PKG.type,Waiting_PKG.weigth);
-            Waiting_PKG.type=NONE;
+            Waiting_PKG.type=NO_PACKAGE;
         }
     }
 }

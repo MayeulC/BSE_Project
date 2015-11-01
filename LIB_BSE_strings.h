@@ -29,8 +29,8 @@ static const char * string_e_package_too_big="Error, measured size exceeds "
 
 static const char * string_e_defaultEvent = "Unknown event type\r\n";
 
-static const char * string_e_package_too_big = "Error, measured size exceeds "
-                                               "max gauge tolerance\r\n";
+static const char * string_e_package_not_normed = "Error, measured size exceeds "
+                                                  "max gauge tolerance\r\n";
 
 static const char * string_status_request="R \r\n"
                                           "RTC: xx/yy/zz \r\n" //last is 20th

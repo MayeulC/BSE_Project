@@ -174,7 +174,8 @@ void CONV_HMSC(unsigned char value, char * string)
 
 void sendStatus(void)
 {
-    struct packageCounter num_packages = getPackageCounter();
+    struct packageCounter num_packages;
+    num_packages = getPackageCounter();
     CONV_HMSC(RTC_Minutes,string_status_request+10);
     CONV_HMSC(RTC_Secondes,string_status_request+13);
     CONV_HMSC(RTC_5ms/2,string_status_request+16);

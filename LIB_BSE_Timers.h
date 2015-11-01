@@ -48,7 +48,7 @@ int Package_detected = 0;
 
 /* EXTERNAL FUNCTIONS */
 extern void dispatch(void);
-
+extern void cleanEvents(void);
 /* Functions */
 
 /*

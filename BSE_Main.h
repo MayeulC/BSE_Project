@@ -24,10 +24,23 @@
 #ifndef BSE_MAIN_H
 #define BSE_MAIN_H
 #include "defines.h"
+/* Externs */
 extern void Init_Device(void);
 extern unsigned char Getchar(void);
 extern void sendStatus(void);
-struct package Waiting_PKG={0,NONE};
+extern void print(enum package_types type, unsigned char weigth);
+
+/* Globals */
+struct package Waiting_PKG={0,NO_PACKAGE};
+
+/* Function Prototypes */
+
+/* 
+ * void main(void)
+ *
+ * Main entry point.
+ *
+ */
 void main(void);
 
 

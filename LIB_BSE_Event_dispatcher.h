@@ -43,10 +43,13 @@
 extern void Pulse_P20(void);
 extern void Pulse_P21(void);
 extern void packageDetection(void);
+extern void clearPackageCounter(void);
 extern void Clear_RTC(void);
+extern void Send_String(char * string);
 
 /* GLOBALS */
 extern struct package Waiting_PKG; // this one is in the main
+extern unsigned int timestamp; //See timer2 files
 /*
  * This is the event queue. It is the single most important variable in
  * this project. It is basically a todo list containing various elements

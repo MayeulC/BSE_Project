@@ -25,7 +25,7 @@
 
 void dispatch(void)
 {
-    enum package_types current_weighed=NONE;
+    enum package_types current_weighed=NO_PACKAGE;
     static enum boolean scale_free=TRUE; //Yes, this is an assumption
     unsigned char remaining_loops=5; // To avoid staying too long
     unsigned char next;
@@ -46,29 +46,32 @@ void dispatch(void)
                 if(!scale_free)
                     break; //just discard it, there is nothing we can do
                 Pulse_P20(); //push PPA
-                switch((enum package_types)(event_queue[next].meta)){
+                switch(event_queue[next].p){
                     case TYPE1:
-                        addEvent({LED1_ON,timestamp});
-                        addEvent({LED1_OFF,timestamp+100/T2PERIOD});
+                        addEvent(Event(LED1_ON,timestamp));
+                        addEvent(Event(LED1_OFF,timestamp+100/T2PERIOD));
                         break;
                     case TYPE2:
-                        addEvent({LED2_ON,timestamp});
-                        addEvent({LED2_OFF,timestamp+100/T2PERIOD});
+                        addEvent(Event(LED2_ON,timestamp));
+                        addEvent(Event(LED2_OFF,timestamp+100/T2PERIOD));
                         break;
                     case TYPE3:
+                        addEvent(Event(LED3_ON,timestamp));
+                        addEvent(Event(LED3_OFF,timestamp+100/T2PERIOD));
+                        break;
                     default:
-                        addEvent({LEDR_ON,timestamp});
-                        addEvent({LEDR_OFF,timestamp+100/T2PERIOD});
+                        addEvent(Event(LEDR_ON,timestamp));
+                        addEvent(Event(LEDR_OFF,timestamp+100/T2PERIOD));
                 }
                 scale_free=FALSE;
-                current_weighed=(enum package_types)(event_queue[next].meta);
-                addEvent({START_PES,timestamp});
-                addEvent({STOP_PES,timestamp+1});
+                current_weighed=event_queue[next].p;
+                addEvent(Event(START_PES,timestamp));
+                addEvent(Event(STOP_PES,timestamp+1));
                 break;
             case PPB_push:
                 Pulse_P21(); //push PPB
                 scale_free=TRUE;
-                current_weighed=NONE;
+                current_weighed=NO_PACKAGE;
                 break;
             case LED1_ON:
                 CT1_DCT=0;
@@ -102,14 +105,14 @@ void dispatch(void)
                 break;
             case PRINT:
                 Waiting_PKG.type=current_weighed;
-                Waiting_PKG.weigth=(unsigned char)(event_queue[next].meta);
+                Waiting_PKG.weigth=event_queue[next].uc;
                 // The main will call the print function  (with "M ..... m")
                 // note : 5ms ~= 500char@115200 bauds
                 break;
             case error:
                 event_num=0;
                 SIG_Erreur=1;
-                Send_String((char *)event_queue[next].meta);
+                Send_String(event_queue[next].string);
                 break;
             default:
                 makeError(string_e_defaultEvent);
@@ -134,10 +137,10 @@ int nextEvent(void) // TODO : make this less dumb
 {
     unsigned char i=0;
     unsigned char candidate=EVENT_QUEUE_LENGTH;
-    enum event_type returningtype=NONE;
+    enum event_type returningtype=NO_EVENT;
     unsigned char encounteredPPB_Push=EVENT_QUEUE_LENGTH; //not yet
     if(event_num == 0)
-        return NULL; // Skip a few corner cases
+        return candidate; // Skip a few corner cases
 
     while(i<event_num) // All the events are candidate
     {
@@ -186,7 +189,7 @@ void processInput(void)
         Clear_RTC();
     if(RAZ_CP)
         clearPackageCounter();
-    if(RAZ_Sys)
+    if(START_Sys)
     {
         event_num=0;
         SIG_Erreur=0;
@@ -195,7 +198,7 @@ void processInput(void)
 
 void makeError(const char *message)
 {
-    addEvent({error,timestamp,message});
+    addEvent(EventS(error,timestamp,message));
 }
 
 void removeUseless(void)

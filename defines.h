@@ -34,7 +34,7 @@
 #define abs(x) ( (x) < 0 ? (-(x)):(x))
 
 /* DEFINES */
-//#define T2PERIOD 5 //ms
+#define T2PERIOD 5 //ms // This was supposed to be defined elsewhere
 
 /* Packages subsystem */
 #define CONVASPEED 100 //cm/s
@@ -81,7 +81,7 @@ enum event_type{
     START_PES,
     STOP_PES,
     PRINT,
-    NONE
+    NO_EVENT
     //QUERY_STATUS //the main() takes care of this one
 };
 
@@ -91,7 +91,7 @@ enum package_types{
     TYPE3, //20cm
     OTHER, //25 to MAXPACKAGELENGTHcm
     ERROR,  // >MAXPACKAGELENGTHcm
-    NONE
+    NO_PACKAGE
 };
 
 enum boolean{
@@ -118,10 +118,64 @@ struct packageCounter{ // Limited to 255 each, but we can print 99 at best, so..
 struct event{
     enum event_type type;
     unsigned int deadline;
-    void *meta;// Used to pass misc info. Such as package type
+    enum package_types p;
+	  unsigned char uc;
+	  char * string;
     unsigned char discarded; // Boolean, marks the event as eraseable by
                              // the garbage collector
 };
 
+/* Constructors */
 
+/*
+ * event EventX(enum event_type, unsigned int, void*);
+ *
+ * These functions create a new event with the parameters they get, and return it.
+ * Multiple constructors exists depending on the type of parameters to be set.
+ * Note : Since this is a new event, discarded is automatically put at 0
+ * 
+ */
+
+struct event Eventp(enum event_type type,
+																 unsigned int deadline,
+																 enum package_types p)
+{
+	  struct event e;
+	  e.type=type;
+	  e.deadline=deadline;
+	  e.p=p;
+	  e.discarded=0;
+	  return e;
+}
+struct event Eventuc(enum event_type type,
+																 unsigned int deadline,
+																 unsigned char uc)
+{
+	  struct event e;
+	  e.type=type;
+	  e.deadline=deadline;
+	  e.uc=uc;
+	  e.discarded=0;
+	  return e;
+}
+struct event Event(enum event_type type,
+																 unsigned int deadline)
+{
+	  struct event e;
+	  e.type=type;
+	  e.deadline=deadline;
+	  e.discarded=0;
+	  return e;
+}
+struct event EventS(enum event_type type,
+																 unsigned int deadline,
+										char * string)
+{
+	  struct event e;
+	  e.type=type;
+	  e.deadline=deadline;
+	  e.discarded=0;
+	  e.string = string;
+	  return e;
+}
 #endif //DEFINES_H

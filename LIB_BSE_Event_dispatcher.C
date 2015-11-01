@@ -132,7 +132,6 @@ int nextEvent(void) // TODO : make this less dumb
 {
     unsigned char i=0;
     unsigned char candidate=EVENT_QUEUE_LENGTH;
-    unsigned int bestDeadline=-1; // TODO : change to something meaningful
     enum event_type returningtype=NONE;
     unsigned char encounteredPPB_Push=EVENT_QUEUE_LENGTH; //not yet
     if(event_num == 0)
@@ -142,19 +141,19 @@ int nextEvent(void) // TODO : make this less dumb
     {
         if(!event_queue[i].discarded) // If still valid, we continue
         {
-            if(bestDeadline> abs(timestamp - event_queue[i].deadline)) // nearest event
-            {
-                bestDeadline=abs(timestamp - event_queue[i].deadline );
-                candidate=i;
-                returningtype=event_queue[i].type;
-            }
             if(event_queue[i].type == error ) // This one is of the utmost importance
                 return i; // must be processed as soon as possible
-            if(event_queue[i].type == PPB_push)
+            if(event_queue[i].deadline==timestamp)
+            {
+                candidate=i; //we could have broken the loop, if not for the line below
+            }
+            if(event_queue[i].type == PPB_push) // Those too are here to be processed ASAP
                 encounteredPPB_Push=i;
         }
     }
-    if(returningtype==PPA_push && encounteredPPB_Push!= EVENT_QUEUE_LENGTH)
+    if(candidate!=EVENT_QUEUE_LENGTH &&
+       event_queue[candidate].type==PPA_push &&
+       encounteredPPB_Push!= EVENT_QUEUE_LENGTH)
         return encounteredPPB_Push; // Artificially prioritize these
     return candidate;
 }

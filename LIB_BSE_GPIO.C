@@ -1,8 +1,8 @@
-/* This program is designed to be compiled with Keil µVision4's ANSI C
+/* This program is designed to be compiled with Keil ÂµVision4's ANSI C
    compiler, and ran on a 8051F020 microcontroller.
 	 
    This file contains the functions used to configure the GPIO. It does
-	 NOT configure the crossbar.
+   NOT configure the crossbar.
 	 
    Copyright (C) 2015  Aydin Alperen <alperen.aydin@cpe.fr>
    Copyright (C) 2015  Cantan Mayeul <mayeul.cantan@cpe.fr>

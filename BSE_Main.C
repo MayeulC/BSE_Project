@@ -1,11 +1,11 @@
 /* BSE_Main.C
-	 This program is designed to be compiled with Keil µVision4's ANSI C
-	 compiler, and ran on a 8051F020 microcontroller.
+   This program is designed to be compiled with Keil µVision4's ANSI C
+   compiler, and ran on a 8051F020 microcontroller.
 	 
-	 This file contains the main() function
+   This file contains the main() function
 	 
    Copyright (C) 2015  Aydin Alperen <alperen.aydin@cpe.fr>
-	 Copyright (C) 2015  Cantan Mayeul <mayeul.cantan@cpe.fr>
+   Copyright (C) 2015  Cantan Mayeul <mayeul.cantan@cpe.fr>
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -26,12 +26,12 @@
 
 void main(void)
 {
-	Init_Device();
-	Send_String("Hello, World !");
-	while(1){
-		demo2();
+    Init_Device();
+    Send_String("Hello, World !");
+    while(1){
+        demo2();
         Send_to_DAC0(ACQ_ADC());
-	}
+    }
 }
 
 

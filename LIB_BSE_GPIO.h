@@ -1,4 +1,4 @@
-/* This program is designed to be compiled with Keil µVision4's ANSI C
+/* This program is designed to be compiled with Keil ÂµVision4's ANSI C
    compiler, and ran on a 8051F020 microcontroller.
 
    This file contains the prototypes of the LIB_BSE_GPIO.C functions.
@@ -38,7 +38,7 @@ void Config_GPIO(void);
 /*
  * void Pulse_P20(void)
  *
- * This function generates a 500�s pulse on pin P2.0. It is blocking
+ * This function generates a 500µs pulse on pin P2.0. It is blocking
  */
 void Pulse_P20(void);
 

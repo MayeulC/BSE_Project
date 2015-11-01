@@ -1,8 +1,8 @@
-/* This program is designed to be compiled with Keil µVision4's ANSI C
-	 compiler, and ran on a 8051F020 microcontroller.
+/* This program is designed to be compiled with Keil ÂµVision4's ANSI C
+   compiler, and ran on a 8051F020 microcontroller.
 	 
-	 This file contains the functions used to configure INT1, as well as the
-	 INT1 ISR. It supposes that the crossbar has been configured accordingly
+   This file contains the functions used to configure INT1, as well as the
+   INT1 ISR. It supposes that the crossbar has been configured accordingly
 	 
    Copyright (C) 2015  Aydin Alperen <alperen.aydin@cpe.fr>
    Copyright (C) 2015  Cantan Mayeul <mayeul.cantan@cpe.fr>
@@ -25,18 +25,18 @@
 
 void Config_INT1(void)
 {
-	EX1=1; // Interrupt 1 enable
-	PX1=0; // Interrupt 1 is set to low-priority
-	IT1=1; // Interupt 1 is edge-triggered
+    EX1=1; // Interrupt 1 enable
+    PX1=0; // Interrupt 1 is set to low-priority
+    IT1=1; // Interupt 1 is edge-triggered
 }
 
 extern void Pulse_P20(void);
 extern void Pulse_P21(void);
 void ISR_INT1(void) interrupt 2
 {
-	//TODO
-	Test_1=1;
-	Pulse_P20();
-	Pulse_P21();
-	Test_1=0;
+    //TODO
+    Test_1=1;
+    Pulse_P20();
+    Pulse_P21();
+    Test_1=0;
 }

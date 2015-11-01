@@ -73,6 +73,14 @@ enum event_type{
     QUERY_STATUS
 };
 
+enum package_types{
+    TYPE1, //10cm
+    TYPE2, //15cm
+    TYPE3, //20cm
+    OTHER, //25 to 50cm
+    ERROR  // >50cm
+};
+
 struct event{
     enum event_type type;
     unsigned int deadline;

@@ -34,6 +34,15 @@
 #define abs(x) ( (x) < 0 ? (-(x)):(x))
 
 /* DEFINES */
+//#define T2PERIOD 5 //ms
+
+/* Packages subsystem */
+#define CONVASPEED 100 //cm/s
+#define CONVBSPEED 100
+#define CONVALENGTH 60 //cm
+#define TRAVELTIME (CONVALENGTH*1000)/(CONVASPEED*T2PERIOD) //T2 tick
+#define MAXPACKAGELENGTH 50 //cm
+#define PACKAGE_GAUGE_TOLERANCE 10 //mm
 
 /* system clock */
 #define SYSCLK 22118400
@@ -77,8 +86,8 @@ enum package_types{
     TYPE1, //10cm
     TYPE2, //15cm
     TYPE3, //20cm
-    OTHER, //25 to 50cm
-    ERROR  // >50cm
+    OTHER, //25 to MAXPACKAGELENGTHcm
+    ERROR  // >MAXPACKAGELENGTHcm
 };
 
 struct event{

@@ -113,6 +113,16 @@ void cleanEvents(void);
 void processInput(void);
 
 /*
+ * void makeError(const char * message)
+ *
+ * This function inserts a new event in the events queue, with the
+ * associated messages. These messages are then sent trough the UART, and
+ * switch the program to an error state.
+ *
+ */
+void makeError(const char * message);
+
+/*
  * void removeUseless(void)
  *
  * This function tries to remove doubles from the event queue if there are

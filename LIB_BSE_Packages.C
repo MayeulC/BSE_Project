@@ -2,8 +2,8 @@
    This program is designed to be compiled with Keil µVision4's ANSI C
    compiler, and ran on a 8051F020 microcontroller.
 
-   This file contains the config_Timer2(), ISR2_Timer2(), Clear_RTC()
-   functions prototypes and the global variables used.
+   This file contains the function prototypes for the package management
+   system.
 
    Copyright (C) 2015  Aydin Alperen <alperen.aydin@cpe.fr>
    Copyright (C) 2015  Cantan Mayeul <mayeul.cantan@cpe.fr>
@@ -24,3 +24,61 @@
 */
 
 #include "LIB_BSE_Packages.h"
+
+void packageDetection(void)
+{
+    //Note : a state machine implementation could have been done here
+    static unsigned char previousStatus=0;
+    static unsigned int statusChange=timestamp;
+    unsigned char status=DETECT;
+    unsigned int deltaT;
+    unsigned int package_lengtht; //mm
+    enum package_types type;
+    unsigned int deadline;
+    if(status==0 & previousStatus == 1) // falling edge, package detected
+    {
+        deltaT=statusChange-timestamp;  //duration of the transit /T2PERIOD
+
+    }
+    if(status!=previousStatus)
+        deltaT=statusChange-timestamp;
+
+    package_lengtht=((deltaT*T2PERIOD)*CONVASPEED);// n*ms*mm/s
+    if(package_length > MAXPACKAGELENGTH ||
+       deltaT>(65535/(T2PERIOD*CONVASPEED))-1) // overflow check
+    {
+        makeError(string_e_package_too_big);
+        return;
+    }
+
+    if((package_lengtht+PACKAGE_GAUGE_TOLERANCE)%50
+            > 2*PACKAGE_GAUGE_TOLERANCE) //exceeds tolerance
+    {
+        makeError(string_e_not_normed); // note : 5cm+-tol is accepted
+        return;                         // probably not a big deal.
+    }
+    switch((package_lengtht+PACKAGE_GAUGE_TOLERANCE)/50){
+        case 2: //10cm+-tolerance
+            type=TYPE1;
+            deadline=TRAVELTIME+(5000)/(CONVASPEED*T2PERIOD);
+            break;
+        case 3: //15cm
+            type=TYPE2;
+            deadline=TRAVELTIME+(7500)/(CONVASPEED*T2PERIOD);
+            break;
+        case 4: //20cm
+            type=TYPE3;
+            deadline=TRAVELTIME+(10000)/(CONVASPEED*T2PERIOD);
+            break;
+        default:
+            return; // We don't care, in fact
+    }
+
+    addEvent({PPA_push,deadline,type,0});
+
+}
+
+void clearPackageCounter(void)
+{
+    num_packages=0;
+}

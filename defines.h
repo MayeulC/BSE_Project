@@ -1,5 +1,5 @@
 /*
-   This program is designed to be compiled with Keil µVision4's ANSI C
+   This program is designed to be compiled with Keil ÂµVision4's ANSI C
    compiler, and ran on a 8051F020 microcontroller.
 
    This files contains #defines and macros used by multiple files
@@ -36,6 +36,13 @@
 
 /* ADC0 */
 #define ADC_TIMEOUT 8*16*3 // ADC clock is eight times slower than sysclk, it
-                           //  needs 16 ticks. The imeout is three times this value.
+                           //  needs 16 ticks. The timeout is three times this value.
+
+/* Event dispatcher */
+#define EVENT_QUEUE_LENGTH 32 //curently, max is 255 (unsigned char are used to browse the queue)
+// Below, attempt to clean the queue if it reaches 85% capacity
+#define EVENT_QUEUE_AUTO_CLEAN_THRESHOLD (EVENT_QUEUE_LENGTH*85)/100
+// Below, attempt to remove elements from the queue if it reaches 110% capacity [disabled for now]
+#define EVENT_QUEUE_AUTO_REMOVE_THRESHOLD (EVENT_QUEUE_LENGTH*85)/100
 
 #endif //DEFINES_H

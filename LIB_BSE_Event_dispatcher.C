@@ -96,9 +96,9 @@ void dispatch(void)
             Decl_PES=0;
             break;
         case PRINT:
-            (unsigned char)(event_queue[next].meta);
-            current_weighed;
-            // Call print function  (with "M ..... m")
+            Waiting_PKG.type=current_weighed;
+            Waiting_PKG.weigth=(unsigned char)(event_queue[next].meta);
+            // The main will call the print function  (with "M ..... m")
             // note : 5ms ~= 500char@115200 bauds
             break;
         case QUERY_STATUS:

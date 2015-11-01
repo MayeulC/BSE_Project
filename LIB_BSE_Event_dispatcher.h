@@ -45,7 +45,7 @@ extern void packageDetection(void);
 extern void Clear_RTC(void);
 
 /* GLOBALS */
-
+extern struct package Waiting_PKG; // this one is in the main
 /*
  * This is the event queue. It is the single most important variable in
  * this project. It is basically a todo list containing various elements

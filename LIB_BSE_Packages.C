@@ -74,7 +74,7 @@ void packageDetection(void)
             return; // We don't care, in fact
     }
 
-    addEvent({PPA_push,deadline,type,0});
+    addEvent({PPA_push,deadline+timestamp,type,0});
     num_packages++;
 
 }

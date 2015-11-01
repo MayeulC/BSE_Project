@@ -65,7 +65,7 @@
 /* TYPES */
 enum event_type{
     error,
-    reset,
+    //reset,
     PPA_push,
     PPB_push,
     LED1_ON,
@@ -88,6 +88,11 @@ enum package_types{
     TYPE3, //20cm
     OTHER, //25 to MAXPACKAGELENGTHcm
     ERROR  // >MAXPACKAGELENGTHcm
+};
+
+enum boolean{
+    FALSE,
+    TRUE
 };
 
 struct event{

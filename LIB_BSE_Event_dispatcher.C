@@ -25,6 +25,9 @@
 
 void dispatch(void)
 {
+    enum package_types current_weighed=OTHER;
+    static boolean scale_free=TRUE; //Yes, this is an assumption
+
     if(event_num == 0)
         return; // nothing to do
 
@@ -32,41 +35,59 @@ void dispatch(void)
 
     unsigned char next = nextEvent();
     switch(event_queue[next].type) {
-
-        case reset:
-            event_num=0;
-            SIG_Erreur=0;
-            break;
         case PPA_push:
+            //TODO : check that it hasn't expired
+            if(!scale_free)
+                break; //just discard it, there is nothing we can do
             Pulse_P20(); //push PPA
             // Todo : check if plate is free before doing so
+            switch((enum package_types)(event_queue[next].meta)){
+                case TYPE1:
+                    addEvent({LED1_ON,timestamp});
+                    addEvent({LED1_OFF,timestamp+100/T2PERIOD});
+                    break;
+                case TYPE2:
+                    addEvent({LED2_ON,timestamp});
+                    addEvent({LED2_OFF,timestamp+100/T2PERIOD});
+                    break;
+                case TYPE3:
+                default:
+                    addEvent({LEDR_ON,timestamp});
+                    addEvent({LEDR_OFF,timestamp+100/T2PERIOD});
+            }
+            scale_free=FALSE;
+            current_weighed=(enum package_types)(event_queue[next].meta);
+            addEvent({START_PES,timestamp});
+            addEvent({STOP_PES,timestamp+1});
             break;
         case PPB_push:
             Pulse_P21(); //push PPB
+            scale_free=TRUE;
+            current_weighed=OTHER;
             break;
         case LED1_ON:
-            CT1_DCT=1;
-            break;
-        case LED2_ON:
-            CT2_DCT=1;
-            break;
-        case LED3_ON:
-            CT3_DCT=1;
-            break;
-        case LEDR_ON:
-            CHG_DCT=1;
-            break;
-        case LED1_OFF:
             CT1_DCT=0;
             break;
-        case LED2_OFF:
+        case LED2_ON:
             CT2_DCT=0;
             break;
-        case LED3_OFF:
+        case LED3_ON:
             CT3_DCT=0;
             break;
-        case LEDR_OFF:
+        case LEDR_ON:
             CHG_DCT=0;
+            break;
+        case LED1_OFF:
+            CT1_DCT=1;
+            break;
+        case LED2_OFF:
+            CT2_DCT=1;
+            break;
+        case LED3_OFF:
+            CT3_DCT=1;
+            break;
+        case LEDR_OFF:
+            CHG_DCT=1;
             break;
         case START_PES:
             Decl_PES=1;
@@ -87,7 +108,9 @@ void dispatch(void)
             SIG_Erreur=1;
             send_error_info(event_queue[next].meta);
     }
-    event_queue[next].discarded=1; // Since we proceeded it, it is no longer useful.
+    // Since we proceeded it, it is no longer useful. We however
+    // add a "backdoor" for packages that might get pushed later
+    event_queue[next].discarded=!event_queue[next].discarded;
 
     if(event_num > EVENT_QUEUE_AUTO_REMOVE_THRESHOLD)
         removeUseless();
@@ -158,6 +181,11 @@ void processInput(void)
         event_num=0;
         SIG_Erreur=0;
     }
+}
+
+void makeError(const char *message)
+{
+    addEvent({error,timestamp,message});
 }
 
 void removeUseless(void)

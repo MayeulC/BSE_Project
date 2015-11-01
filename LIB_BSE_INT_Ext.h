@@ -27,6 +27,7 @@
 
 /* Externs */
 extern void addEvent(struct event e);
+extern unsigned char ACQ_ADC(void);
 
 /* Functions */
 

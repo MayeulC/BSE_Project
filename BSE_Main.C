@@ -27,17 +27,17 @@
 void main(void)
 {
     Init_Device();
+    char c;
     while(1)
     {
-        // The only thing main() does is answering status requests
-        // on the UART. This way, it is non-blocking for the Timer2 ISR,
-        // thus eliminating a possible RTC drift source
-        if(Getchar()=='R')
-            sendStatus();
-        if(Waiting_PKG.type!=NO_PACKAGE)
+        char c = Getchar();
+        if(c == 'R' || c == 'r')
         {
-            print(Waiting_PKG.type,Waiting_PKG.weigth);
-            Waiting_PKG.type=NO_PACKAGE;
+            struct packageCounter num=getPackageCounter(void);
+            char* str = "Nombre de Colis détectés: ABC";
+            unsigned char n = num.num_packages;
+            CONV_Pes_Val(n, str[25]);
+            Send_string(str);
         }
     }
 }

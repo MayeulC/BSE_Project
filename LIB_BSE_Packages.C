@@ -36,58 +36,58 @@ void packageDetection(void)
     enum package_types type;
     unsigned int deadline;
     
-	  if(status!=previousStatus)
-		{
+    if(status!=previousStatus)
+    {
         deltaT=statusChange-timestamp;
-			  statusChange=timestamp;
-	  if(status==0 & previousStatus == 1) // falling edge, package detected
-    {
-        deltaT=statusChange-timestamp;  //duration of the transit /T2PERIOD
+        statusChange=timestamp;
+        if(status==0 & previousStatus == 1) // falling edge, package detected
+        {
+            deltaT=statusChange-timestamp;  //duration of the transit /T2PERIOD
 
-   
-		//TODO : we also need to detect small intervals.
-    
-    package_length=((deltaT*T2PERIOD)*CONVASPEED);// n*ms*mm/s
-    if(package_length > MAXPACKAGELENGTH ||
-       deltaT>(65535/(T2PERIOD*CONVASPEED))-1) // overflow check
-    {
-        makeError(string_e_package_too_big);
-        return;
-    }
 
-    if((package_length+PACKAGE_GAUGE_TOLERANCE)%50
-            > 2*PACKAGE_GAUGE_TOLERANCE) //exceeds tolerance
-    {
-        makeError(string_e_package_not_normed); // note : 5cm+-tol is accepted
-        return;                         // probably not a big deal.
-    }
-    switch((package_length+PACKAGE_GAUGE_TOLERANCE)/50){
-        case 2: //10cm+-tolerance
-            type=TYPE1;
-            deadline=TRAVELTIME+(5000)/(CONVASPEED*T2PERIOD);
-						num_packages.num_packages++;
-				    num_packages.num_packages1++;
-            break;
-        case 3: //15cm
-            type=TYPE2;
-            deadline=TRAVELTIME+(7500)/(CONVASPEED*T2PERIOD);
-						num_packages.num_packages++;
-				    num_packages.num_packages2++;
-            break;
-        case 4: //20cm
-            type=TYPE3;
-            deadline=TRAVELTIME+(10000)/(CONVASPEED*T2PERIOD);
-						num_packages.num_packages++;
-				    num_packages.num_packages3++;
-            break;
-        default:
-					  num_packages.num_packages++;
-            return; // We don't care, in fact
-    }
+            //TODO : we also need to detect small intervals.
 
-    addEvent(Eventp(PPA_push,deadline+timestamp,type));
-	}
-}
+            package_length=((deltaT*T2PERIOD)*CONVASPEED);// n*ms*mm/s
+            if(package_length > MAXPACKAGELENGTH ||
+                    deltaT>(65535/(T2PERIOD*CONVASPEED))-1) // overflow check
+            {
+                makeError(string_e_package_too_big);
+                return;
+            }
+
+            if((package_length+PACKAGE_GAUGE_TOLERANCE)%50
+                    > 2*PACKAGE_GAUGE_TOLERANCE) //exceeds tolerance
+            {
+                makeError(string_e_package_not_normed); // note : 5cm+-tol is accepted
+                return;                         // probably not a big deal.
+            }
+            switch((package_length+PACKAGE_GAUGE_TOLERANCE)/50){
+            case 2: //10cm+-tolerance
+                type=TYPE1;
+                deadline=TRAVELTIME+(5000)/(CONVASPEED*T2PERIOD);
+                num_packages.num_packages++;
+                num_packages.num_packages1++;
+                break;
+            case 3: //15cm
+                type=TYPE2;
+                deadline=TRAVELTIME+(7500)/(CONVASPEED*T2PERIOD);
+                num_packages.num_packages++;
+                num_packages.num_packages2++;
+                break;
+            case 4: //20cm
+                type=TYPE3;
+                deadline=TRAVELTIME+(10000)/(CONVASPEED*T2PERIOD);
+                num_packages.num_packages++;
+                num_packages.num_packages3++;
+                break;
+            default:
+                num_packages.num_packages++;
+                return; // We don't care, in fact
+            }
+
+            addEvent(Eventp(PPA_push,deadline+timestamp,type));
+        }
+    }
 
 }
 

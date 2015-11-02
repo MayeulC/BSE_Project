@@ -41,81 +41,81 @@ void dispatch(void)
             break;
         remaining_loops--;
         switch(event_queue[next].type) {
-            case PPA_push:
-                //TODO : check that it hasn't expired
-                if(!scale_free)
-                    break; //just discard it, there is nothing we can do
-                Pulse_P20(); //push PPA
-                switch(event_queue[next].p){
-                    case TYPE1:
-                        addEvent(Event(LED1_ON,timestamp));
-                        addEvent(Event(LED1_OFF,timestamp+100/T2PERIOD));
-                        break;
-                    case TYPE2:
-                        addEvent(Event(LED2_ON,timestamp));
-                        addEvent(Event(LED2_OFF,timestamp+100/T2PERIOD));
-                        break;
-                    case TYPE3:
-                        addEvent(Event(LED3_ON,timestamp));
-                        addEvent(Event(LED3_OFF,timestamp+100/T2PERIOD));
-                        break;
-                    default:
-                        addEvent(Event(LEDR_ON,timestamp));
-                        addEvent(Event(LEDR_OFF,timestamp+100/T2PERIOD));
-                }
-                scale_free=FALSE;
-                current_weighed=event_queue[next].p;
-                addEvent(Event(START_PES,timestamp));
-                addEvent(Event(STOP_PES,timestamp+1));
+        case PPA_push:
+            //TODO : check that it hasn't expired
+            if(!scale_free)
+                break; //just discard it, there is nothing we can do
+            Pulse_P20(); //push PPA
+            switch(event_queue[next].p){
+            case TYPE1:
+                addEvent(Event(LED1_ON,timestamp));
+                addEvent(Event(LED1_OFF,timestamp+100/T2PERIOD));
                 break;
-            case PPB_push:
-                Pulse_P21(); //push PPB
-                scale_free=TRUE;
-                current_weighed=NO_PACKAGE;
+            case TYPE2:
+                addEvent(Event(LED2_ON,timestamp));
+                addEvent(Event(LED2_OFF,timestamp+100/T2PERIOD));
                 break;
-            case LED1_ON:
-                CT1_DCT=0;
-                break;
-            case LED2_ON:
-                CT2_DCT=0;
-                break;
-            case LED3_ON:
-                CT3_DCT=0;
-                break;
-            case LEDR_ON:
-                CHG_DCT=0;
-                break;
-            case LED1_OFF:
-                CT1_DCT=1;
-                break;
-            case LED2_OFF:
-                CT2_DCT=1;
-                break;
-            case LED3_OFF:
-                CT3_DCT=1;
-                break;
-            case LEDR_OFF:
-                CHG_DCT=1;
-                break;
-            case START_PES:
-                Decl_PES=1;
-                break;
-            case STOP_PES:
-                Decl_PES=0;
-                break;
-            case PRINT:
-                Waiting_PKG.type=current_weighed;
-                Waiting_PKG.weigth=event_queue[next].uc;
-                // The main will call the print function  (with "M ..... m")
-                // note : 5ms ~= 500char@115200 bauds
-                break;
-            case error:
-                event_num=0;
-                SIG_Erreur=1;
-                Send_String(event_queue[next].string);
+            case TYPE3:
+                addEvent(Event(LED3_ON,timestamp));
+                addEvent(Event(LED3_OFF,timestamp+100/T2PERIOD));
                 break;
             default:
-                makeError(string_e_defaultEvent);
+                addEvent(Event(LEDR_ON,timestamp));
+                addEvent(Event(LEDR_OFF,timestamp+100/T2PERIOD));
+            }
+            scale_free=FALSE;
+            current_weighed=event_queue[next].p;
+            addEvent(Event(START_PES,timestamp));
+            addEvent(Event(STOP_PES,timestamp+1));
+            break;
+        case PPB_push:
+            Pulse_P21(); //push PPB
+            scale_free=TRUE;
+            current_weighed=NO_PACKAGE;
+            break;
+        case LED1_ON:
+            CT1_DCT=0;
+            break;
+        case LED2_ON:
+            CT2_DCT=0;
+            break;
+        case LED3_ON:
+            CT3_DCT=0;
+            break;
+        case LEDR_ON:
+            CHG_DCT=0;
+            break;
+        case LED1_OFF:
+            CT1_DCT=1;
+            break;
+        case LED2_OFF:
+            CT2_DCT=1;
+            break;
+        case LED3_OFF:
+            CT3_DCT=1;
+            break;
+        case LEDR_OFF:
+            CHG_DCT=1;
+            break;
+        case START_PES:
+            Decl_PES=1;
+            break;
+        case STOP_PES:
+            Decl_PES=0;
+            break;
+        case PRINT:
+            Waiting_PKG.type=current_weighed;
+            Waiting_PKG.weigth=event_queue[next].uc;
+            // The main will call the print function  (with "M ..... m")
+            // note : 5ms ~= 500char@115200 bauds
+            break;
+        case error:
+            event_num=0;
+            SIG_Erreur=1;
+            Send_String(event_queue[next].string);
+            break;
+        default:
+            makeError(string_e_defaultEvent);
         }
         // Since we proceeded it, it is no longer useful. We however
         // add a "backdoor" for packages that might get pushed later
@@ -127,10 +127,24 @@ void dispatch(void)
         cleanEvents();
 }
 
-void addEvent(struct event e) //Note : this must be called in an interrupt-safe way (TODO)
+void addEvent(struct event e)
 {
+    char temp_IE = IE; // interrupt-safe
+    EA = 1;
+
     event_num++;
-    event_queue[event_num]=e;
+    if(event_num >= EVENT_QUEUE_LENGTH)
+    {
+        event_queue[0].type=error;
+        event_queue[0].string=string_e_queue_full;
+        event_num=1;
+    }
+    else
+    {
+        event_queue[event_num]=e;
+    }
+    IE = temp_IE;
+
 }
 
 int nextEvent(void) // TODO : make this less dumb

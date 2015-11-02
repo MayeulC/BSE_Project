@@ -61,7 +61,7 @@
 // Below, attempt to clean the queue if it reaches 85% capacity
 #define EVENT_QUEUE_AUTO_CLEAN_THRESHOLD (EVENT_QUEUE_LENGTH*85)/100
 // Below, attempt to remove elements from the queue if it reaches 110% capacity [disabled for now]
-#define EVENT_QUEUE_AUTO_REMOVE_THRESHOLD (EVENT_QUEUE_LENGTH*85)/100
+#define EVENT_QUEUE_AUTO_REMOVE_THRESHOLD (EVENT_QUEUE_LENGTH*110)/100
 
 
 /* TYPES */
@@ -119,8 +119,8 @@ struct event{ // constructors available in LIB_BSE_Event_dispatcher.C
     enum event_type type;
     unsigned int deadline;
     enum package_types p;
-	  unsigned char uc;
-	  char * string;
+    unsigned char uc;
+    char * string;
     unsigned char discarded; // Boolean, marks the event as eraseable by
                              // the garbage collector
 };

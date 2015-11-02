@@ -28,11 +28,13 @@
 const char * string_e_package_too_big="Error, measured size exceeds "
                                              "max package size\r\n";
 
-const char * string_e_defaultEvent = "Unknown event type\r\n";
+const char * string_e_defaultEvent = "Error, unknown event type\r\n";
+
+xdata const char * string_e_queue_full = "Error, event queue full\r\n";
 
 const char * string_e_package_not_normed = "Error, measured size exceeds "
                                                   "max gauge tolerance\r\n";
-																									
+
 char string_status_request[73]="R \r\n"
                                           "RTC: xx/yy/zz \r\n" //last is 20th
                                           "T1 : xx/yy \r\n"
@@ -43,11 +45,12 @@ char string_status_request[73]="R \r\n"
 
 char string_label[35]="Tx -- Pds :yyy0g \r\n" //19 char
                                  "H : xx/yy/zz \r\n";
-																 
+
 #else
 extern const char * string_e_package_too_big;
 extern const char * string_e_defaultEvent;
-extern const char * string_e_package_not_normed;			
+extern xdata const char * string_e_queue_full;
+extern const char * string_e_package_not_normed;
 extern char string_status_request[73];
 extern char string_label[35];
 #endif

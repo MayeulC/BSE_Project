@@ -38,6 +38,8 @@ void Config_GPIO(void)
 	P3=0x87;        //configure the open drains as input; output low on the 
 									// others, excepted P3.2, which must be output high by default
 	P1MDOUT |= 0x40;//Configures P1.6 (LED) as push-pull
+	
+	SIG_Erreur=1; // No error
 }
 
 void Pulse_P20(void)

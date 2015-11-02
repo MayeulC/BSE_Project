@@ -62,8 +62,8 @@ extern unsigned int timestamp; //See timer2 files
  *
  */
 
-static struct event event_queue[EVENT_QUEUE_LENGTH];
-static unsigned char event_num=0;
+xdata struct event event_queue[EVENT_QUEUE_LENGTH];
+unsigned char event_num=0;
 
 
 /* FUNCTIONS */

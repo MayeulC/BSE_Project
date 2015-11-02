@@ -24,12 +24,16 @@
 #ifndef BSE_MAIN_H
 #define BSE_MAIN_H
 #include "defines.h"
+#include "LIB_BSE_strings.h"
+
 /* Externs */
 extern void Init_Device(void);
 extern unsigned char Getchar(void);
 extern void sendStatus(void);
 extern void print(enum package_types type, unsigned char weigth);
-
+extern void dispatch(void); 
+extern void demo2(void);
+extern int Send_String(char* char_ptr);
 /* Globals */
 struct package Waiting_PKG={0,NO_PACKAGE};
 

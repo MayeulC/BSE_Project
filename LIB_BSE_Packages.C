@@ -38,16 +38,18 @@ void packageDetection(void)
     
     if(status!=previousStatus)
     {
-        deltaT=statusChange-timestamp;
+        deltaT=timestamp-statusChange;
         statusChange=timestamp;
         if(status==0 & previousStatus == 1) // falling edge, package detected
         {
-            deltaT=statusChange-timestamp;  //duration of the transit /T2PERIOD
+            //deltaT=timestamp-statusChange;  //duration of the transit /T2PERIOD
 
-
+					/*Send_String("Colis!\r\n"); // DEBUG; delete this TODO
+					previousStatus=status;
+					return;*/
             //TODO : we also need to detect small intervals.
 
-            package_length=((deltaT*T2PERIOD)*CONVASPEED);// n*ms*mm/s
+            package_length=((deltaT*T2PERIOD)*CONVASPEED*100);// n*ms*cm/s
             if(package_length > MAXPACKAGELENGTH ||
                     deltaT>(65535/(T2PERIOD*CONVASPEED))-1) // overflow check
             {
@@ -87,6 +89,7 @@ void packageDetection(void)
 
             addEvent(Eventp(PPA_push,deadline+timestamp,type));
         }
+				previousStatus=status;
     }
 
 }

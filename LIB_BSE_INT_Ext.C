@@ -43,7 +43,7 @@ void ISR_INT1(void) interrupt 2
     }
     else
     {
-        addEvent(EventS(ERROR,timestamp,string_e_package_too_heavy))
+        addEvent(EventS(ERROR,timestamp,string_e_package_too_heavy));
     }
 
 }

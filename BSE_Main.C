@@ -27,8 +27,15 @@
 void main(void)
 {
     Init_Device();
+		
     while(1)
     {
-
+				if(Getchar()=='R')
+            Send_String(string_status_request);//sendStatus();
+        if(Waiting_PKG.type!=NO_PACKAGE)
+        {
+            print(Waiting_PKG.type,Waiting_PKG.weigth);
+            Waiting_PKG.type=NO_PACKAGE;
+        }
     }
 }

@@ -35,6 +35,7 @@ extern unsigned int timestamp;
 extern struct event Eventp(enum event_type type,
 																 unsigned int deadline,
 																 enum package_types p);
+extern int Send_String(char* char_ptr);
 
 /* Globals */
 struct packageCounter num_packages={0};

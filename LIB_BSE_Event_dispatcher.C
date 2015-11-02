@@ -29,10 +29,11 @@ void dispatch(void)
     static enum boolean scale_free=TRUE; //Yes, this is an assumption
     unsigned char remaining_loops=5; // To avoid staying too long
     unsigned char next;
-    if(event_num == 0)
+    
+	  processInput();
+	  
+	  if(event_num == 0)
         return; // nothing to do
-
-    processInput();
 
     while( remaining_loops)
     {
@@ -48,6 +49,7 @@ void dispatch(void)
             Pulse_P20(); //push PPA
             switch(event_queue[next].p){
             case TYPE1:
+                Send_String("Colis!\r\n");
                 addEvent(Event(LED1_ON,timestamp));
                 addEvent(Event(LED1_OFF,timestamp+100/T2PERIOD));
                 break;
@@ -64,7 +66,6 @@ void dispatch(void)
                 addEvent(Event(LEDR_OFF,timestamp+100/T2PERIOD));
             }
             scale_free=FALSE;
-            Send_String("Colis!");
             break;
         case PPB_push:
             Pulse_P21(); //push PPB
@@ -109,7 +110,7 @@ void dispatch(void)
             break;
         case error:
             event_num=0;
-            SIG_Erreur=1;
+            //SIG_Erreur=0; // commented for debug
             Send_String(event_queue[next].string);
             break;
         default:
@@ -128,7 +129,7 @@ void dispatch(void)
 void addEvent(struct event e)
 {
     char temp_IE = IE; // interrupt-safe
-    EA = 1;
+    EA = 0;
 
     event_num++;
     if(event_num >= EVENT_QUEUE_LENGTH)
@@ -167,6 +168,7 @@ int nextEvent(void) // TODO : make this less dumb
             if(event_queue[i].type == PPB_push) // Those too are here to be processed ASAP
                 encounteredPPB_Push=i;
         }
+				i++;
     }
     if(candidate!=EVENT_QUEUE_LENGTH &&
        event_queue[candidate].type==PPA_push &&
@@ -196,15 +198,16 @@ void cleanEvents(void)
 
 void processInput(void)
 {
-    packageDetection();
+		if(SIG_Erreur==1)
+			  packageDetection();
     if(RAZ_RTC == 0)
         Clear_RTC();
-    if(RAZ_CP)
+    if(RAZ_CP==0)
         clearPackageCounter();
-    if(START_Sys)
+    if(START_Sys==0)
     {
         event_num=0;
-        SIG_Erreur=0;
+        SIG_Erreur=1;
     }
 }
 

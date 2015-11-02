@@ -101,7 +101,7 @@ char Putchar(char c, int csg_tempo)
 
 int Send_String(char* char_ptr)
 {
-  int csg_tempo = 5;
+  int csg_tempo = 15;
   int i = 0;
   char c_return;
   char* c_send = char_ptr;

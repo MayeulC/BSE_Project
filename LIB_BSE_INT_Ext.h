@@ -33,6 +33,9 @@ extern unsigned int timestamp;
 extern struct event Eventuc(enum event_type type,
 																 unsigned int deadline,
 																 unsigned char uc);
+extern struct event EventS(enum event_type type,
+																 unsigned int deadline,
+										char * string);
 
 /* Functions */
 

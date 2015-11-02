@@ -64,9 +64,10 @@ void dispatch(void)
                 addEvent(Event(LEDR_OFF,timestamp+100/T2PERIOD));
             }
             scale_free=FALSE;
-            current_weighed=event_queue[next].p;
-            addEvent(Event(START_PES,timestamp));
-            addEvent(Event(STOP_PES,timestamp+1));
+            Send_String("Colis!");
+//            current_weighed=event_queue[next].p;
+//            addEvent(Event(START_PES,timestamp));
+//            addEvent(Event(STOP_PES,timestamp+1));
             break;
         case PPB_push:
             Pulse_P21(); //push PPB

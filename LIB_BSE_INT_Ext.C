@@ -34,6 +34,16 @@ extern void Pulse_P20(void);
 extern void Pulse_P21(void);
 void ISR_INT1(void) interrupt 2
 {
-    unsigned char value=ACQ_ADC();
-    addEvent(Eventuc(PRINT, timestamp, value));
+
+    unsigned char value  =ACQ_ADC();
+    if( (WEIGHT_MIN*21/25 < value) && (value < WEIGHT_MAX*21/25))
+    {
+        unsigned char weight =25*(value/21);
+        addEvent(Eventuc(PRINT, timestamp, value));
+    }
+    else
+    {
+        addEvent(EventS(ERROR,timestamp,string_e_package_too_heavy))
+    }
+
 }

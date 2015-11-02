@@ -159,7 +159,7 @@ void demo2(void)
 	Putchar(c,2);
 }
 
-void CONV_Pes_Val(unsigned char value, char * string)
+void  CONV_Pes_Val(unsigned char value, char * string)
 {
     string[2]=value%10+'0';
     string[1]=(value/10)%10+'0';
@@ -219,11 +219,7 @@ void sendStatus(void)
 void print(enum package_types type, unsigned char weigth)
 {
     string_label[1]=type+'1';
-    // TODO : add weight
-    // x*2500/(255*Vref/2) ~ 6 (5.94)
-	  // This calculation seems false. The correct one seems to be
-	  // x*2500*Vref/(2*255)
-    CONV_Pes_Val(12*weigth,string_label+12);
+    CONV_Pes_Val(weigth,string_label+12);
 
     CONV_HMSC(RTC_Minutes,string_label+24);
     CONV_HMSC(RTC_Secondes,string_label+27);

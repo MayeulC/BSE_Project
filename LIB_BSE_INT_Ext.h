@@ -24,6 +24,7 @@
 #ifndef LIB_BSE_INT_Ext_H
 #define LIB_BSE_INT_Ext_H
 #include "defines.h"
+#include "LIB_BSE_strings.h"
 
 /* Externs */
 extern void addEvent(struct event e);

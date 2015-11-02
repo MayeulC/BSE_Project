@@ -63,6 +63,9 @@
 // Below, attempt to remove elements from the queue if it reaches 110% capacity [disabled for now]
 #define EVENT_QUEUE_AUTO_REMOVE_THRESHOLD (EVENT_QUEUE_LENGTH*110)/100
 
+/* Weights*/
+#define WEIGHT_MAX 200 // in dg
+#define WEIGHT_MIN 20 // also in dg
 
 /* TYPES */
 enum event_type{

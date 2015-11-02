@@ -28,6 +28,9 @@
 xdata const char * string_e_package_too_big="Error, measured size exceeds "
                                              "max package size\r\n";
 
+xdata const char * string_e_package_too_heavy="Error, measured size exceeds "
+                                               "max package weight\r\n";
+
 xdata const char * string_e_defaultEvent = "Unknown event type\r\n";
 
 xdata const char * string_e_package_not_normed = "Error, measured size exceeds "
@@ -48,6 +51,7 @@ xdata char string_label[35]="Tx -- Pds :yyy0g \r\n" //19 char
 
 #else
 extern xdata const char * string_e_package_too_big;
+extern xdata const char * string_e_package_too_heavy;
 extern xdata const char * string_e_defaultEvent;
 extern xdata const char * string_e_queue_full;
 extern xdata const char * string_e_package_not_normed;

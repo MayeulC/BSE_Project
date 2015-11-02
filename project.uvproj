@@ -386,6 +386,16 @@
               <FileType>1</FileType>
               <FilePath>.\LIB_BSE_UART.c</FilePath>
             </File>
+            <File>
+              <FileName>LIB_BSE_ADC.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LIB_BSE_ADC.c</FilePath>
+            </File>
+            <File>
+              <FileName>LIB_BSE_DAC.C</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LIB_BSE_DAC.C</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

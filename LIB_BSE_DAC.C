@@ -15,7 +15,7 @@
 //------------------------------------------------------------------------------------
 #include <c8051f020.h>                    // SFR declarations
 #include <intrins.h>  
-#include <Ports_Declarations_TP_Emb.h> 
+//#include <Ports_Declarations_TP_Emb.h> 
 //------------------------------------------------------------------------------
 
 

@@ -24,7 +24,8 @@
 #ifndef LIB_BSE_INT_Ext_H
 #define LIB_BSE_INT_Ext_H
 #include "defines.h"
-
+extern void Send_to_DAC0(unsigned char Output_DAC);
+extern unsigned char ACQ_ADC(void);
 /*
  * void Config_InT1(void)
  *

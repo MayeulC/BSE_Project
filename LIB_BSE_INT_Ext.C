@@ -36,7 +36,6 @@ void ISR_INT1(void) interrupt 2
 {
 	//TODO
 	Test_1=1;
-	Pulse_P20();
-	Pulse_P21();
+	Send_to_DAC0(ACQ_ADC());
 	Test_1=0;
 }

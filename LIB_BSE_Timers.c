@@ -28,7 +28,7 @@
 
 void Config_Timer2(void)
 {
-  T2CON = 0x00; // Resetting different parametres
+  /*T2CON = 0x00; // Resetting different parametres
 
   CKCON&= ~(1<<5); // CKCON.5 = T2M when set to one uses SYSCLK/12
 
@@ -38,39 +38,12 @@ void Config_Timer2(void)
   PT2   = 0; // Priority of Timer2 (change this afterwards)
 
   T2CON |= 1<<2; // Activating Timer2
-
+*/
 }
 
 void ISR_Timer2(void) interrupt 5
 {
   P3__5 =1;
-  // Controlling the RTC
-
-  // If it works correctly, Timer2 overflows every 5ms.
-  RTC_5ms += 1;
-  if (RTC_5ms == 200) // 200*5ms = 1s
-    RTC_Secondes += 1;
-  if (RTC_Secondes == 60) // 60s = 1m
-    RTC_Minutes +=1;
-  if (RTC_Minutes == 60) // 60m = 1h
-    RTC_Heures +=1;
-
-  // LED
-
-  LED = ~(LED);
-
-  // Package detection
-  static int Package_counter =0;
-
-  if (P2__2 == 0)
-    Package_counter++;
-  else
-    {
-      Package_flag = Package_counter;
-      Package_counter = 0; 
-    }
-  
-  // Deactivating the flag
   TF2 = 0;
 	
 	P3__5 = 0;

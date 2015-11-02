@@ -33,6 +33,7 @@ extern void demo2(void);
 extern void Send_to_DAC0(unsigned char Output_DAC);
 extern unsigned char ACQ_ADC(void);
 extern int Package_flag;
+extern void Send_to_DAC0(unsigned char Output_DAC);
 
 void main(void);
 

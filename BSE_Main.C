@@ -29,13 +29,11 @@ void main(void)
 	Init_Device();
 	Send_String("Hello, World !");
 	while(1){
-		demo2();
-        Send_to_DAC0(ACQ_ADC());
 	}
 }
 
 
-
+/*
 void Package_detection(void)
 {
   if(Package_flag == 0)
@@ -57,5 +55,5 @@ void Package_detection(void)
       Package_flag =0;
     }
 
-
 }
+*/

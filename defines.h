@@ -55,7 +55,7 @@
                            //  needs 16 ticks. The timeout is three times this value.
 
 /* Event dispatcher */
-#define EVENT_QUEUE_LENGTH 32 //curently, max is 255 (unsigned char are used
+#define EVENT_QUEUE_LENGTH 5 //curently, max is 255 (unsigned char are used
                               // to browse the queue). This value is also used
                               // as an error code.
 // Below, attempt to clean the queue if it reaches 85% capacity

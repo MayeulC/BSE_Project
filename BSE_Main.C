@@ -33,3 +33,29 @@ void main(void)
         Send_to_DAC0(ACQ_ADC());
 	}
 }
+
+
+
+void Package_detection(void)
+{
+  if(Package_flag == 0)
+    return;
+  static unsigned char LED_OFF_TARGET=0;
+  if(LED_OFF_TARGET=0)
+    LED=0;
+  else
+  {
+    LED=1;
+    LED_OFF_TARGET--;
+  }
+  int length_Package = Package_flag*T2PERIOD*CASPEED;
+  
+  if( 9<length_Package && length_Package<11 )
+    {
+      LED_OFF_TARGET=100/T2PERIOD -1; // 100ms target
+      LED=1;
+      Package_flag =0;
+    }
+
+
+}

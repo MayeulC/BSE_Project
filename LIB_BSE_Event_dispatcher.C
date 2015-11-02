@@ -65,9 +65,6 @@ void dispatch(void)
             }
             scale_free=FALSE;
             Send_String("Colis!");
-//            current_weighed=event_queue[next].p;
-//            addEvent(Event(START_PES,timestamp));
-//            addEvent(Event(STOP_PES,timestamp+1));
             break;
         case PPB_push:
             Pulse_P21(); //push PPB

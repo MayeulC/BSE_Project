@@ -29,15 +29,6 @@ void main(void)
     Init_Device();
     while(1)
     {
-        // The only thing main() does is answering status requests
-        // on the UART. This way, it is non-blocking for the Timer2 ISR,
-        // thus eliminating a possible RTC drift source
-        if(Getchar()=='R')
-            sendStatus();
-        if(Waiting_PKG.type!=NO_PACKAGE)
-        {
-            print(Waiting_PKG.type,Waiting_PKG.weigth);
-            Waiting_PKG.type=NO_PACKAGE;
-        }
+
     }
 }

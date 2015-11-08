@@ -43,8 +43,8 @@ xdata char string_status_request[73]="R \r\n"
                                "HG : xx/yy \r\n";
 
 
-xdata char string_label[35]="Tx -- Pds :yyy0g \r\n" //19 char
-                      "H : xx/yy/zz \r\n";
+xdata char string_label[37]="MTx -- Pds :yyy0g \r\n" //19 char
+                      "H : xx/yy/zz \r\nm";
 
 #else
 extern xdata const char * string_e_package_too_big;
@@ -52,6 +52,6 @@ extern xdata const char * string_e_defaultEvent;
 extern xdata const char * string_e_queue_full;
 extern xdata const char * string_e_package_not_normed;
 extern xdata char string_status_request[73];
-extern xdata char string_label[35];
+extern xdata char string_label[36];
 #endif
 #endif //LIB_BSE_STRINGS_H

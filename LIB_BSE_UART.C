@@ -102,7 +102,7 @@ char Putchar(char c, int csg_tempo)
 int Send_String(char* char_ptr)
 {
   int csg_tempo = 5;
-  int i = 0;
+  unsigned char i = 0; //We assume that no string is >255char long
   char c_return;
   char* c_send = char_ptr;
   
@@ -184,7 +184,7 @@ void CONV_HMSC(unsigned char value, char * string)
 	
 void sendStatus(void)
 {
-	  int l=0;
+	  unsigned char l=0;
     struct packageCounter num_packages;
     num_packages = getPackageCounter();
     CONV_HMSC(RTC_Minutes,string_status_request+9);
@@ -220,18 +220,19 @@ void sendStatus(void)
 }
 void print(enum package_types type, unsigned char weigth)
 {
-    string_label[1]=type+'1';
+	  unsigned char l=0;
+    string_label[2]=type+'1';
     // TODO : add weight
     // x*2500/(255*Vref/2) ~ 6 (5.94)
 	  // This calculation seems false. The correct one seems to be
 	  // x*2500*Vref/(2*255)
-    CONV_Pes_Val(12*weigth,string_label+11);
+    CONV_Pes_Val(12*weigth,string_label+12);
 
-    CONV_HMSC(RTC_Minutes,string_label+23);
-    CONV_HMSC(RTC_Secondes,string_label+26);
-    CONV_HMSC(RTC_5ms/2,string_label+29);
+    CONV_HMSC(RTC_Minutes,string_label+24);
+    CONV_HMSC(RTC_Secondes,string_label+27);
+    CONV_HMSC(RTC_5ms/2,string_label+30);
 
-    Putchar('M',2); //could have been in the string
-    Send_String(string_label);
-    Putchar('m',2);
+    do{
+        l+=Send_String(string_label+l);
+	  }while(l<35); // Dirty hack again; my keyboard's dirty
 }

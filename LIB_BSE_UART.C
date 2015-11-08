@@ -1,9 +1,9 @@
 /* 
    This program is designed to be compiled with Keil µVision4's ANSI C
-	 compiler, and ran on a 8051F020 microcontroller.
+   compiler, and ran on a 8051F020 microcontroller.
 	 
-  This file contains the files to configure the UART0, its clock and the
-	functions used to read and write. 
+   This file contains the files to configure the UART0, its clock and the
+   functions used to read and write.
 	 
    Copyright (C) 2015  Aydin Alperen <alperen.aydin@cpe.fr>
    Copyright (C) 2015  Cantan Mayeul <mayeul.cantan@cpe.fr>
@@ -109,7 +109,7 @@ int Send_String(char* char_ptr)
   while(*c_send != '\0' )
     {
       c_return = Putchar(*c_send, csg_tempo);
-      if(c_return == 0) return 0;
+      if(c_return == 0) return i; //follow-up to the dirty hack
       i++;
       c_send++;
     }
@@ -164,4 +164,74 @@ void CONV_Pes_Val(unsigned char value, char * string)
     string[2]=value%10+'0';
     string[1]=(value/10)%10+'0';
     string[0]=(value/100)%10+'0';
+}
+
+void CONV_HMSC(unsigned char value, char * string)
+{
+    string[1]=value%10+'0';
+    string[0]=(value/10)%10+'0';
+}
+
+/*void copyString(const char * source, char * destination)
+{
+	  unsigned char c;
+	  do{
+			   c=*destination=*source;
+			   destination++;
+			   source++;
+		}while(c!='\0');
+}*/
+	
+void sendStatus(void)
+{
+	  int l=0;
+    struct packageCounter num_packages;
+    num_packages = getPackageCounter();
+    CONV_HMSC(RTC_Minutes,string_status_request+9);
+    CONV_HMSC(RTC_Secondes,string_status_request+12);
+    CONV_HMSC(RTC_5ms/2,string_status_request+15);
+
+    CONV_HMSC(num_packages.num_packages1,
+              string_status_request+25);
+    CONV_HMSC(num_packages.num_packages1,
+              string_status_request+28);
+
+    CONV_HMSC(num_packages.num_packages2,
+              string_status_request+38);
+    CONV_HMSC(num_packages.num_packages2,
+              string_status_request+41);
+
+    CONV_HMSC(num_packages.num_packages3,
+              string_status_request+51);
+    CONV_HMSC(num_packages.num_packages3,
+              string_status_request+54);
+
+    CONV_HMSC(num_packages.num_packages
+              -num_packages.num_packages1
+              -num_packages.num_packages2
+              -num_packages.num_packages3,
+              string_status_request+64);
+    CONV_HMSC(0,string_status_request+67);
+
+    do{
+        l+=Send_String(string_status_request+l);
+    }while(l<72); // Dirty hack to force the UART to transmit everything
+    // TODO : complete this function
+}
+void print(enum package_types type, unsigned char weigth)
+{
+    string_label[1]=type+'1';
+    // TODO : add weight
+    // x*2500/(255*Vref/2) ~ 6 (5.94)
+	  // This calculation seems false. The correct one seems to be
+	  // x*2500*Vref/(2*255)
+    CONV_Pes_Val(12*weigth,string_label+11);
+
+    CONV_HMSC(RTC_Minutes,string_label+23);
+    CONV_HMSC(RTC_Secondes,string_label+26);
+    CONV_HMSC(RTC_5ms/2,string_label+29);
+
+    Putchar('M',2); //could have been in the string
+    Send_String(string_label);
+    Putchar('m',2);
 }

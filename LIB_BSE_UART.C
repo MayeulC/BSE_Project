@@ -1,9 +1,9 @@
 /* 
    This program is designed to be compiled with Keil µVision4's ANSI C
-   compiler, and ran on a 8051F020 microcontroller.
+	 compiler, and ran on a 8051F020 microcontroller.
 	 
-   This file contains the files to configure the UART0, its clock and the
-   functions used to read and write.
+  This file contains the files to configure the UART0, its clock and the
+	functions used to read and write. 
 	 
    Copyright (C) 2015  Aydin Alperen <alperen.aydin@cpe.fr>
    Copyright (C) 2015  Cantan Mayeul <mayeul.cantan@cpe.fr>
@@ -164,72 +164,4 @@ void CONV_Pes_Val(unsigned char value, char * string)
     string[2]=value%10+'0';
     string[1]=(value/10)%10+'0';
     string[0]=(value/100)%10+'0';
-}
-
-void CONV_HMSC(unsigned char value, char * string)
-{
-    string[2]=value%10+'0';
-    string[1]=(value/10)%10+'0';
-}
-
-/*void copyString(const char * source, char * destination)
-{
-	  unsigned char c;
-	  do{
-			   c=*destination=*source;
-			   destination++;
-			   source++;
-		}while(c!='\0');
-}*/
-	
-void sendStatus(void)
-{
-    struct packageCounter num_packages;
-    num_packages = getPackageCounter();
-    CONV_HMSC(RTC_Minutes,string_status_request+10);
-    CONV_HMSC(RTC_Secondes,string_status_request+13);
-    CONV_HMSC(RTC_5ms/2,string_status_request+16);
-
-    CONV_HMSC(num_packages.num_packages1,
-              string_status_request+26);
-    CONV_HMSC(num_packages.num_packages1,
-              string_status_request+29);
-
-    CONV_HMSC(num_packages.num_packages2,
-              string_status_request+39);
-    CONV_HMSC(num_packages.num_packages2,
-              string_status_request+42);
-
-    CONV_HMSC(num_packages.num_packages3,
-              string_status_request+52);
-    CONV_HMSC(num_packages.num_packages3,
-              string_status_request+55);
-
-    CONV_HMSC(num_packages.num_packages
-              -num_packages.num_packages1
-              -num_packages.num_packages2
-              -num_packages.num_packages3,
-              string_status_request+65);
-    CONV_HMSC(0,string_status_request+68);
-
-    Send_String(string_status_request);
-
-    // TODO : complete this function
-}
-void print(enum package_types type, unsigned char weigth)
-{
-    string_label[1]=type+'1';
-    // TODO : add weight
-    // x*2500/(255*Vref/2) ~ 6 (5.94)
-	  // This calculation seems false. The correct one seems to be
-	  // x*2500*Vref/(2*255)
-    CONV_Pes_Val(12*weigth,string_label+12);
-
-    CONV_HMSC(RTC_Minutes,string_label+24);
-    CONV_HMSC(RTC_Secondes,string_label+27);
-    CONV_HMSC(RTC_5ms/2,string_label+30);
-
-    Putchar('M',2); //could have been in the string
-    Send_String(string_label);
-    Putchar('m',2);
 }

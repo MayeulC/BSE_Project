@@ -126,7 +126,7 @@ void addEvent(struct event e)
     }
     else
     {
-        event_queue[event_num]=e;
+        event_queue[event_num-1]=e;
     }
     IE = temp_IE;
 

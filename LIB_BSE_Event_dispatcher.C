@@ -150,7 +150,7 @@ int nextEvent(void) // TODO : make this less dumb
         if(!event_queue[i].discarded) // If still valid, we continue
         {
             if(event_queue[i].type == error ) // This one is of the utmost importance
-                return i; // must be processed as soon as possible
+                return i;                     // must be processed as soon as possible
             if(event_queue[i].deadline==timestamp)
             {
                 candidate=i; //we could have broken the loop, if not for the line below

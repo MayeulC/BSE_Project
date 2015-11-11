@@ -61,7 +61,7 @@
 #define EVENT_QUEUE_LENGTH 64 //curently, max is 255 (unsigned char are used
                               // to browse the queue). This value is also used
                               // as an error code.
-                             // Below, attempt to clean the queue if it reaches 85% capacity
+                              // Below, attempt to clean the queue if it reaches 85% capacity
 #define EVENT_QUEUE_AUTO_CLEAN_THRESHOLD (EVENT_QUEUE_LENGTH*85)/100
 // Below, attempt to remove elements from the queue if it reaches 110% capacity [disabled for now]
 #define EVENT_QUEUE_AUTO_REMOVE_THRESHOLD (EVENT_QUEUE_LENGTH*110)/100
@@ -93,7 +93,7 @@ enum package_types{
     TYPE2, //15cm
     TYPE3, //20cm
     OTHER, //25 to MAXPACKAGELENGTHcm
-    ERROR,  // >MAXPACKAGELENGTHcm
+    ERROR, // >MAXPACKAGELENGTHcm
     NO_PACKAGE
 };
 

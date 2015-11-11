@@ -29,14 +29,14 @@ void Config_GPIO(void)
     P0MDOUT |= 1; //P0.0 in push-pull mode
     P0MDOUT &= ~(1<<1); //P0.1 in open drain mode
     P2MDOUT = 0x7b; //P2.7 and P2.2 configured as open drain, the others as
-    // push-pull.
+                    // push-pull.
     P2=~0x7b;       //configure the open drains as input; output low on the
-    // others.
+                    // others.
 
     P3MDOUT = 0x7c; //P3.0, P3.1 and P3.7 as open drain; push-pull for the others
 
     P3=0x87;        //configure the open drains as input; output low on the
-    // others, excepted P3.2, which must be output high by default
+                    // others, excepted P3.2, which must be output high by default
     P1MDOUT |= 0x40;//Configures P1.6 (LED) as push-pull
 }
 

@@ -61,7 +61,7 @@
 #define EVENT_QUEUE_LENGTH 64 //curently, max is 255 (unsigned char are used
                               // to browse the queue). This value is also used
                               // as an error code.
-// Below, attempt to clean the queue if it reaches 85% capacity
+                             // Below, attempt to clean the queue if it reaches 85% capacity
 #define EVENT_QUEUE_AUTO_CLEAN_THRESHOLD (EVENT_QUEUE_LENGTH*85)/100
 // Below, attempt to remove elements from the queue if it reaches 110% capacity [disabled for now]
 #define EVENT_QUEUE_AUTO_REMOVE_THRESHOLD (EVENT_QUEUE_LENGTH*110)/100
@@ -105,7 +105,7 @@ enum boolean{
 struct package{
     unsigned char weigth;
     enum package_types type;
-	  char * meta;
+    char * meta;
 };
 
 struct packageCounter{ // Limited to 255 each, but we can print 99 at best, so...
@@ -124,9 +124,9 @@ struct event{ // constructors available in LIB_BSE_Event_dispatcher.C
     unsigned int deadline;
     enum package_types p;
     unsigned char uc;
-	  char * string;
+    char * string;
     unsigned char discarded; // Boolean, marks the event as eraseable by
-                             // the garbage collector
+    // the garbage collector
 };
 
 #endif //DEFINES_H

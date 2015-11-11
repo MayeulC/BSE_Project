@@ -1,10 +1,10 @@
 /* 
    This program is designed to be compiled with Keil µVision4's ANSI C
    compiler, and ran on a 8051F020 microcontroller.
-	 
+
    This file contains the config_Timer2(), ISR2_Timer2(), Clear_RTC()
    functions.
-	 
+
    Copyright (C) 2015  Aydin Alperen <alperen.aydin@cpe.fr>
    Copyright (C) 2015  Cantan Mayeul <mayeul.cantan@cpe.fr>
 

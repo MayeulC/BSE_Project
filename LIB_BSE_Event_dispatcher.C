@@ -29,9 +29,9 @@ void dispatch(void)
     static enum boolean scale_free=TRUE; //Yes, this is an assumption
     unsigned char remaining_loops=5; // To avoid staying too long
     unsigned char next;
-	
-		processInput();
-	
+
+    processInput();
+
     if(event_num == 0)
         return; // nothing to do
 
@@ -42,65 +42,65 @@ void dispatch(void)
             break;
         remaining_loops--;
         switch(event_queue[next].type) {
-        case PPA_push:
-            //TODO : check that it hasn't expired
-            if(!scale_free)
-                break; //just discard it, there is nothing we can do
-            Pulse_P20(); //push PPA
-            scale_free=FALSE;
-            current_weighed=event_queue[next].p;
-            addEvent(Event(START_PES,timestamp));
-            addEvent(Event(STOP_PES,timestamp+1));
-            break;
-        case PPB_push:
-            Pulse_P21(); //push PPB
-            scale_free=TRUE;
-            current_weighed=NO_PACKAGE;
-            break;
-        case LED1_ON:
-            CT1_DCT=0;
-            break;
-        case LED2_ON:
-            CT2_DCT=0;
-            break;
-        case LED3_ON:
-            CT3_DCT=0;
-            break;
-        case LEDR_ON:
-            CHG_DCT=0;
-            break;
-        case LED1_OFF:
-            CT1_DCT=1;
-            break;
-        case LED2_OFF:
-            CT2_DCT=1;
-            break;
-        case LED3_OFF:
-            CT3_DCT=1;
-            break;
-        case LEDR_OFF:
-            CHG_DCT=1;
-            break;
-        case START_PES:
-            Decl_PES=1;
-            break;
-        case STOP_PES:
-            Decl_PES=0;
-            break;
-        case PRINT:
-            Waiting_PKG.type=current_weighed;
-            Waiting_PKG.weigth=event_queue[next].uc;
-            // The main will call the print function  (with "M ..... m")
-            // note : 5ms ~= 500char@115200 bauds
-            break;
-        case error:
-            event_num=0;
-            SIG_Erreur=0;
-            Waiting_PKG.type=error;
-				    Waiting_PKG.meta=event_queue[next].string;
-            break;
-        default:
-            makeError(string_e_defaultEvent);
+            case PPA_push:
+                //TODO : check that it hasn't expired
+                if(!scale_free)
+                    break; //just discard it, there is nothing we can do
+                Pulse_P20(); //push PPA
+                scale_free=FALSE;
+                current_weighed=event_queue[next].p;
+                addEvent(Event(START_PES,timestamp));
+                addEvent(Event(STOP_PES,timestamp+1));
+                break;
+            case PPB_push:
+                Pulse_P21(); //push PPB
+                scale_free=TRUE;
+                current_weighed=NO_PACKAGE;
+                break;
+            case LED1_ON:
+                CT1_DCT=0;
+                break;
+            case LED2_ON:
+                CT2_DCT=0;
+                break;
+            case LED3_ON:
+                CT3_DCT=0;
+                break;
+            case LEDR_ON:
+                CHG_DCT=0;
+                break;
+            case LED1_OFF:
+                CT1_DCT=1;
+                break;
+            case LED2_OFF:
+                CT2_DCT=1;
+                break;
+            case LED3_OFF:
+                CT3_DCT=1;
+                break;
+            case LEDR_OFF:
+                CHG_DCT=1;
+                break;
+            case START_PES:
+                Decl_PES=1;
+                break;
+            case STOP_PES:
+                Decl_PES=0;
+                break;
+            case PRINT:
+                Waiting_PKG.type=current_weighed;
+                Waiting_PKG.weigth=event_queue[next].uc;
+                // The main will call the print function  (with "M ..... m")
+                // note : 5ms ~= 500char@115200 bauds
+                break;
+            case error:
+                event_num=0;
+                SIG_Erreur=0;
+                Waiting_PKG.type=error;
+                Waiting_PKG.meta=event_queue[next].string;
+                break;
+            default:
+                makeError(string_e_defaultEvent);
         }
         // Since we proceeded it, it is no longer useful. We however
         // add a "backdoor" for packages that might get pushed later
@@ -115,10 +115,10 @@ void dispatch(void)
 void addEvent(struct event e)
 {	
     char temp_IE = IE; // interrupt-safe
-	
-	  if(SIG_Erreur ==0)
-			return; // if we are in error mode, don't do anything
-		
+
+    if(SIG_Erreur ==0)
+        return; // if we are in error mode, don't do anything
+
     EA = 0;
 
     event_num++;
@@ -158,11 +158,11 @@ int nextEvent(void) // TODO : make this less dumb
             if(event_queue[i].type == PPB_push) // Those too are here to be processed ASAP
                 encounteredPPB_Push=i;
         }
-				i++;
+        i++;
     }
     if(candidate!=EVENT_QUEUE_LENGTH &&
-       event_queue[candidate].type==PPA_push &&
-       encounteredPPB_Push!= EVENT_QUEUE_LENGTH)
+            event_queue[candidate].type==PPA_push &&
+            encounteredPPB_Push!= EVENT_QUEUE_LENGTH)
         return encounteredPPB_Push; // Artificially prioritize these
     return candidate;
 }
@@ -212,34 +212,34 @@ void removeUseless(void)
 
 // event constructors
 struct event Eventp(enum event_type type,
-																 unsigned int deadline,
-																 enum package_types p)
+                    unsigned int deadline,
+                    enum package_types p)
 {
-	  struct event e;
-	  e.type=type;
-	  e.deadline=deadline;
-	  e.p=p;
-	  e.discarded=0;
-	  return e;
+    struct event e;
+    e.type=type;
+    e.deadline=deadline;
+    e.p=p;
+    e.discarded=0;
+    return e;
 }
 
 struct event Event(enum event_type type,
-																 unsigned int deadline)
+                   unsigned int deadline)
 {
-	  struct event e;
-	  e.type=type;
-	  e.deadline=deadline;
-	  e.discarded=0;
-	  return e;
+    struct event e;
+    e.type=type;
+    e.deadline=deadline;
+    e.discarded=0;
+    return e;
 }
 struct event EventS(enum event_type type,
-																 unsigned int deadline,
-										char * string)
+                    unsigned int deadline,
+                    char * string)
 {
-	  struct event e;
-	  e.type=type;
-	  e.deadline=deadline;
-	  e.discarded=0;
-	  e.string = string;
-	  return e;
+    struct event e;
+    e.type=type;
+    e.deadline=deadline;
+    e.discarded=0;
+    e.string = string;
+    return e;
 }

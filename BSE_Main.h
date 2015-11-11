@@ -24,6 +24,7 @@
 #ifndef BSE_MAIN_H
 #define BSE_MAIN_H
 #include "defines.h"
+
 /* Externs */
 extern void Init_Device(void);
 extern unsigned char Getchar(void);

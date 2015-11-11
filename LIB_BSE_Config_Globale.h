@@ -68,10 +68,10 @@ void  Init_RST(void);
  * Sets the system clock to use an external crystal. SYSCLK = 22,1184HZ
  *
  * OSCXCN is completely modified. This function also waits for the
- * sysclock to be operational. Note that the internal oscillator isn't 
+ * sysclock to be operational. Note that the internal oscillator isn't
  * modified.
  * See datasheet p.137 for more information
- * 
+ *
  */
 void Init_CLK(void);
 

@@ -1,10 +1,10 @@
 /* 
    This program is designed to be compiled with Keil µVision4's ANSI C
    compiler, and ran on a 8051F020 microcontroller.
-	 
+
    This file contains the files to configure the ADC and other functions
    releated to ADC
-	 
+
    Copyright (C) 2015  Aydin Alperen <alperen.aydin@cpe.fr>
    Copyright (C) 2015  Cantan Mayeul <mayeul.cantan@cpe.fr>
 
@@ -42,7 +42,7 @@ void CFG_VREF(void);
  * Configures the ADC0.
  * Weight must be measured with a 1g precision, which means a
  * 0.4mV resolution.
- * Modified registers: AMX0CF, ADC0CN, AMX0SL 
+ * Modified registers: AMX0CF, ADC0CN, AMX0SL
  * See Datasheet pages 47, 48, 50 for more info.
  */
 void CFG_ADC0(void);

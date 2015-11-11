@@ -25,27 +25,27 @@
 #define LIB_BSE_STRINGS_H
 
 #ifdef LIB_BSE_UART_H
-xdata const char * string_e_package_too_big="Error, measured size exceeds "
-                                             "max package size\r\n";
-																						 
-xdata const char * string_e_package_too_heavy="Error, package is too heavy\r\n";
-																						 
-xdata const char * string_e_package_too_light="Error, package is too light\r\n";
+xdata const char * string_e_package_too_big = "Error, measured size exceeds "
+                                              "max package size\r\n";
+
+xdata const char * string_e_package_too_heavy = "Error, package is too heavy\r\n";
+
+xdata const char * string_e_package_too_light = "Error, package is too light\r\n";
 
 xdata const char * string_e_defaultEvent = "Unknown event type\r\n";
 
 xdata const char * string_e_queue_full = "Error, event queue full\r\n";
 
-xdata char string_status_request[73]="R \r\n"
-                               "RTC: xx/yy/zz \r\n" //last is 20th
-                               "T1 : xx/yy \r\n"
-                               "T2 : xx/yy \r\n"
-                               "T3 : xx/yy \r\n"
-                               "HG : xx/yy \r\n";
+xdata char string_status_request[73] = "R \r\n"
+                                       "RTC: xx/yy/zz \r\n" //last is 20th
+                                       "T1 : xx/yy \r\n"
+                                       "T2 : xx/yy \r\n"
+                                       "T3 : xx/yy \r\n"
+                                       "HG : xx/yy \r\n";
 
 
-xdata char string_label[37]="MTx -- Pds :yyy0g \r\n" //19 char
-                      "H : xx/yy/zz \r\nm";
+xdata char string_label[37] = "MTx -- Pds :yyy0g \r\n" //19 char
+                              "H : xx/yy/zz \r\nm";
 
 #else
 extern xdata const char * string_e_package_too_big;

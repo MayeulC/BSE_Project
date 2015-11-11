@@ -27,8 +27,8 @@
 void CFG_VREF(void)
 {
     REF0CN |= 1<<4 + 3; // AD0VRS configured to use Vref0 pin as the reference voltage.
-                        //  Internal voltage reference is enabled, as well as the Bias
-                        //  generator.
+    //  Internal voltage reference is enabled, as well as the Bias
+    //  generator.
 }
 
 void CFG_ADC0(void)
@@ -41,10 +41,10 @@ void CFG_ADC0(void)
     //  This is the value we put in AD0SC
     ADC0CF = (8<<4) + 1;
     ADC0CN = 0x81; // Conversion initiated on AD0BUSY flag,  data is right-justified,
-                   //  Also activates ADC0 in continuous tracking mode.
+    //  Also activates ADC0 in continuous tracking mode.
 
     AMX0SL=3; // Channel select register configured to read from AIN3, this shouldn't
-              //  change.
+    //  change.
 }
 
 unsigned char ACQ_ADC(void)

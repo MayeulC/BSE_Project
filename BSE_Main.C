@@ -1,9 +1,9 @@
 /* BSE_Main.C
-   This program is designed to be compiled with Keil µVision4's ANSI C
+   This program is designed to be compiled with Keil ÂµVision4's ANSI C
    compiler, and ran on a 8051F020 microcontroller.
-	 
+
    This file contains the main() function
-	 
+
    Copyright (C) 2015  Aydin Alperen <alperen.aydin@cpe.fr>
    Copyright (C) 2015  Cantan Mayeul <mayeul.cantan@cpe.fr>
 
@@ -26,7 +26,7 @@
 
 void main(void)
 {
-	  unsigned char l=0;
+    unsigned char l=0;
     Init_Device();
     while(1)
     {
@@ -37,9 +37,9 @@ void main(void)
             sendStatus();
         if(Waiting_PKG.type!=NO_PACKAGE)
         {
-						if(Waiting_PKG.type == error)
-						    Send_String_Safe(Waiting_PKG.meta);
-						else
+            if(Waiting_PKG.type == error)
+                Send_String_Safe(Waiting_PKG.meta);
+            else
                 print(Waiting_PKG.type,Waiting_PKG.weigth);
             Waiting_PKG.type=NO_PACKAGE;
         }

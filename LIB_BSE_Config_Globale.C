@@ -1,10 +1,10 @@
 /* 
    This program is designed to be compiled with Keil µVision4's ANSI C
    compiler, and ran on a 8051F020 microcontroller.
-	 
+
    This file contains the Init_Device() and other functions it calls,
    to initialise the device.
-	 
+
    Copyright (C) 2015  Aydin Alperen <alperen.aydin@cpe.fr>
    Copyright (C) 2015  Cantan Mayeul <mayeul.cantan@cpe.fr>
 
@@ -41,11 +41,11 @@ void Init_Device(void)
 
 void Init_RST(void)
 {
-	  char temp_IE = IE; // interrupt-safe
+    char temp_IE = IE; // interrupt-safe
     EA = 0;
     WDTCN = 0xDE;
     WDTCN = 0xAD;
-	  IE = temp_IE;
+    IE = temp_IE;
 }
 
 void Init_CLK(void)

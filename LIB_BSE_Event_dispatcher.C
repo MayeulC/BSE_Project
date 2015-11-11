@@ -29,10 +29,11 @@ void dispatch(void)
     static enum boolean scale_free=TRUE; //Yes, this is an assumption
     unsigned char remaining_loops=5; // To avoid staying too long
     unsigned char next;
+	
+		processInput();
+	
     if(event_num == 0)
         return; // nothing to do
-
-    processInput();
 
     while( remaining_loops)
     {
@@ -184,9 +185,9 @@ void processInput(void)
     packageDetection();
     if(RAZ_RTC == 0)
         Clear_RTC();
-    if(RAZ_CP)
+    if(RAZ_CP == 0)
         clearPackageCounter();
-    if(START_Sys)
+    if(START_Sys == 0)
     {
         event_num=0;
         SIG_Erreur=0;

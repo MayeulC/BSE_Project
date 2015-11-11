@@ -29,7 +29,7 @@ void packageDetection(void)
 {
     //Note : a state machine implementation could have been done here
     static unsigned char previousStatus=0;
-    static unsigned int statusChange=0;
+    static unsigned int statusChange=0; //Timestamp
     unsigned char status=DETECT;
     unsigned int deltaT;
     unsigned int package_length; //mm
@@ -38,13 +38,12 @@ void packageDetection(void)
     
     if(status!=previousStatus)
     {
-        deltaT=statusChange-timestamp;
+        deltaT=timestamp-statusChange; //duration of the transit /T2PERIOD
+			  if(deltaT>-deltaT) //timer overflow occured
+				    deltaT=-deltaT;
         statusChange=timestamp;
         if(status==0 & previousStatus == 1) // falling edge, package detected
         {
-            deltaT=statusChange-timestamp;  //duration of the transit /T2PERIOD
-
-
             //TODO : we also need to detect small intervals.
 
             package_length=((deltaT*T2PERIOD)*CONVASPEED);// n*ms*mm/s
@@ -58,8 +57,9 @@ void packageDetection(void)
             if((package_length+PACKAGE_GAUGE_TOLERANCE)%50
                     > 2*PACKAGE_GAUGE_TOLERANCE) //exceeds tolerance
             {
-                makeError(string_e_package_not_normed); // note : 5cm+-tol is accepted
-                return;                         // probably not a big deal.
+                addEvent(Event(LEDR_ON,timestamp));
+                addEvent(Event(LEDR_OFF,timestamp+100/T2PERIOD));
+                return; // note : 5cm+-tol is accepted. probably not a big deal.
             }
             switch((package_length+PACKAGE_GAUGE_TOLERANCE)/50){
             case 2: //10cm+-tolerance
@@ -67,28 +67,35 @@ void packageDetection(void)
                 deadline=TRAVELTIME+(5000)/(CONVASPEED*T2PERIOD);
                 num_packages.num_packages++;
                 num_packages.num_packages1++;
+						    addEvent(Event(LED1_ON,timestamp));
+                addEvent(Event(LED1_OFF,timestamp+100/T2PERIOD));
                 break;
             case 3: //15cm
                 type=TYPE2;
                 deadline=TRAVELTIME+(7500)/(CONVASPEED*T2PERIOD);
                 num_packages.num_packages++;
                 num_packages.num_packages2++;
+						    addEvent(Event(LED2_ON,timestamp));
+                addEvent(Event(LED2_OFF,timestamp+100/T2PERIOD));
                 break;
             case 4: //20cm
                 type=TYPE3;
                 deadline=TRAVELTIME+(10000)/(CONVASPEED*T2PERIOD);
                 num_packages.num_packages++;
                 num_packages.num_packages3++;
+						    addEvent(Event(LED3_ON,timestamp));
+                addEvent(Event(LED3_OFF,timestamp+100/T2PERIOD));
                 break;
             default:
                 num_packages.num_packages++;
-                return; // We don't care, in fact
+						    addEvent(Event(LEDR_ON,timestamp));
+                addEvent(Event(LEDR_OFF,timestamp+100/T2PERIOD));
+                return;
             }
-
             addEvent(Eventp(PPA_push,deadline+timestamp,type));
         }
     }
-
+    previousStatus=status;
 }
 
 void clearPackageCounter(void)

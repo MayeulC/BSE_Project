@@ -46,23 +46,6 @@ void dispatch(void)
             if(!scale_free)
                 break; //just discard it, there is nothing we can do
             Pulse_P20(); //push PPA
-            switch(event_queue[next].p){
-            case TYPE1:
-                addEvent(Event(LED1_ON,timestamp));
-                addEvent(Event(LED1_OFF,timestamp+100/T2PERIOD));
-                break;
-            case TYPE2:
-                addEvent(Event(LED2_ON,timestamp));
-                addEvent(Event(LED2_OFF,timestamp+100/T2PERIOD));
-                break;
-            case TYPE3:
-                addEvent(Event(LED3_ON,timestamp));
-                addEvent(Event(LED3_OFF,timestamp+100/T2PERIOD));
-                break;
-            default:
-                addEvent(Event(LEDR_ON,timestamp));
-                addEvent(Event(LEDR_OFF,timestamp+100/T2PERIOD));
-            }
             scale_free=FALSE;
             current_weighed=event_queue[next].p;
             addEvent(Event(START_PES,timestamp));

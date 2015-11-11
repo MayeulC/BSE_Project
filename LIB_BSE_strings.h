@@ -30,9 +30,6 @@ xdata const char * string_e_package_too_big="Error, measured size exceeds "
 
 xdata const char * string_e_defaultEvent = "Unknown event type\r\n";
 
-xdata const char * string_e_package_not_normed = "Error, measured size exceeds "
-                                                  "max gauge tolerance\r\n";
-
 xdata const char * string_e_queue_full = "Error, event queue full\r\n";
 
 xdata char string_status_request[73]="R \r\n"
@@ -50,7 +47,6 @@ xdata char string_label[37]="MTx -- Pds :yyy0g \r\n" //19 char
 extern xdata const char * string_e_package_too_big;
 extern xdata const char * string_e_defaultEvent;
 extern xdata const char * string_e_queue_full;
-extern xdata const char * string_e_package_not_normed;
 extern xdata char string_status_request[73];
 extern xdata char string_label[36];
 #endif

@@ -41,7 +41,7 @@
 #define CONVBSPEED 100
 #define CONVALENGTH 60 //cm
 #define TRAVELTIME (CONVALENGTH*1000)/(CONVASPEED*T2PERIOD) //T2 tick
-#define MAXPACKAGELENGTH 50 //cm
+#define MAXPACKAGELENGTH 500 //mm
 #define PACKAGE_GAUGE_TOLERANCE 10 //mm
 
 /* system clock */

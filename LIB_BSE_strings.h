@@ -27,6 +27,10 @@
 #ifdef LIB_BSE_UART_H
 xdata const char * string_e_package_too_big="Error, measured size exceeds "
                                              "max package size\r\n";
+																						 
+xdata const char * string_e_package_too_heavy="Error, package is too heavy\r\n";
+																						 
+xdata const char * string_e_package_too_light="Error, package is too light\r\n";
 
 xdata const char * string_e_defaultEvent = "Unknown event type\r\n";
 
@@ -45,6 +49,8 @@ xdata char string_label[37]="MTx -- Pds :yyy0g \r\n" //19 char
 
 #else
 extern xdata const char * string_e_package_too_big;
+extern xdata const char * string_e_package_too_heavy;
+extern xdata const char * string_e_package_too_light;
 extern xdata const char * string_e_defaultEvent;
 extern xdata const char * string_e_queue_full;
 extern xdata char string_status_request[73];

@@ -193,11 +193,8 @@ void print(enum package_types type, unsigned char weigth)
 {
 	  unsigned char l=0;
     string_label[2]=type+'1';
-    // TODO : add weight
-    // x*2500/(255*Vref/2) ~ 6 (5.94)
-	  // This calculation seems false. The correct one seems to be
-	  // x*2500*Vref/(2*255)
-    CONV_Pes_Val(12*weigth,string_label+12);
+    
+    CONV_Pes_Val(weigth,string_label+12);
 
     CONV_HMSC(RTC_Minutes,string_label+24);
     CONV_HMSC(RTC_Secondes,string_label+27);

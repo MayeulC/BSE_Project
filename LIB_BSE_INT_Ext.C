@@ -34,6 +34,38 @@ extern void Pulse_P20(void);
 extern void Pulse_P21(void);
 void ISR_INT1(void) interrupt 2
 {
-    unsigned char value=ACQ_ADC();
-    addEvent(Eventuc(PRINT, timestamp, value));
+	  struct event e;
+    unsigned int value=257*ACQ_ADC();
+	  // Weight calculation
+	  // Note : we use a x2 input gain before the ADC
+	  // So, 255 <-> Vref/2=1.2V
+	  // this way, we can retrieve the voltage from the measure m :
+	  // v = m*(Vref/2)/255 = m*1.2/255 ~= 0.00475*m
+	  // But 1 V <-> 2.5kg
+	  // So, w = 250*v = m*1.2*250/255 =1,176470588235294*m
+	  // If we take 1 as the conversion factor, he maximum error is
+    // achieved for v=1V, or m=212. It is of 38g, which seems too much.
+	  // That's why we convert this value to an int.
+	  // To be able to do this calculation right, we multiply by 257 the
+    // value,before dividing it by 218. This way, we maximize our range,
+	  // while keeping an accurate conversion
+	  value/=218; // now in dg
+	  if(value>MAXPACKAGEWEIGHT)
+		{
+			  e.type=error;
+			  e.string=string_e_package_too_heavy;
+		}
+		else if(value < MINPACKAGEWEIGHT)
+		{
+				e.type=error;
+			  e.string=string_e_package_too_light;
+		}
+		else
+		{
+			  e.deadline=timestamp;
+			  e.type=PRINT;
+			  e.uc=value;
+		}
+		e.discarded=0;
+    addEvent(e);
 }

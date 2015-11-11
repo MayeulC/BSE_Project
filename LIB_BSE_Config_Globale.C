@@ -39,7 +39,6 @@ void Init_Device(void)
     EA = 1;
 }
 
-
 void Init_RST(void)
 {
     // Normally we don't need EA, but it doesn't hurt anyone to be safe

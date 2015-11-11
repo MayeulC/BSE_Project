@@ -24,14 +24,13 @@
 #ifndef LIB_BSE_INT_Ext_H
 #define LIB_BSE_INT_Ext_H
 #include "defines.h"
+#include "LIB_BSE_strings.h"
 
 /* Externs */
 extern void addEvent(struct event e);
 extern unsigned char ACQ_ADC(void);
 extern unsigned int timestamp;
-extern struct event Eventuc(enum event_type type,
-																 unsigned int deadline,
-																 unsigned char uc);
+extern void makeError(const char * message);
 
 /* Functions */
 

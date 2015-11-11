@@ -218,17 +218,7 @@ struct event Eventp(enum event_type type,
 	  e.discarded=0;
 	  return e;
 }
-struct event Eventuc(enum event_type type,
-																 unsigned int deadline,
-																 unsigned char uc)
-{
-	  struct event e;
-	  e.type=type;
-	  e.deadline=deadline;
-	  e.uc=uc;
-	  e.discarded=0;
-	  return e;
-}
+
 struct event Event(enum event_type type,
 																 unsigned int deadline)
 {

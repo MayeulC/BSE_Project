@@ -5,8 +5,10 @@ What works
 ==========
 Everything more or less works, but we didn't have time to completely debug some functionalities : 
 
-* The equation used to calculate the weigth might not be valid
 * The Send_String function sometimes returns without completing. A check has been added to be able to use the UART correctly.
+
+Compilation warning : 
+A function has been excluded from the overlay analysis. Be sure to add the `LIB_BSE_linker_command.lin` file as the linker script.
 
 What works : 
 

@@ -151,9 +151,6 @@ void removeUseless(void);
 struct event Eventp(enum event_type type,
 																 unsigned int deadline,
 																 enum package_types p);
-struct event Eventuc(enum event_type type,
-																 unsigned int deadline,
-																 unsigned char uc);
 struct event Event(enum event_type type,
 																 unsigned int deadline);
 struct event EventS(enum event_type type,

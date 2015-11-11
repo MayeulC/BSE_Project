@@ -1,0 +1,6 @@
+
+RAMSIZE(256) 
+
+OVERLAY (?PR?ADDEVENT?LIB_BSE_EVENT_DISPATCHER ! *) 
+; please see http://www.keil.com/support/docs/805.htm 
+; for reference

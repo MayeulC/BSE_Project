@@ -73,8 +73,3 @@ void Pulse_P21(void)
 	_nop_ ();
         Decl_PP2=0;
 }
-
-void Demo_GPIO(void)
-{
-
-}

@@ -49,12 +49,4 @@ void Pulse_P20(void);
  */
 void Pulse_P21(void);
 
-/*
- * void Demo_GPIO(void)
- *
- * This function demonstrates the functionality of the various GPIO
- * elements
- */
-void Demo_GPIO(void);
-
 #endif //LIB_BSE_GPIO

@@ -154,6 +154,7 @@ int nextEvent(void) // TODO : make this less dumb
             if(event_queue[i].type == PPB_push) // Those too are here to be processed ASAP
                 encounteredPPB_Push=i;
         }
+				i++;
     }
     if(candidate!=EVENT_QUEUE_LENGTH &&
        event_queue[candidate].type==PPA_push &&

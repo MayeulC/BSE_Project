@@ -172,16 +172,6 @@ void CONV_HMSC(unsigned char value, char * string)
     string[0]=(value/10)%10+'0';
 }
 
-/*void copyString(const char * source, char * destination)
-{
-	  unsigned char c;
-	  do{
-			   c=*destination=*source;
-			   destination++;
-			   source++;
-		}while(c!='\0');
-}*/
-	
 void sendStatus(void)
 {
 	  unsigned char l=0;

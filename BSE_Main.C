@@ -36,7 +36,10 @@ void main(void)
             sendStatus();
         if(Waiting_PKG.type!=NO_PACKAGE)
         {
-            print(Waiting_PKG.type,Waiting_PKG.weigth);
+						if(Waiting_PKG.type == error)
+							  Send_String(Waiting_PKG.meta);
+						else
+                print(Waiting_PKG.type,Waiting_PKG.weigth);
             Waiting_PKG.type=NO_PACKAGE;
         }
     }

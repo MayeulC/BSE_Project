@@ -96,7 +96,8 @@ void dispatch(void)
         case error:
             event_num=0;
             SIG_Erreur=0;
-            Send_String(event_queue[next].string);
+            Waiting_PKG.type=error;
+				    Waiting_PKG.meta=event_queue[next].string;
             break;
         default:
             makeError(string_e_defaultEvent);

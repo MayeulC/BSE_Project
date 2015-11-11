@@ -6,7 +6,6 @@ What works
 Everything more or less works, but we didn't have time to completely debug some functionalities : 
 
 * The equation used to calculate the weigth might not be valid
-* The deadline for pushng the packages seems not to be computed correctly
 * The Send_String function sometimes returns without completing. A check has been added to be able to use the UART correctly.
 
 What works : 

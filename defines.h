@@ -40,7 +40,8 @@
 #define CONVASPEED 100 //cm/s
 #define CONVBSPEED 100
 #define CONVALENGTH 60 //cm
-#define TRAVELTIME (CONVALENGTH*1000)/(CONVASPEED*T2PERIOD) //T2 tick
+//#define TRAVELTIME (CONVALENGTH*1000)/(CONVASPEED*T2PERIOD) //T2 tick
+#define TRAVELTIME 120 // By putting in the constant directly, we avoid casting problems
 #define MAXPACKAGELENGTH 500 //mm
 #define PACKAGE_GAUGE_TOLERANCE 10 //mm
 

@@ -65,7 +65,7 @@ void packageDetection(void)
             switch((package_length+PACKAGE_GAUGE_TOLERANCE)/50){
             case 2: //10cm+-tolerance
                 type=TYPE1;
-                deadline=TRAVELTIME+(5000)/(CONVASPEED*T2PERIOD);
+                deadline=TRAVELTIME+10;//TRAVELTIME+(5000)/(CONVASPEED*T2PERIOD);
                 num_packages.num_packages++;
                 num_packages.num_packages1++;
 						    addEvent(Event(LED1_ON,timestamp));
@@ -73,7 +73,7 @@ void packageDetection(void)
                 break;
             case 3: //15cm
                 type=TYPE2;
-                deadline=TRAVELTIME+(7500)/(CONVASPEED*T2PERIOD);
+                deadline=TRAVELTIME+15;//TRAVELTIME+(7500)/(CONVASPEED*T2PERIOD);
                 num_packages.num_packages++;
                 num_packages.num_packages2++;
 						    addEvent(Event(LED2_ON,timestamp));
@@ -81,7 +81,7 @@ void packageDetection(void)
                 break;
             case 4: //20cm
                 type=TYPE3;
-                deadline=TRAVELTIME+(10000)/(CONVASPEED*T2PERIOD);
+                deadline=TRAVELTIME+20;//TRAVELTIME+(10000)/(CONVASPEED*T2PERIOD);
                 num_packages.num_packages++;
                 num_packages.num_packages3++;
 						    addEvent(Event(LED3_ON,timestamp));

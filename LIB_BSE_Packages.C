@@ -44,6 +44,7 @@ void packageDetection(void)
         statusChange=timestamp;
         if(status==0 & previousStatus == 1) // falling edge, package detected
         {
+					  previousStatus=status;
             //TODO : we also need to detect small intervals.
 
             package_length=((deltaT*T2PERIOD)*CONVASPEED)/100;// n*ms*cm/s
@@ -94,8 +95,11 @@ void packageDetection(void)
             }
             addEvent(Eventp(PPA_push,deadline+timestamp,type));
         }
+				else
+				{
+					previousStatus=status;
+				}
     }
-    previousStatus=status;
 }
 
 void clearPackageCounter(void)

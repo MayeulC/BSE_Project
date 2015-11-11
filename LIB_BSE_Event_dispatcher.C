@@ -113,8 +113,12 @@ void dispatch(void)
 }
 
 void addEvent(struct event e)
-{
+{	
     char temp_IE = IE; // interrupt-safe
+	
+	  if(SIG_Erreur ==0)
+			return; // if we are in error mode, don't do anything
+		
     EA = 0;
 
     event_num++;

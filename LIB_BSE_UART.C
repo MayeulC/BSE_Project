@@ -116,6 +116,13 @@ int Send_String(char* char_ptr)
   return i;
 }
 
+void Send_String_Safe(char * str)
+{
+	  unsigned char l=0;
+		do
+				l+=Send_String(str+l);
+		while(str[l]!='\0');
+}
 
 char Getchar(void)
 {

@@ -38,9 +38,7 @@ void main(void)
         if(Waiting_PKG.type!=NO_PACKAGE)
         {
 						if(Waiting_PKG.type == error)
-							  do
-							      l+=Send_String(Waiting_PKG.meta+l);
-								while(Waiting_PKG.meta[l]!='\0');
+						    Send_String_Safe(Waiting_PKG.meta);
 						else
                 print(Waiting_PKG.type,Waiting_PKG.weigth);
             Waiting_PKG.type=NO_PACKAGE;

@@ -29,7 +29,7 @@ extern void Init_Device(void);
 extern unsigned char Getchar(void);
 extern void sendStatus(void);
 extern void print(enum package_types type, unsigned char weigth);
-extern int Send_String(char* char_ptr);
+extern int Send_String_Safe(char* str);
 
 /* Globals */
 struct package Waiting_PKG={0,NO_PACKAGE};

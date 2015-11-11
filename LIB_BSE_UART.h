@@ -90,6 +90,16 @@ char Putchar(char c, int csg_tempo);
 int Send_String(char *char_ptr);
 
 /*
+ * void Send_String_Safe(char * str)
+ * 
+ * This function repeatedly attempts to send a string
+ * trough the UART, until it has confirmation that the
+ * last character has been sent.
+ * Note : tis function might loop forever on some conditions.
+ * Be sure to add the terminatior '\0' at the end of the string.
+ */
+void Send_String_Safe(char * str);
+/*
  * char Getchar(void)
  * 
  * The read function. Reads the the character in SBUF0

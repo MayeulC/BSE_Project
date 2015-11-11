@@ -95,7 +95,7 @@ void dispatch(void)
             break;
         case error:
             event_num=0;
-            SIG_Erreur=1;
+            SIG_Erreur=0;
             Send_String(event_queue[next].string);
             break;
         default:
@@ -190,7 +190,7 @@ void processInput(void)
     if(START_Sys == 0)
     {
         event_num=0;
-        SIG_Erreur=0;
+        SIG_Erreur=1;
     }
 }
 

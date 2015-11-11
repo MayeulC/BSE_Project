@@ -314,7 +314,7 @@
             </VariousControls>
           </Ax51>
           <Lx51>
-            <useFile>0</useFile>
+            <useFile>1</useFile>
             <linkonly>0</linkonly>
             <UseMemoryFromTarget>1</UseMemoryFromTarget>
             <CaseSensitiveSymbols>0</CaseSensitiveSymbols>
@@ -323,7 +323,7 @@
             <OverlayString></OverlayString>
             <MiscControls></MiscControls>
             <DisableWarningNumbers></DisableWarningNumbers>
-            <LinkerCmdFile></LinkerCmdFile>
+            <LinkerCmdFile>.\LIB_BSE_linker_command.lin</LinkerCmdFile>
             <Assign></Assign>
             <ReserveString></ReserveString>
             <CClasses></CClasses>
@@ -374,11 +374,6 @@
               <FileName>LIB_BSE_Config_Globale.C</FileName>
               <FileType>1</FileType>
               <FilePath>.\LIB_BSE_Config_Globale.C</FilePath>
-            </File>
-            <File>
-              <FileName>LIB_BSE_DAC.C</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\LIB_BSE_DAC.C</FilePath>
             </File>
             <File>
               <FileName>LIB_BSE_Event_dispatcher.C</FileName>

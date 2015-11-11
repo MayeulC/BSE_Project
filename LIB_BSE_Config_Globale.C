@@ -41,9 +41,11 @@ void Init_Device(void)
 
 void Init_RST(void)
 {
-    // Normally we don't need EA, but it doesn't hurt anyone to be safe
+	  char temp_IE = IE; // interrupt-safe
+    EA = 0;
     WDTCN = 0xDE;
     WDTCN = 0xAD;
+	  IE = temp_IE;
 }
 
 void Init_CLK(void)

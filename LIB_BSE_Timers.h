@@ -58,6 +58,9 @@ extern void cleanEvents(void);
  * The period is 5ms => frequency of 200Hz
  * It is a 16 bit timer with Auto-recharge.
  * The overflow will call the function ISR2_Timer2
+ *
+ * Modified registers: T2CON, CKCON, RCAP2L, RCAP2H, TL2, TH2
+ * See datasheet p.237-239 for more details
  */
 void Config_Timer2(void);
 
@@ -66,8 +69,10 @@ void Config_Timer2(void);
  *
  * This is an interruptuion function. It is called when Timer2 overflows.
  * It increments the RTC.
+ * Launches some periodic actions like the event dispatcher
+ * Writes to P3__5
+ * Clears the TF2 flag
  *
- * Note: This is a skeleton. For now, it only tuns on anf off a LED. More stuff will be eventually added.
  */
 void ISR_Timer2(void);
 

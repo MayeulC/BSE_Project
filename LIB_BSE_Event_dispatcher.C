@@ -115,7 +115,7 @@ void dispatch(void)
 void addEvent(struct event e)
 {
     char temp_IE = IE; // interrupt-safe
-    EA = 1;
+    EA = 0;
 
     event_num++;
     if(event_num >= EVENT_QUEUE_LENGTH)

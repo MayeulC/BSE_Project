@@ -39,6 +39,9 @@ extern void makeError(const char * message);
  *
  * This function enables INT1, and sets its priority to low.
  * It configures INT1 as an edge-triggered interrupt.
+ *
+ * Modifies EX1, PX1, IT1 from the IE, IP and TCON.
+ * More details pages 119, 120, 231 of the datasheet.
  */
 void Config_INT1(void);
 

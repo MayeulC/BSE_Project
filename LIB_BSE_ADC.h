@@ -32,6 +32,7 @@
  * void CFG_VREF(void)
  *
  * Configures the Reference voltage
+ * Modifies the REF0CN register (see datasheet p.92)
  */
 void CFG_VREF(void);
 
@@ -41,6 +42,8 @@ void CFG_VREF(void);
  * Configures the ADC0.
  * Weight must be measured with a 1g precision, which means a
  * 0.4mV resolution.
+ * Modified registers: AMX0CF, ADC0CN, AMX0SL 
+ * See Datasheet pages 47, 48, 50 for more info.
  */
 void CFG_ADC0(void);
 

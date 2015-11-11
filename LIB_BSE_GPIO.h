@@ -31,7 +31,10 @@
  * void Config_GPIO(void)
  *
  * This function configures the GPIO, setting PORT pins in output/input
- * mode depending on the realized function
+ * mode depending on the realized function. See declarations_gpio_bse.h
+ * For a list of the used GPIO pins and their role.
+ * Modified registers: P0MDOUT, P1MDOUT, P2MDOUT, P2, P3
+ * See the datasheet p. 173-176 for more info.
  */
 void Config_GPIO(void);
 

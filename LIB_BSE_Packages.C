@@ -46,7 +46,7 @@ void packageDetection(void)
         {
             //TODO : we also need to detect small intervals.
 
-            package_length=((deltaT*T2PERIOD)*CONVASPEED);// n*ms*mm/s
+            package_length=((deltaT*T2PERIOD)*CONVASPEED)/100;// n*ms*cm/s
             if(package_length > MAXPACKAGELENGTH ||
                     deltaT>(65535/(T2PERIOD*CONVASPEED))-1) // overflow check
             {

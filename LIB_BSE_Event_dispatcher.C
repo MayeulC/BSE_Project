@@ -96,6 +96,9 @@ void dispatch(void)
             case error:
                 event_num=0;
                 SIG_Erreur=0;
+                // Scale must be freed whenever there's an error.
+                // This could be smarter.
+                scale_free=TRUE;
                 Waiting_PKG.type=error;
                 Waiting_PKG.meta=event_queue[next].string;
                 break;

@@ -151,7 +151,8 @@ int nextEvent(void) // TODO : make this less dumb
         {
             if(event_queue[i].type == error ) // This one is of the utmost importance
                 return i;                     // must be processed as soon as possible
-            if(event_queue[i].deadline==timestamp)
+            if(event_queue[i].deadline == timestamp ||
+               event_queue[i].deadline == timestamp -1)
             {
                 candidate=i; //we could have broken the loop, if not for the line below
             }

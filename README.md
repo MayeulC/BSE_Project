@@ -39,13 +39,10 @@ If the system is in error mode, it just refuses to add events to the queue. We c
 
 Comments for the corrector
 ==========================
-Feel free to consult statistics included in the stats/ dir, or to make your own.
+Feel free to consult statistics included in the stats/ dir (open the index.html file), or to make your own.
 I also included both git shortlog and git log outputs into logs.txt in case you can't use git.
 This is on the branch complete, which is the most advanced as of now. Phase 1,2,3,4 branches are here to demonstrate some functionalities.
 
 If you prefer github's interface, the project is there too, just send me an email so that I can give you access to it. The goal is of course to open up the repository once cleaned up a bit.
 
 We decided early to go on and write everything in English to avoid mixing French with English keywords, etc. With that came the choice to write detailled comments for each function we wrote, as well as adding a LICENSE header to each of our files. Since the program is to be publicly released, we opted for the GPLv3 license.
-
-Sorry for the delay. As of writing this line, it is 20:18, but I corrected a few mistakes in the code which were worth it.
-

@@ -31,13 +31,19 @@ void Config_GPIO(void)
     P2MDOUT = 0x7b; //P2.7 and P2.2 configured as open drain, the others as
                     // push-pull.
     P2=~0x7b;       //configure the open drains as input; output low on the
-                    // others.
+                    // others. Note : the LEDs then turn on; see below.
 
     P3MDOUT = 0x7c; //P3.0, P3.1 and P3.7 as open drain; push-pull for the others
 
     P3=0x87;        //configure the open drains as input; output low on the
                     // others, excepted P3.2, which must be output high by default
     P1MDOUT |= 0x40;//Configures P1.6 (LED) as push-pull
+
+    CHG_DCT = 1; // The following instructions put the LEDs in the right state (OFF)
+    CT3_DCT = 1; // We could have added an event to turn these off after a short
+    CT2_DCT = 1; // delay, hence effectively performing a startup LED diagnosis,
+    CT1_DCT = 1; // to the price of (albeit very little) added complexity.
+    SIG_Erreur = 1; // Be sure not to start in error mode
 }
 
 void Pulse_P20(void)

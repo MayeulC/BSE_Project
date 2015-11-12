@@ -202,5 +202,5 @@ void print(enum package_types type, unsigned char weigth)
 
     do{
         l+=Send_String(string_label+l);
-    }while(l<35); // Dirty hack again; my keyboard's dirty
+    }while(string_label[l]!='\0'); // Dirty hack again; my keyboard's dirty
 }

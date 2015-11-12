@@ -99,7 +99,7 @@ void dispatch(void)
                 // Scale must be freed whenever there's an error.
                 // This could be smarter.
                 scale_free=TRUE;
-                Waiting_PKG.type=error;
+                Waiting_PKG.type=ERROR;
                 Waiting_PKG.meta=event_queue[next].string;
                 break;
             default:

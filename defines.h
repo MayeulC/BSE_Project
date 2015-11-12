@@ -43,8 +43,8 @@
 //#define TRAVELTIME (CONVALENGTH*1000)/(CONVASPEED*T2PERIOD) //T2 tick
 #define TRAVELTIME 120 // By putting in the constant directly, we avoid casting problems
 #define MAXPACKAGELENGTH 500 //mm
-#define MAXPACKAGEWEIGHT 257 //dg
-#define MINPACKAGEWEIGHT 17 //dg
+#define MAXPACKAGEWEIGHT 257 //dag
+#define MINPACKAGEWEIGHT 17 //dag
 #define PACKAGE_GAUGE_TOLERANCE 10 //mm
 
 /* system clock */

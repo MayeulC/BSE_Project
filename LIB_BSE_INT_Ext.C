@@ -35,7 +35,8 @@ extern void Pulse_P21(void);
 void ISR_INT1(void) interrupt 2
 {
     struct event e;
-    unsigned int value=257*ACQ_ADC();
+    unsigned int value=ACQ_ADC();
+	  value *= 257;
     // Weight calculation
     // Note : we use a x2 input gain before the ADC
     // So, 255 <-> Vref/2=1.2V
@@ -49,7 +50,7 @@ void ISR_INT1(void) interrupt 2
     // To be able to do this calculation right, we multiply by 257 the
     // value,before dividing it by 218. This way, we maximize our range,
     // while keeping an accurate conversion
-    value/=218; // now in dg
+    value/=218; // now in dag
     if(value>MAXPACKAGEWEIGHT)
     {
         e.type=error;

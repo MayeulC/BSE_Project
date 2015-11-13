@@ -1,10 +1,10 @@
 /* 
    This program is designed to be compiled with Keil µVision4's ANSI C
-	 compiler, and ran on a 8051F020 microcontroller.
-	 
-	 This file contains the Init_Device() and other functions it calls,
-	 to initialise the device.
-	 
+   compiler, and ran on a 8051F020 microcontroller.
+
+   This file contains the Init_Device() and other functions it calls,
+   to initialise the device.
+
    Copyright (C) 2015  Aydin Alperen <alperen.aydin@cpe.fr>
    Copyright (C) 2015  Cantan Mayeul <mayeul.cantan@cpe.fr>
 
@@ -27,42 +27,42 @@
 
 void Init_Device(void)
 {
-  EA = 0;
-  Init_RST();
-  Init_CLK();
-	Init_XBAR();
-	Config_GPIO();
-	Config_INT1();
-	CFG_UART0();
+    EA = 0;
+    Init_RST();
+    Init_CLK();
+    Init_XBAR();
+    Config_GPIO();
+    Config_INT1();
+    CFG_UART0();
     CFG_ADC0();
-    CFG_DAC0();
-	Config_Timer2();
-  EA = 1;
+    Config_Timer2();
+    EA = 1;
 }
-
 
 void Init_RST(void)
 {
-  // Normally we don't need EA, but it doesn't hurt anyone to be safe
-  WDTCN = 0xDE;
-  WDTCN = 0xAD;  
+    char temp_IE = IE; // interrupt-safe
+    EA = 0;
+    WDTCN = 0xDE;
+    WDTCN = 0xAD;
+    IE = temp_IE;
 }
 
 void Init_CLK(void)
 {
-	int i;
-  // We are supposed to have  OSCXCN = 0110 0111
-  OSCXCN = 0x67; 
+    int i;
+    // We are supposed to have  OSCXCN = 0110 0111
+    OSCXCN = 0x67;
 
-  for(i=0; i<3000; i++);
-  while( (OSCXCN & 0x80) == 0);
- 
-  OSCICN = 0x08;
+    for(i=0; i<3000; i++);
+    while( (OSCXCN & 0x80) == 0);
+
+    OSCICN = 0x08;
 }
 
 void Init_XBAR(void)
 {
-	XBR0      = 0x04; // Enable UART0
-  XBR1      = 0x10; // Enable INT1
-  XBR2      = 0x40; // Enable crossbar
+    XBR0      = 0x04; // Enable UART0
+    XBR1      = 0x10; // Enable INT1
+    XBR2      = 0x40; // Enable crossbar
 }

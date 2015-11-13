@@ -24,12 +24,24 @@
 #ifndef LIB_BSE_INT_Ext_H
 #define LIB_BSE_INT_Ext_H
 #include "defines.h"
+#include "LIB_BSE_strings.h"
+
+/* Externs */
+extern void addEvent(struct event e);
+extern unsigned char ACQ_ADC(void);
+extern unsigned int timestamp;
+extern void makeError(const char * message);
+
+/* Functions */
 
 /*
  * void Config_InT1(void)
  *
  * This function enables INT1, and sets its priority to low.
  * It configures INT1 as an edge-triggered interrupt.
+ *
+ * Modifies EX1, PX1, IT1 from the IE, IP and TCON.
+ * More details pages 119, 120, 231 of the datasheet.
  */
 void Config_INT1(void);
 
@@ -38,7 +50,7 @@ void Config_INT1(void);
  *
  * This ISR is called when iNT1 is triggered.
  * For now, it is mostly a placeholder, emitting a signal on P3^4.
-*/
+ */
 void ISR_INT1(void);
 
 #endif //LIB_BSE_INT_Ext_H

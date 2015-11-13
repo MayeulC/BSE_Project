@@ -24,18 +24,26 @@
 #ifndef BSE_MAIN_H
 #define BSE_MAIN_H
 #include "defines.h"
-extern void Init_Device(void);
-extern void Send_String(char *);
-extern char Getchar(void);
-extern void Putchar(char,int);
-extern void demo1(void);
-extern void demo2(void);
-extern void Send_to_DAC0(unsigned char Output_DAC);
-extern unsigned char ACQ_ADC(void);
-extern int Package_flag;
 
+/* Externs */
+extern void Init_Device(void);
+extern unsigned char Getchar(void);
+extern void sendStatus(void);
+extern void print(enum package_types type, unsigned char weigth);
+extern int Send_String_Safe(char* str);
+
+/* Globals */
+struct package Waiting_PKG={0,NO_PACKAGE};
+
+/* Function Prototypes */
+
+/* 
+ * void main(void)
+ *
+ * Main entry point.
+ *
+ */
 void main(void);
 
-void Package_detection(void);
 
 #endif //BSE_MAIN_H

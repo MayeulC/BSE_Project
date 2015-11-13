@@ -28,13 +28,16 @@
 
 #include "defines.h"
 
-/* externs to be found in LIB_BSE_Timers.h and LIB_BSE_GPIO.h */
+/* 
+ * externs to be found in LIB_BSE_Timers.h,
+ * LIB_BSE_GPIO.h, and LIB_BSE_ADC.h
+ *
+ */
 extern void Config_Timer2(void);
 extern void Config_GPIO(void);
 extern void Config_INT1(void);
 extern void CFG_UART0(void);
 extern void CFG_ADC0(void);
-extern void CFG_DAC0(void);
 
 /*
  * void Init_device(void)
@@ -43,6 +46,7 @@ extern void CFG_DAC0(void);
  *
  * The only function from this file that should be called by main.
  * It calls upon the others functions in the file.
+ * Activates interrupts globally with EA.
  *
  */
 void Init_Device(void);
@@ -52,6 +56,9 @@ void Init_Device(void);
  *
  * Configures RST sources.
  * Deactivates the Watchdog.
+ * WDTCN is modified.
+ * See datasheet p.130 for more information
+ *
  */
 void  Init_RST(void);
 
@@ -60,13 +67,21 @@ void  Init_RST(void);
  *
  * Sets the system clock to use an external crystal. SYSCLK = 22,1184HZ
  *
+ * OSCXCN is completely modified. This function also waits for the
+ * sysclock to be operational. Note that the internal oscillator isn't
+ * modified.
+ * See datasheet p.137 for more information
+ *
  */
 void Init_CLK(void);
 
 /*
  * void Init_XBAR(void)
  *
- * Initializes the crossbar, with INT1 and UART0 enabled
+ * Initializes the crossbar, with INT1 and UART0 enabled.
+ *
+ * XBR0, XBR1 and XBR3 registers are completely modified.
+ * See datasheet p.163-172 for more information
  *
  */
 void Init_XBAR(void);

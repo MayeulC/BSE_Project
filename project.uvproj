@@ -118,7 +118,7 @@
             <Oh166RecLen>16</Oh166RecLen>
           </OPTHX>
           <Simulator>
-            <UseSimulator>0</UseSimulator>
+            <UseSimulator>1</UseSimulator>
             <LoadApplicationAtStartup>1</LoadApplicationAtStartup>
             <RunToMain>1</RunToMain>
             <RestoreBreakpoints>1</RestoreBreakpoints>
@@ -129,7 +129,7 @@
             <LimitSpeedToRealTime>0</LimitSpeedToRealTime>
           </Simulator>
           <Target>
-            <UseTarget>1</UseTarget>
+            <UseTarget>0</UseTarget>
             <LoadApplicationAtStartup>1</LoadApplicationAtStartup>
             <RunToMain>0</RunToMain>
             <RestoreBreakpoints>1</RestoreBreakpoints>
@@ -166,7 +166,6 @@
             <Capability>0</Capability>
             <DriverSelection>-1</DriverSelection>
           </Flash1>
-          <bUseTDR>0</bUseTDR>
           <Flash2></Flash2>
           <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
@@ -315,7 +314,7 @@
             </VariousControls>
           </Ax51>
           <Lx51>
-            <useFile>0</useFile>
+            <useFile>1</useFile>
             <linkonly>0</linkonly>
             <UseMemoryFromTarget>1</UseMemoryFromTarget>
             <CaseSensitiveSymbols>0</CaseSensitiveSymbols>
@@ -324,7 +323,7 @@
             <OverlayString></OverlayString>
             <MiscControls></MiscControls>
             <DisableWarningNumbers></DisableWarningNumbers>
-            <LinkerCmdFile></LinkerCmdFile>
+            <LinkerCmdFile>.\LIB_BSE_linker_command.lin</LinkerCmdFile>
             <Assign></Assign>
             <ReserveString></ReserveString>
             <CClasses></CClasses>
@@ -357,14 +356,29 @@
               <FilePath>.\STARTUP.A51</FilePath>
             </File>
             <File>
+              <FileName>LIB_BSE_UART.C</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LIB_BSE_UART.C</FilePath>
+            </File>
+            <File>
               <FileName>BSE_Main.C</FileName>
               <FileType>1</FileType>
               <FilePath>.\BSE_Main.C</FilePath>
             </File>
             <File>
-              <FileName>LIB_BSE_INT_Ext.C</FileName>
+              <FileName>LIB_BSE_ADC.C</FileName>
               <FileType>1</FileType>
-              <FilePath>.\LIB_BSE_INT_Ext.C</FilePath>
+              <FilePath>.\LIB_BSE_ADC.C</FilePath>
+            </File>
+            <File>
+              <FileName>LIB_BSE_Config_Globale.C</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LIB_BSE_Config_Globale.C</FilePath>
+            </File>
+            <File>
+              <FileName>LIB_BSE_Event_dispatcher.C</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LIB_BSE_Event_dispatcher.C</FilePath>
             </File>
             <File>
               <FileName>LIB_BSE_GPIO.C</FileName>
@@ -372,19 +386,19 @@
               <FilePath>.\LIB_BSE_GPIO.C</FilePath>
             </File>
             <File>
-              <FileName>LIB_BSE_Timers.c</FileName>
+              <FileName>LIB_BSE_INT_Ext.C</FileName>
               <FileType>1</FileType>
-              <FilePath>.\LIB_BSE_Timers.c</FilePath>
+              <FilePath>.\LIB_BSE_INT_Ext.C</FilePath>
             </File>
             <File>
-              <FileName>LIB_BSE_Config_Globale.c</FileName>
+              <FileName>LIB_BSE_Packages.C</FileName>
               <FileType>1</FileType>
-              <FilePath>.\LIB_BSE_Config_Globale.c</FilePath>
+              <FilePath>.\LIB_BSE_Packages.C</FilePath>
             </File>
             <File>
-              <FileName>LIB_BSE_UART.c</FileName>
+              <FileName>LIB_BSE_Timers.C</FileName>
               <FileType>1</FileType>
-              <FilePath>.\LIB_BSE_UART.c</FilePath>
+              <FilePath>.\LIB_BSE_Timers.C</FilePath>
             </File>
           </Files>
         </Group>

@@ -28,7 +28,15 @@
 #define LIB_BSE_UART_H
 
 #include "defines.h"
+#include "LIB_BSE_strings.h"
 #include <intrins.h>
+
+/* Externs */
+extern struct packageCounter getPackageCounter(void);
+extern unsigned char RTC_5ms;
+extern unsigned char RTC_Secondes;
+extern unsigned char RTC_Minutes;
+extern unsigned char RTC_Heures;
 
 /*
  * void CFG_Clock_UART0(void)
@@ -66,15 +74,15 @@ void CFG_UART0(void);
  *        Put the c in SBUF0
  *        Set TI0 = 0
  *        return c
- * If not, wait 100 us then call Putchar(c, csg_tempo-1) 
+ * If not, wait 100 us then call Putchar(c, csg_tempo-1)
  *
- * 
+ *
  */
 char Putchar(char c, int csg_tempo);
 
 /*
  * int Send_String(char *char_ptr)
- * 
+ *
  * Sends a string using Putchar several times.
  * If a single Putchar fails, it return 0.
  * Othewise, it returns the number of strings sent.
@@ -82,13 +90,23 @@ char Putchar(char c, int csg_tempo);
 int Send_String(char *char_ptr);
 
 /*
+ * void Send_String_Safe(char * str)
+ *
+ * This function repeatedly attempts to send a string
+ * trough the UART, until it has confirmation that the
+ * last character has been sent.
+ * Note : tis function might loop forever on some conditions.
+ * Be sure to add the terminatior '\0' at the end of the string.
+ */
+void Send_String_Safe(char * str);
+/*
  * char Getchar(void)
- * 
+ *
  * The read function. Reads the the character in SBUF0
  *
  * The Algorithm:
  * Checks if RI0 is 1
- * if true, 
+ * if true,
  *    c = SBUF0
  *    RI0 = 0
  *    return c
@@ -100,20 +118,20 @@ char Getchar(void);
 
 /*
  * void demo1(void)
- * 
- * A small echo function. 
+ *
+ * A small echo function.
  * Waits for a character.
- * When it gets it, it sends it back 2 times. 
- */ 
- void demo1(void);
+ * When it gets it, it sends it back 2 times.
+ */
+void demo1(void);
 
 /*
  * void demo2(void)
- * 
- * Another small echo function. 
+ *
+ * Another small echo function.
  * As long as new character isn't received, it sends the same char.
- */ 
- void demo2(void);
+ */
+void demo2(void);
 
 /*
  * void CONV_Pes_Val(unsigned char value, char * string)
@@ -122,6 +140,23 @@ char Getchar(void);
  *
  */
 void CONV_Pes_Val(unsigned char value, char * string);
+
+/*
+ * void sendStatus(void)
+ *
+ * Ths functions replies to a status request, sending statistics about
+ * operations.
+ *
+ */
+void sendStatus(void);
+
+/*
+ * void print(enum package_types type)
+ *
+ * Prints the label on the package
+ *
+ */
+void print(enum package_types type, unsigned char weigth);
 
 #endif //LIB_BSE_UART_H
 

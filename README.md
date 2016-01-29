@@ -1,5 +1,8 @@
 # BSE_Project
-School work
+This project was some school work done at CPE Lyon. We had a specification to follow, as well as checkpoints to validate our work (hence the different phase branches). Please note that code in these branches may not work, since we may have used other means to validate these checkpoints.
+BSE stands for "Base des Systèmes Embarqués", or introduction to embedded systems, and is one of the modules of the fourth year at CPE Lyon in our speciality. You can find the complete specification (albeit in French) in the corresponding folder. We tried our best to write everything in English, but some French must have slipped here and there. As of now, the files that were provided to us are not translated yet.
+
+The whole project is available under the GPL.V3 License, excepted the specification, which is released as CC BY-NC-ND 4.0, since we are not the crators. If you want to create derivative works from the specification, please contact either us or CPE Lyon, explaining your request. If you contact us, we will forward your request to the right person.
 
 What works
 ==========
@@ -36,13 +39,3 @@ Then, the event dispatcher checks if the queued items can be acomplished, and do
 An other source of async event is the INT1, which adds an event to the queue.
 
 If the system is in error mode, it just refuses to add events to the queue. We could have just filtered out the events depending on whether they could be processed safely, but chose to go this way for a bit of extra safety.
-
-Comments for the corrector
-==========================
-Feel free to consult statistics included in the stats/ dir (open the index.html file), or to make your own.
-I also included both git shortlog and git log outputs into logs.txt in case you can't use git.
-This is on the branch complete, which is the most advanced as of now. Phase 1,2,3,4 branches are here to demonstrate some functionalities.
-
-If you prefer github's interface, the project is there too, just send me an email so that I can give you access to it. The goal is of course to open up the repository once cleaned up a bit.
-
-We decided early to go on and write everything in English to avoid mixing French with English keywords, etc. With that came the choice to write detailled comments for each function we wrote, as well as adding a LICENSE header to each of our files. Since the program is to be publicly released, we opted for the GPLv3 license.
